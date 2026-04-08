@@ -1,0 +1,103 @@
+nohup: ignoring input
+/home/einnew90/qiskit/venv/lib/python3.10/site-packages/qiskit_nature/second_q/mappers/qubit_mapper.py:188: PauliSumOpDeprecationWarning: PauliSumOp is deprecated as of version 0.6.0 and support for them will be removed no sooner than 3 months after the release. Instead, use SparsePauliOp. You can switch to SparsePauliOp immediately, by setting `qiskit_nature.settings.use_pauli_sum_op` to `False`.
+  qubit_ops[name] = self._map_single(second_q_op, register_length=register_length)
+0.5 * X
+- 1.0 * Z
+0.5 * X
+- 0.8 * Z
+0.5 * X
+- 0.6 * Z
+0.5 * X
+- 0.3999999999999999 * Z
+0.5 * X
+- 0.19999999999999996 * Z
+0.5 * X
+0.5 * X
++ 0.20000000000000018 * Z
+0.5 * X
++ 0.40000000000000013 * Z
+0.5 * X
++ 0.6000000000000001 * Z
+0.5 * X
++ 0.8 * Z
+0.5 * X
++ 1.0 * Z
+/home/einnew90/qiskit/real_machine_test/1Q/massive_dirac_qiskit.py:123: ComplexWarning: Casting complex values to real discards the imaginary part
+  norm_exact[ild,k] = phi.conj()@phi
+/home/einnew90/qiskit/real_machine_test/1Q/massive_dirac_qiskit.py:124: ComplexWarning: Casting complex values to real discards the imaginary part
+  E_exact[ild,k] = phi.conj()@Hld[ild].to_matrix()@phi/norm_exact[ild,k]
+/home/einnew90/qiskit/real_machine_test/1Q/massive_dirac_qiskit.py:130: ComplexWarning: Casting complex values to real discards the imaginary part
+  X_exact[ild,k] = vll[ild,:,k].conj().transpose()@X@vll[ild,:,k]
+/home/einnew90/qiskit/real_machine_test/1Q/massive_dirac_qiskit.py:131: ComplexWarning: Casting complex values to real discards the imaginary part
+  Y_exact[ild,k] = vll[ild,:,k].conj().transpose()@Y@vll[ild,:,k]
+/home/einnew90/qiskit/real_machine_test/1Q/massive_dirac_qiskit.py:132: ComplexWarning: Casting complex values to real discards the imaginary part
+  Z_exact[ild,k] = vll[ild,:,k].conj().transpose()@Z@vll[ild,:,k]
+1 0.9580299999999992 0.02618465150239654
+1 0.9580299999999992 -0.7743291987120043 -0.7810249675906655
+# 1/2: 10.0%
+2 0.9532824999999996 -0.18945141741007437
+2 0.9532824999999996 -0.624238509514249 -0.6403124237432848
+# 1/2: 20.0%
+3 0.9431437499999997 -0.03235243553589239
+3 0.9431437499999997 -0.5152690477859765 -0.5385164807134504
+# 1/2: 30.0%
+4 0.9176037499999995 -0.2826092344573182
+4 0.9176037499999995 -0.4620303082529832 -0.5
+# 1/2: 40.0%
+5 0.8708937499999995 -1.3972194712574715
+5 0.8708937499999995 -0.49000951778046153 -0.5385164807134505
+# 1/2: 50.0%
+6 0.8423150000000006 -2.3274343451602433
+6 0.8423150000000006 -0.587002493610275 -0.640312423743285
+# 1/2: 60.0%
+7 0.8146000000000002 -3.487425676237823
+7 0.8146000000000002 -0.7293691877634566 -0.7810249675906655
+# 1/2: 70.0%
+8 0.8084612500000001 -5.381594665741509
+8 0.8084612500000001 -0.8722465094348771 -0.9433981132056604
+# 1/2: 80.0%
+9 0.7407537499999998 -7.219766110617251
+9 0.7407537499999998 -1.0159487680675112 -1.118033988749895
+# 1/2: 90.0%
+waiting...
+10 0.6108075000000001 -9.171089597028873
+# 1/2: 100.0%
+waiting...
+1 0.9533975000000001 0.9944212798836956
+1 0.9533975000000001 0.7932290149587952 0.7810249675906655
+# 2/2: 10.0%
+waiting...
+2 0.9453037500000002 2.4930617534553763
+2 0.9453037500000002 0.6560962558288527 0.6403124237432848
+# 2/2: 20.0%
+waiting...
+3 0.9278125 4.3871220385354945
+3 0.9278125 0.5518976822348255 0.5385164807134504
+# 2/2: 30.0%
+waiting...
+4 0.8910537500000002 6.845670585101458
+4 0.8910537500000002 0.5072655643718422 0.5
+# 2/2: 40.0%
+waiting...
+5 0.8245175 9.22810081142542
+5 0.8245175 0.5532655802380451 0.5385164807134505
+# 2/2: 50.0%
+waiting...
+6 0.7663350000000001 9.866702668541183
+6 0.7663350000000001 0.6689999584732766 0.640312423743285
+# 2/2: 60.0%
+waiting...
+7 0.7035287500000003 9.115323999450586
+7 0.7035287500000003 0.8225168430986289 0.7810249675906655
+# 2/2: 70.0%
+waiting...
+8 0.6339499999999995 6.5928558526766405
+8 0.6339499999999995 0.9882936930252149 0.9433981132056604
+# 2/2: 80.0%
+waiting...
+9 0.5831037499999998 4.58316628788116
+9 0.5831037499999998 1.1483242535180742 1.118033988749895
+# 2/2: 90.0%
+waiting...
+10 0.5721162499999999 4.197029484264035
+# 2/2: 100.0%

@@ -1,0 +1,54 @@
+nohup: ignoring input
+/home/einnew90/qiskit/venv/lib/python3.10/site-packages/qiskit_nature/second_q/mappers/qubit_mapper.py:188: PauliSumOpDeprecationWarning: PauliSumOp is deprecated as of version 0.6.0 and support for them will be removed no sooner than 3 months after the release. Instead, use SparsePauliOp. You can switch to SparsePauliOp immediately, by setting `qiskit_nature.settings.use_pauli_sum_op` to `False`.
+  qubit_ops[name] = self._map_single(second_q_op, register_length=register_length)
+0.5 * X
+- 1.0 * Z
+0.5 * X
+- 0.8 * Z
+0.5 * X
+- 0.6 * Z
+0.5 * X
+- 0.3999999999999999 * Z
+0.5 * X
+- 0.19999999999999996 * Z
+0.5 * X
+0.5 * X
++ 0.20000000000000018 * Z
+0.5 * X
++ 0.40000000000000013 * Z
+0.5 * X
++ 0.6000000000000001 * Z
+0.5 * X
++ 0.8 * Z
+0.5 * X
++ 1.0 * Z
+/home/einnew90/qiskit/real_machine_test/1Q/mitigated/xyz/xyz_run.py:123: ComplexWarning: Casting complex values to real discards the imaginary part
+  norm_exact[ild,k] = phi.conj()@phi
+/home/einnew90/qiskit/real_machine_test/1Q/mitigated/xyz/xyz_run.py:124: ComplexWarning: Casting complex values to real discards the imaginary part
+  E_exact[ild,k] = phi.conj()@Hld[ild].to_matrix()@phi/norm_exact[ild,k]
+/home/einnew90/qiskit/real_machine_test/1Q/mitigated/xyz/xyz_run.py:130: ComplexWarning: Casting complex values to real discards the imaginary part
+  X_exact[ild,k] = vll[ild,:,k].conj().transpose()@X@vll[ild,:,k]
+/home/einnew90/qiskit/real_machine_test/1Q/mitigated/xyz/xyz_run.py:131: ComplexWarning: Casting complex values to real discards the imaginary part
+  Y_exact[ild,k] = vll[ild,:,k].conj().transpose()@Y@vll[ild,:,k]
+/home/einnew90/qiskit/real_machine_test/1Q/mitigated/xyz/xyz_run.py:132: ComplexWarning: Casting complex values to real discards the imaginary part
+  Z_exact[ild,k] = vll[ild,:,k].conj().transpose()@Z@vll[ild,:,k]
+waiting...
+# 1/2: 10.0%, |<Φ|Ψ>|^2 =  1.0010252922461969
+waiting...
+# 1/2: 20.0%, |<Φ|Ψ>|^2 =  0.9982973253038802
+waiting...
+# 1/2: 30.0%, |<Φ|Ψ>|^2 =  1.0005941705688768
+waiting...
+# 1/2: 40.0%, |<Φ|Ψ>|^2 =  0.9987937353426302
+waiting...
+# 1/2: 50.0%, |<Φ|Ψ>|^2 =  1.0024718955029392
+waiting...
+# 1/2: 60.0%, |<Φ|Ψ>|^2 =  1.0022760960081225
+waiting...
+# 1/2: 70.0%, |<Φ|Ψ>|^2 =  1.001570586289629
+waiting...
+# 1/2: 80.0%, |<Φ|Ψ>|^2 =  0.9983359920443873
+waiting...
+# 1/2: 90.0%, |<Φ|Ψ>|^2 =  0.9934310081274278
+waiting...
+# 1/2: 100.0%, |<Φ|Ψ>|^2 =  0.9983306087240134

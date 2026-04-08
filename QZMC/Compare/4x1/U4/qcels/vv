@@ -1,0 +1,574 @@
+40c40
+< n_x     = 4
+---
+> n_x     = 8
+54c54
+< Uc           = 4.0
+---
+> Uc           = 10.0
+164a165,318
+> # using symmetry
+> def ApplyParticleHole(i):
+>     bit_expr = bin(i)[2:].zfill(n_qubit)
+>     operated = ''
+>     for k in range(n_qubit):
+>         if (bit_expr[k] =='0'):
+>             operated += '1'
+>         else :
+>             operated += '0'
+>     return int(operated,2)
+> def ApplySpinReverse(i):
+>     bit_expr = bin(i)[2:].zfill(n_qubit)
+>     operated = ''
+>     n_orbital = n_qubit//2
+>     for k in range(n_orbital):
+>         i_up = 2*k
+>         i_dn = 2*k+1
+>         operated += bit_expr[i_dn]
+>         operated += bit_expr[i_up]
+>     return int(operated,2)
+> def ApplyOrderReverse(i):
+>     bit_expr = bin(i)[2:].zfill(n_qubit)
+>     operated = ''
+>     for k in reversed(range(n_qubit)):
+>         operated += bit_expr[k]
+>     return int(operated,2)
+> 
+> def OrderReverseSign(i):
+>     return 1
+> # compose particle hole symmetry operator Ph
+> isec = 0
+> Or = np.zeros((dim_sub[0],dim_sub[0]),dtype=complex)
+> for jj in range(dim_sub[0]):
+>     j = indx_sub[isec][jj]
+>     i = ApplyOrderReverse(j)
+>     ii = iindx_sub[isec][i]
+>     Or[ii,jj] = OrderReverseSign(i)
+> 
+> 
+> def ParticleHoleSign(i):
+>     bit_expr = bin(i)[2:].zfill(n_qubit)
+>     operated = ''
+>     n_orbital = n_qubit//2
+>     sign_exp = 0
+>     for k in range(n_orbital):
+>         i_up = 2*k
+>         i_dn = 2*k+1
+>         sign_exp += (int(bit_expr[i_up]) + int(bit_expr[i_dn])) * k
+>     sign_exp = sign_exp % 2
+>     return (-1) ** sign_exp
+> # compose particle hole symmetry operator Ph
+> isec = 0
+> Ph = np.zeros((dim_sub[0],dim_sub[0]),dtype=complex)
+> for jj in range(dim_sub[0]):
+>     j = indx_sub[isec][jj]
+>     i = ApplyParticleHole(j)
+>     ii = iindx_sub[isec][i]
+>     Ph[ii,jj] = ParticleHoleSign(i)
+> 
+> def SpinReverseSign(i):
+>     bit_expr = bin(i)[2:].zfill(n_qubit)
+>     operated = ''
+>     n_orbital = n_qubit//2
+>     sign_exp = 0
+>     for k in range(n_orbital):
+>         i_up = 2*k
+>         i_dn = 2*k+1
+>         sign_exp += int(bit_expr[i_up]) * int(bit_expr[i_dn])
+>     sign_exp = sign_exp % 2
+>     return (-1) ** sign_exp
+> # compose spin reverse symmetry operator Sr
+> isec = 0
+> Sr = np.zeros((dim_sub[0],dim_sub[0]),dtype=complex)
+> for jj in range(dim_sub[0]):
+>     j = indx_sub[isec][jj]
+>     i = ApplySpinReverse(j)
+>     ii = iindx_sub[isec][i]
+>     Sr[ii,jj] = SpinReverseSign(i)
+> 
+> # compose the projection operator
+> isec = 0
+> identity = np.identity((dim_sub[isec]),dtype=complex)
+> projection = (identity + Or) 
+> projection = (identity + Ph) @ projection
+> if (n_dimer%2==0):
+>     projection = (identity + Sr) @ projection
+> else:
+>     projection = (identity - Sr) @ projection
+> projection /= 8
+> 
+> # symmetry sectorization
+> isec = 0
+> done = [False] * dim_sub[isec]
+> S = []
+> indx_S = 0
+> for i in range(dim_sub[isec]):
+>     if (done[i]):
+>         continue
+>     S.append([i])
+>     # apply symmetry operation
+>     ss = []
+>     for l in S[indx_S]:
+>         j = ApplyOrderReverse(indx_sub[isec][l])
+>         jj = iindx_sub[isec][j]
+>         if (jj not in S[indx_S]):
+>             ss += [jj]
+>             done[jj] = True
+>     S[indx_S] += ss
+> 
+>     ss = []
+>     for l in S[indx_S]:
+>         j = ApplySpinReverse(indx_sub[isec][l])
+>         jj = iindx_sub[isec][j]
+>         if (jj not in S[indx_S]):
+>             ss += [jj]
+>             done[jj] = True
+>     S[indx_S] += ss
+> 
+>     ss = []
+>     for l in S[indx_S]:
+>         j = ApplyParticleHole(indx_sub[isec][l])
+>         jj = iindx_sub[isec][j]
+>         if (jj not in S[indx_S]):
+>             ss += [jj]
+>             done[jj] = True
+>     S[indx_S] += ss
+> 
+>     indx_S += 1
+> num_S = len(S)
+> 
+> 
+> # find the reduced basis by finding eigenstate of projection operator
+> # it can be diffent. But, in thsi case, dim_reduced = num_S because all S has projection=1 eigenstate
+> dim_reduced = num_S
+> basis_transform = np.zeros((num_S,dim_sub[isec]),dtype=complex)
+> for indx_S in range(num_S):
+>     dim = len(S[indx_S])
+>     project_small = np.zeros((dim,dim),dtype=complex)
+>     for jjj in range(dim):
+>         jj = S[indx_S][jjj]
+>         for iii in range(dim):
+>             ii = S[indx_S][iii]
+>             project_small[iii,jjj] = projection[ii,jj]
+>     eigen_e, eigen_v = np.linalg.eigh(project_small)
+>     # only eigenvalue=1 (maximum) is valid
+>     #print(np.sum(np.abs(eigen_e)>0.5))
+>     for jjj in range(dim):
+>             jj = S[indx_S][jjj]
+>             basis_transform[indx_S,jj] = np.conj(eigen_v[jjj,-1])
+> #print(basis_transform[0,:])
+> if (core==0):
+>     print('reduced dimension: ', dim_reduced)
+> 
+> # %%
+169,170c323,324
+<     eigen_energies_exact.append(np.zeros((n_hamiltonians,dim_sub[isec]),dtype=float))
+<     eigen_vectors_exact.append(np.zeros((n_hamiltonians,dim_sub[isec],dim_sub[isec]),dtype=complex))
+---
+>     eigen_energies_exact.append(np.zeros((n_hamiltonians,dim_reduced),dtype=float))
+>     eigen_vectors_exact.append(np.zeros((n_hamiltonians,dim_reduced,dim_reduced),dtype=complex))
+172a327
+> start_time = datetime.now()
+174,175c329,330
+<     eigen_e               = np.zeros((dim_sub[isec]),dtype=float)
+<     eigen_v               = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+---
+>     eigen_e               = np.zeros((dim_reduced),dtype=float)
+>     eigen_v               = np.zeros((dim_reduced,dim_reduced),dtype=complex)
+177d331
+<         start_time = datetime.now()
+198c352,354
+<         H_subs[isec].append(H_sub)
+---
+>         H_sub_reduced = basis_transform@(H_sub.toarray())@basis_transform.conj().T
+> 
+>         H_subs[isec].append(H_sub_reduced)
+203,232c359,378
+<             eigen_e, eigen_v = np.linalg.eigh(H_sub.toarray())
+<             #print(alpha,eigen_e[0])
+<         comm.Barrier()
+<         bcast_start_time = datetime.now()
+<         comm.Bcast([eigen_e,MPI.DOUBLE],root=i_core)
+<         comm.Bcast([eigen_v,MPI.DOUBLE_COMPLEX],root=i_core)
+<         eigen_energies_exact[isec][alpha,:]   = eigen_e
+<         eigen_vectors_exact[isec][alpha,:,:] = eigen_v
+<         end_time = datetime.now()
+<         elapsed = end_time-start_time
+<         elapsed = elapsed.total_seconds()
+<         gc.collect()
+<         if (core==0):
+<             st = '# {percent}%, elapsed time = {elapsed} secs'.format(percent=((alpha+1)/(nt_inter)*100),elapsed=elapsed)
+<             memory_usage(st)
+<             st = 'Bcast time = {elapsed} secs'.format(elapsed=(end_time-bcast_start_time).total_seconds())
+<             print(st)
+< 
+< # %%
+< #def Apply_ExactEvolution(isec, alpha, eps, time, v):
+< #    M = H_subs[isec][alpha]-eps*sparse.eye(dim_sub[isec])
+< #    M = -1j * M * time
+< #    w = sparse.linalg.expm_multiply(M,v)
+< #    return w
+< #
+< #def Apply_ExactGaussian(isec, alpha, eps, beta, v):
+< #    M = H_subs[isec][alpha]-eps*sparse.eye(dim_sub[isec])
+< #    M = -0.5 * beta**2 * M@M
+< #    w = sparse.linalg.expm_multiply(M,v)
+< #    return w
+---
+>             eigen_e, eigen_v = np.linalg.eigh(H_sub_reduced)
+>             eigen_energies_exact[isec][alpha,:]   = eigen_e
+>             eigen_vectors_exact[isec][alpha,:,:] = eigen_v
+>     del eigen_e, eigen_v
+>     gc.collect()
+> comm.Barrier()
+> bcast_start_time = datetime.now()
+> for isec in range(nsec):
+>     for alpha in range(n_hamiltonians):
+>         i_core = alpha%cores
+>         comm.Bcast([eigen_energies_exact[isec][alpha,:] ,MPI.DOUBLE],root=i_core)
+>         comm.Bcast([eigen_vectors_exact[isec][alpha,:,:],MPI.DOUBLE_COMPLEX],root=i_core)
+> end_time = datetime.now()
+> elapsed = end_time-start_time
+> elapsed = elapsed.total_seconds()
+> if (core==0):
+>     st = '# {percent}%, elapsed time = {elapsed} secs'.format(percent=(100),elapsed=elapsed)
+>     memory_usage(st)
+>     st = 'Bcast time = {elapsed} secs'.format(elapsed=(end_time-bcast_start_time).total_seconds())
+>     print(st)
+234,252d379
+< def ExactEvolution (isec, alpha, eps, time):
+<     Vl = copy.deepcopy(eigen_vectors_exact[isec][alpha,:,:])
+<     evol = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+<     vec = np.zeros((dim_sub[isec]),dtype=complex)
+<     for k in range(dim_sub[isec]):
+<         vec[k] = np.exp(-1j*time*(eigen_energies_exact[isec][alpha,k]-eps))
+<     exp_d = np.diag(vec)
+<     evol = Vl@exp_d@Vl.conj().T
+<     return evol
+< #
+< def ExactGaussian (isec, alpha, eps, beta):
+<     Vl = copy.deepcopy(eigen_vectors_exact[isec][alpha,:,:])
+<     evol = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+<     vec = np.zeros((dim_sub[isec]),dtype=float)
+<     for k in range(dim_sub[isec]):
+<         vec[k] = np.exp(-0.5 * beta ** 2 * (eigen_energies_exact[isec][alpha,k]-eps)**2)
+<     exp_d = np.diag(vec)
+<     evol = Vl@exp_d@Vl.conj().T
+<     return evol
+253a381
+> # %%
+255,256c383,386
+<     U = ExactEvolution(isec, alpha, eps, time)
+<     w = U@v
+---
+>     w = v.conj()@eigen_vectors_exact[isec][alpha,:,:]
+>     vec = np.exp(-1j*time*(eigen_energies_exact[isec][alpha,:]-eps))
+>     w = vec*w.conj()
+>     w = eigen_vectors_exact[isec][alpha,:,:]@w
+260,261c390,393
+<     U = ExactGaussian(isec, alpha, eps, beta)
+<     w = U@v
+---
+>     w = v.conj()@eigen_vectors_exact[isec][alpha,:,:]
+>     vec = np.exp(-0.5 * beta ** 2*(eigen_energies_exact[isec][alpha,:]-eps)**2)
+>     w = vec*w.conj()
+>     w = eigen_vectors_exact[isec][alpha,:,:]@w
+305a438,440
+> else:
+>     eta_0 = 1.0
+> 
+307c442
+< phi_start = np.zeros((dim_sub[isec]),dtype=complex)
+---
+> phi_start_large = np.zeros((dim_sub[isec]),dtype=complex)
+330c465
+<     phi_start[iindx_sub[isec][ind]] = value
+---
+>     phi_start_large[iindx_sub[isec][ind]] = value
+336a472
+> phi_start = basis_transform@phi_start_large
+418,419c554,555
+< populations = np.zeros(dim_sub[isec])
+< for k in range(dim_sub[isec]):
+---
+> populations = np.zeros(dim_reduced)
+> for k in range(dim_reduced):
+510,513c646,649
+< #time_max_list = [10*j for j in range(1,120)]
+< #time_max_list = [10, 25, 50, 100, 150, 300, 500, 1000, 2000, 4000, 8000]
+< #time_max_list = [10, 35, 60, 210, 360, 620, 1240, 2480, 4960, 9920]
+< time_max_list = [25, 50, 100, 200, 500, 1000, 2000, 4000, 8000]
+---
+> #time_max_list = [20.0 * j for j in range(1,300)]
+> time_max_list = [10, 50, 160, 500, 1800, 3600, 7200, 14400, 28800]
+> #time_max_list = [50, 100, 400, ]
+> #time_max_list = [26, 52, 104, 156, 280, 520, 1040, 2080, 4160, 8320]
+564,565c700,703
+< def ExactFilter (isec, alpha, ks, Coeffs, eps):
+<     ef = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+---
+> def ExactFilteredEvolution (isec, alpha, ks, Coeffs, eps, time):
+>     Vl = copy.deepcopy(eigen_vectors_exact[isec][alpha,:,:])
+>     evol = np.zeros((dim_reduced,dim_reduced),dtype=complex)
+>     vec = np.zeros(dim_reduced,dtype=complex)
+567,577c705,718
+<         ef += Coeffs[j] * ExactEvolution(isec,alpha,eps,ks[j]*tau_scale)
+<     return ef
+< def Apply_ExactFilter (isec, alpha, ks, Coeffs, eps, phi):
+<     phi_ = phi
+<     ef = ExactFilter(isec, alpha, ks, Coeffs, eps)
+<     phi_ = ef@phi_
+<     #w = np.zeros((dim_sub[isec]),dtype=complex)
+<     #for j in range(2*d+1):
+<     #    w += Coeffs[j] * Apply_ExactEvolution(isec,alpha,eps,ks[j]*tau_scale,phi)
+<     return phi_
+< 
+---
+>         for k in range(dim_reduced):
+>             vec[k] += Coeffs[j] * np.exp(-1j*time*eigen_energies_exact[isec][alpha,k]-1j*ks[j]*tau_scale*(eigen_energies_exact[isec][alpha,k]-eps))
+>     exp_d = np.diag(vec)
+>     evol = Vl@exp_d@Vl.conj().T
+>     return evol
+> #def Apply_ExactFilter (isec, alpha, ks, Coeffs, eps, phi):
+> #    phi_ = phi
+> #    ef = ExactFilter(isec, alpha, ks, Coeffs, eps)
+> #    phi_ = ef@phi_
+> #    #w = np.zeros((dim_sub[isec]),dtype=complex)
+> #    #for j in range(2*d+1):
+> #    #    w += Coeffs[j] * Apply_ExactEvolution(isec,alpha,eps,ks[j]*tau_scale,phi)
+> #    return phi_
+> #
+582,583c723
+<     phi = Apply_ExactFilter(isec, alpha,ks, Coeffs, eps, phi)
+<     phi = Apply_ExactEvolution(isec,alpha,0.0,time,phi)
+---
+>     phi = ExactFilteredEvolution(isec, alpha, ks, Coeffs, eps, time)@phi
+591c731,732
+< for time_max in time_max_list:
+---
+> # estimation of the upperbound
+> lambda_init = eigen_energies_exact[0][0,0]*tau_scale
+593,594c734,737
+<     # estimation of the upperbound
+<     lambda_init = eigen_energies_exact[0][0,0]*tau_scale
+---
+> # center of the eigenvalue filter
+> x_center = lambda_init + relative_gap/2.0
+> 
+> for time_max in time_max_list:
+596,598d738
+<     # center of the eigenvalue filter
+<     x_center = lambda_init + relative_gap/2.0
+<     #exact_filter = ExactFilter(0,n_hamiltonians-1,ks,Coeffs,x_center/tau_scale)
+797c937
+< time_max = time_max_list[3]
+---
+> time_max = time_max_list[4]
+799d938
+< #n_samples = [1, 5, 10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+909a1049,1050
+> comm.Barrier()
+> 
+917d1057
+< eigen_vectors_coulomb  = []
+920,921c1060
+<     eigen_energies_coulomb.append(np.zeros((dim_sub[isec]),dtype=float))
+<     eigen_vectors_coulomb.append(np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex))
+---
+>     eigen_energies_coulomb.append(np.zeros((dim_reduced),dtype=float))
+925,926c1064
+<     eigen_e               = np.zeros((dim_sub[isec]),dtype=float)
+<     eigen_v               = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+---
+>     eigen_e               = np.zeros((dim_reduced),dtype=float)
+948c1086,1090
+<     H_subs_coulomb[isec].append(H_sub)
+---
+>     H_sub_reduced = basis_transform@(H_sub.toarray())@basis_transform.conj().T
+> 
+>     H_subs_coulomb[isec].append(H_sub_reduced)
+> 
+>     eigen_e = H_sub_reduced.diagonal() # coulomb interaction matrix is diagonal in occupation number basis
+950,952c1092
+<     eigen_e, eigen_v = np.linalg.eigh(H_sub.toarray())
+<     eigen_energies_coulomb[isec][:]   = eigen_e
+<     eigen_vectors_coulomb[isec][:,:] = eigen_v
+---
+>     eigen_energies_coulomb[isec][:]   = eigen_e.real
+968,969c1108,1109
+<     eigen_energies_kinetic.append(np.zeros((n_hamiltonians,dim_sub[isec]),dtype=float))
+<     eigen_vectors_kinetic.append(np.zeros((n_hamiltonians,dim_sub[isec],dim_sub[isec]),dtype=complex))
+---
+>     eigen_energies_kinetic.append(np.zeros((n_hamiltonians,dim_reduced),dtype=float))
+>     eigen_vectors_kinetic.append(np.zeros((n_hamiltonians,dim_reduced,dim_reduced),dtype=complex))
+973,974c1113,1114
+<     eigen_e               = np.zeros((dim_sub[isec]),dtype=float)
+<     eigen_v               = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+---
+>     eigen_e               = np.zeros((dim_reduced),dtype=float)
+>     eigen_v               = np.zeros((dim_reduced,dim_reduced),dtype=complex)
+997c1137,1139
+<         H_subs_kinetic[isec].append(H_sub)
+---
+>         H_sub_reduced = basis_transform@(H_sub.toarray())@basis_transform.conj().T
+> 
+>         H_subs_kinetic[isec].append(H_sub_reduced)
+1002,1029c1144,1169
+<             eigen_e, eigen_v = np.linalg.eigh(H_sub.toarray())
+<             #print(alpha,eigen_e[0])
+<         comm.Barrier()
+<         bcast_start_time = datetime.now()
+<         comm.Bcast([eigen_e,MPI.DOUBLE],root=i_core)
+<         comm.Bcast([eigen_v,MPI.DOUBLE_COMPLEX],root=i_core)
+<         eigen_energies_kinetic[isec][alpha,:]   = eigen_e
+<         eigen_vectors_kinetic[isec][alpha,:,:] = eigen_v
+<         end_time = datetime.now()
+<         elapsed = end_time-start_time
+<         elapsed = elapsed.total_seconds()
+<         gc.collect()
+<         if (core==0):
+<             st = '# {percent}%, elapsed time = {elapsed} secs'.format(percent=((alpha+1)/(nt_inter)*100),elapsed=elapsed)
+<             memory_usage(st)
+<             st = 'Bcast time = {elapsed} secs'.format(elapsed=(end_time-bcast_start_time).total_seconds())
+<             print(st)
+< 
+< # %%
+< def ExactEvolution_coulomb (isec, eps, time):
+<     Vl = copy.deepcopy(eigen_vectors_coulomb[isec][:,:])
+<     evol = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+<     vec = np.zeros((dim_sub[isec]),dtype=complex)
+<     for k in range(dim_sub[isec]):
+<         vec[k] = np.exp(-1j*time*(eigen_energies_coulomb[isec][k]-eps))
+<     exp_d = np.diag(vec)
+<     evol = Vl@exp_d@Vl.conj().T
+<     return evol
+---
+>             eigen_e, eigen_v = np.linalg.eigh(H_sub_reduced)
+>             eigen_energies_kinetic[isec][alpha,:]   = eigen_e
+>             eigen_vectors_kinetic[isec][alpha,:,:] = eigen_v
+>     del eigen_e, eigen_v
+>     gc.collect()
+> comm.Barrier()
+> bcast_start_time = datetime.now()
+> for isec in range(nsec):
+>     for alpha in range(n_hamiltonians):
+>         i_core = alpha%cores
+>         comm.Bcast([eigen_energies_kinetic[isec][alpha,:] ,MPI.DOUBLE],root=i_core)
+>         comm.Bcast([eigen_vectors_kinetic[isec][alpha,:,:],MPI.DOUBLE_COMPLEX],root=i_core)
+> end_time = datetime.now()
+> elapsed = end_time-start_time
+> elapsed = elapsed.total_seconds()
+> if (core==0):
+>     st = '# {percent}%, elapsed time = {elapsed} secs'.format(percent=(100),elapsed=elapsed)
+>     memory_usage(st)
+>     st = 'Bcast time = {elapsed} secs'.format(elapsed=(end_time-bcast_start_time).total_seconds())
+>     print(st)
+> 
+> 
+> def Apply_ExactEvolution_coulomb(isec, eps, time, v):
+>     vec = np.exp(-1j*time*(eigen_energies_coulomb[isec][:]-eps))
+>     w = vec * v
+>     return w
+1031,1040d1170
+< # %%
+< def ExactEvolution_kinetic (isec, alpha, eps, time):
+<     Vl = copy.deepcopy(eigen_vectors_kinetic[isec][alpha,:,:])
+<     evol = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+<     vec = np.zeros((dim_sub[isec]),dtype=complex)
+<     for k in range(dim_sub[isec]):
+<         vec[k] = np.exp(-1j*time*(eigen_energies_kinetic[isec][alpha,k]-eps))
+<     exp_d = np.diag(vec)
+<     evol = Vl@exp_d@Vl.conj().T
+<     return evol
+1043c1173,1182
+< def TrotterEvolution(isec, alpha, time, eps, n_trotter, indx):
+---
+> 
+> def Apply_ExactEvolution_kinetic(isec, alpha, eps, time, v):
+>     w = v.conj()@eigen_vectors_kinetic[isec][alpha,:,:]
+>     vec = np.exp(-1j*time*(eigen_energies_kinetic[isec][alpha,:]-eps))
+>     w = vec*w.conj()
+>     w = eigen_vectors_kinetic[isec][alpha,:,:]@w
+>     return w
+> 
+> 
+> def Apply_TrotterEvolution(isec, alpha, time, eps, n_trotter, indx, v):
+1045,1046d1183
+<     evol_kinetic = ExactEvolution_kinetic (isec, alpha, 0.0, dt)
+<     evol_coulomb = ExactEvolution_coulomb (isec, 0.0, dt)
+1049c1186
+<         u_trotter = np.identity((dim_sub[isec]),dtype=complex)
+---
+>         w = v
+1051,1052c1188,1189
+<             u_trotter = ExactEvolution_coulomb (isec, 0.0, dt)@u_trotter
+<             u_trotter = ExactEvolution_kinetic (isec, alpha, 0.0, dt)@u_trotter
+---
+>             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+>             w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+1054c1191
+<         u_trotter = np.identity((dim_sub[isec]),dtype=complex)
+---
+>         w = v
+1056,1058c1193,1195
+<             u_trotter = ExactEvolution_kinetic (isec, alpha, 0.0, dt)@u_trotter
+<             u_trotter = ExactEvolution_coulomb (isec, 0.0, dt)@u_trotter
+<     return u_trotter*np.exp(1j*eps*time)
+---
+>             w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+>             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+>     return w*np.exp(1j*eps*time)
+1060c1197
+< def Apply_TrotterEvolution(isec, alpha, time, eps, n_trotter, indx, v):
+---
+> def Apply_TrotterEvolution2(isec, alpha, time, eps, n_trotter, indx, v):
+1062,1063c1199,1200
+<     evol_kinetic = ExactEvolution_kinetic (isec, alpha, 0.0, dt)
+<     evol_coulomb = ExactEvolution_coulomb (isec, 0.0, dt)
+---
+>     vec = np.exp(-1j*dt*(eigen_energies_kinetic[isec][alpha,:]-eps))
+>     M = eigen_vectors_kinetic[isec][alpha,:,:]@np.diag(vec)@eigen_vectors_kinetic[isec][alpha,:,:].conj().T
+1068,1069c1205,1207
+<             w = evol_coulomb@w
+<             w = evol_kinetic@w
+---
+>             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+>             w = M@w
+>             #w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+1073,1074c1211,1213
+<             w = evol_kinetic@w
+<             w = evol_coulomb@w
+---
+>             w = M@w
+>             #w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+>             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+1079c1218
+< time_max = time_max_list[3]
+---
+> time_max = time_max_list[4]
+1081c1220
+< n_sample = 4096
+---
+> n_sample = 256
+1084c1223
+< max_n_trotter_list+= [200,300,400,500, 1000, 2000, 3000, 4000]
+---
+> max_n_trotter_list+= [200, 300, 400, 500, 1000, 2000, 3000, 4000]
+1208,1215c1347,1354
+< 
+< 
+< 
+< 
+< 
+< 
+< 
+< 
+---
+> #
+> #
+> #
+> #
+> #
+> #
+> #
+> #

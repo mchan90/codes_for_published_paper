@@ -1,0 +1,106 @@
+nohup: ignoring input
+[0.   1.25 2.5  3.75 5.  ]
+0 SparsePauliOp(['IX', 'XI'],
+              coeffs=[-1.+0.j, -1.+0.j])
+1 SparsePauliOp(['IX', 'II', 'XI', 'ZZ'],
+              coeffs=[-1.   +0.j, -0.625+0.j, -1.   +0.j, -0.625+0.j])
+2 SparsePauliOp(['IX', 'II', 'XI', 'ZZ'],
+              coeffs=[-1.  +0.j, -1.25+0.j, -1.  +0.j, -1.25+0.j])
+3 SparsePauliOp(['IX', 'II', 'XI', 'ZZ'],
+              coeffs=[-1.   +0.j, -1.875+0.j, -1.   +0.j, -1.875+0.j])
+4 SparsePauliOp(['IX', 'II', 'XI', 'ZZ'],
+              coeffs=[-1. +0.j, -2.5+0.j, -1. +0.j, -2.5+0.j])
+SparsePauliOp(['II', 'ZZ'],
+              coeffs=[-0.625+0.j, -0.625+0.j])
+SparsePauliOp(['II', 'ZZ'],
+              coeffs=[-0.625+0.j, -0.625+0.j])
+SparsePauliOp(['II', 'ZZ'],
+              coeffs=[-0.625+0.j, -0.625+0.j])
+SparsePauliOp(['II', 'ZZ'],
+              coeffs=[-0.625+0.j, -0.625+0.j])
+[('II', (-0.6249999999999998+0j)), ('ZZ', (-0.6249999999999998+0j))]
+[('II', (-0.6249999999999998+0j)), ('ZZ', (-0.6249999999999998+0j))]
+[('II', (-0.6249999999999998+0j)), ('ZZ', (-0.6249999999999998+0j))]
+[('II', (-0.6249999999999998+0j)), ('ZZ', (-0.6249999999999998+0j))]
+/home/einnew90/2-qubit/dimer/perth/naive-trotter/local-transpile-off/dimer.py:158: ComplexWarning: Casting complex values to real discards the imaginary part
+  norms_exact[alpha,i] = phi.conj()@phi
+[1. 1. 1. 1.] [-2.00000000e+00 -1.50145878e-16  3.14944608e-16  2.00000000e+00]
+[0.97723999 1.         1.         0.97723999] [-2.72038183 -1.25        0.          1.47038183]
+[0.96135145 1.         1.         0.96135145] [-3.60849528 -2.5         0.          1.10849528]
+[0.95228321 1.         1.         0.95228321] [-4.61646402 -3.75        0.          0.86646402]
+[0.94742969 1.         1.         0.94742969] [-5.70156212 -5.          0.          0.70156212]
+[0.5+0.j 0.5+0.j 0.5+0.j 0.5+0.j]
+[ 7.07106781e-01+0.j -4.16333634e-17+0.j  1.11022302e-16+0.j
+ -7.07106781e-01+0.j]
+[-4.16333634e-17+0.j  7.07106781e-01+0.j -7.07106781e-01+0.j
+  0.00000000e+00+0.j]
+[-0.5+0.j  0.5+0.j  0.5+0.j -0.5+0.j]
+[0.5+0.j 0.5+0.j 0.5+0.j 0.5+0.j]
+[0.5+0.j 0.5+0.j 0.5+0.j 0.5+0.j]
+##
+[ 0.70710678+0.j  0.        +0.j  0.        +0.j -0.70710678+0.j]
+[ 7.07106781e-01+0.j -4.16333634e-17+0.j  1.11022302e-16+0.j
+ -7.07106781e-01+0.j]
+##
+[ 0.        +0.j -0.70710678+0.j  0.70710678+0.j  0.        +0.j]
+[-4.16333634e-17+0.j  7.07106781e-01+0.j -7.07106781e-01+0.j
+  0.00000000e+00+0.j]
+##
+[ 0.5+0.j -0.5+0.j -0.5+0.j  0.5+0.j]
+[-0.5+0.j  0.5+0.j  0.5+0.j -0.5+0.j]
+##
+[0.5+0.j 0.5+0.j 0.5+0.j 0.5+0.j]
+[0.5+0.j 0.5+0.j 0.5+0.j 0.5+0.j]
+#
+[ 0.70710678+0.j  0.        +0.j  0.        +0.j -0.70710678+0.j]
+[ 7.07106781e-01+0.j -4.16333634e-17+0.j  1.11022302e-16+0.j
+ -7.07106781e-01+0.j]
+##
+[ 0.70710678+0.j  0.        +0.j  0.        +0.j -0.70710678+0.j]
+[ 7.07106781e-01+0.j -4.16333634e-17+0.j  1.11022302e-16+0.j
+ -7.07106781e-01+0.j]
+#
+[ 0.70710678+0.j  0.        +0.j  0.        +0.j -0.70710678+0.j]
+[ 7.07106781e-01+0.j -4.16333634e-17+0.j  1.11022302e-16+0.j
+ -7.07106781e-01+0.j]
+##
+[ 0.        +0.j  0.70710678+0.j -0.70710678+0.j  0.        +0.j]
+[-4.16333634e-17+0.j  7.07106781e-01+0.j -7.07106781e-01+0.j
+  0.00000000e+00+0.j]
+#
+[ 0.70710678+0.j  0.        +0.j  0.        +0.j -0.70710678+0.j]
+[ 7.07106781e-01+0.j -4.16333634e-17+0.j  1.11022302e-16+0.j
+ -7.07106781e-01+0.j]
+##
+[ 0.5+0.j -0.5+0.j -0.5+0.j  0.5+0.j]
+[-0.5+0.j  0.5+0.j  0.5+0.j -0.5+0.j]
+#
+[ 0.70710678+0.j  0.        +0.j  0.        +0.j -0.70710678+0.j]
+[ 7.07106781e-01+0.j -4.16333634e-17+0.j  1.11022302e-16+0.j
+ -7.07106781e-01+0.j]
+##
+7 300
+SparsePauliOp(['IIZ'],
+              coeffs=[1.+0.j])
+waiting...
+/home/einnew90/2-qubit/dimer/perth/naive-trotter/local-transpile-off/dimer.py:986: ComplexWarning: Casting complex values to real discards the imaginary part
+  dE1[0] +=  coeff * result_values_save[i][alpha][i_meas]
+/home/einnew90/2-qubit/dimer/perth/naive-trotter/local-transpile-off/dimer.py:988: ComplexWarning: Casting complex values to real discards the imaginary part
+  dE1[1] +=  coeff * result_values_save[i][alpha][i_meas+n_meas]
+/home/einnew90/2-qubit/dimer/perth/naive-trotter/local-transpile-off/dimer.py:1002: ComplexWarning: Casting complex values to real discards the imaginary part
+  dE2[0] += coeff * result_values_save[i][alpha][i_meas]
+/home/einnew90/2-qubit/dimer/perth/naive-trotter/local-transpile-off/dimer.py:1004: ComplexWarning: Casting complex values to real discards the imaginary part
+  dE2[1] += coeff * result_values_save[i][alpha][i_meas+n_meas]
+/home/einnew90/2-qubit/dimer/perth/naive-trotter/local-transpile-off/dimer.py:1029: ComplexWarning: Casting complex values to real discards the imaginary part
+  eigen_energies_qzmc[alpha,i] = eigen_energies_qzmc[alpha-1,i] + dE1_avg
+1 0.7550491859451142 0.043984079669487475
+# 1/4: 25.0%
+waiting...
+2 0.5710252324239535 0.12951915389251312
+# 1/4: 50.0%
+waiting...
+3 0.39236254181369595 0.25544850073110137
+# 1/4: 75.0%
+waiting...
+4 0.2298170427614632 0.40856055793126966
+# 1/4: 100.0%

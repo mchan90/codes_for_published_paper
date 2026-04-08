@@ -1,0 +1,676 @@
+0 SparsePauliOp(['IIIIIIIIIIIIIYZY', 'IIIIIIIIIIIIIXZX', 'IIIIIIIIIIIIYZYI', 'IIIIIIIIIIIIXZXI', 'IIIIIIIIIYZYIIII', 'IIIIIIIIIXZXIIII', 'IIIIIIIIYZYIIIII', 'IIIIIIIIXZXIIIII', 'IIIIIYZYIIIIIIII', 'IIIIIXZXIIIIIIII', 'IIIIYZYIIIIIIIII', 'IIIIXZXIIIIIIIII', 'IYZYIIIIIIIIIIII', 'IXZXIIIIIIIIIIII', 'YZYIIIIIIIIIIIII', 'XZXIIIIIIIIIIIII', 'IIIIZZIIIIIIIIII', 'IIIIIIIIIIZZIIII', 'IIIIIIIIIIIIIIZZ', 'ZZIIIIIIIIIIIIII', 'IIIIIIIIIIIIZZII', 'IIZZIIIIIIIIIIII', 'IIIIIIZZIIIIIIII', 'IIIIIIIIZZIIIIII'],
+              coeffs=[-0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,
+ -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,
+ -0.5+0.j, -0.5+0.j,  2.5+0.j,  2.5+0.j,  2.5+0.j,  2.5+0.j,  2.5+0.j,
+  2.5+0.j,  2.5+0.j,  2.5+0.j])
+1 SparsePauliOp(['IIIIIIIIIIIIIYZY', 'IIIIIIIIIIIIIXZX', 'IIIIIIIIIIIIYZYI', 'IIIIIIIIIIIIXZXI', 'IIIIIIIIIIIYZYII', 'IIIIIIIIIIIXZXII', 'IIIIIIIIIIYZYIII', 'IIIIIIIIIIXZXIII', 'IIIIIIIIIYZYIIII', 'IIIIIIIIIXZXIIII', 'IIIIIIIIYZYIIIII', 'IIIIIIIIXZXIIIII', 'IIIIIIIYZYIIIIII', 'IIIIIIIXZXIIIIII', 'IIIIIIYZYIIIIIII', 'IIIIIIXZXIIIIIII', 'IIIIIYZYIIIIIIII', 'IIIIIXZXIIIIIIII', 'IIIIYZYIIIIIIIII', 'IIIIXZXIIIIIIIII', 'IIIYZYIIIIIIIIII', 'IIIXZXIIIIIIIIII', 'IIYZYIIIIIIIIIII', 'IIXZXIIIIIIIIIII', 'IYZYIIIIIIIIIIII', 'IXZXIIIIIIIIIIII', 'YZYIIIIIIIIIIIII', 'XZXIIIIIIIIIIIII', 'IIIIZZIIIIIIIIII', 'IIIIIIIIIIZZIIII', 'IIIIIIIIIIIIIIZZ', 'ZZIIIIIIIIIIIIII', 'IIIIIIIIIIIIZZII', 'IIZZIIIIIIIIIIII', 'IIIIIIZZIIIIIIII', 'IIIIIIIIZZIIIIII'],
+              coeffs=[-0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,
+ -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,
+ -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,
+ -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,
+  2.5+0.j,  2.5+0.j,  2.5+0.j,  2.5+0.j,  2.5+0.j,  2.5+0.j,  2.5+0.j,
+  2.5+0.j])
+# dimension of subspace with (n_up,n_dn) = (4,4) = 4900
+reduced dimension:  684
+[# 100%, elapsed time = 15.576592 secs] memory usage:    2.16111 GiB
+Bcast time = 0.021659 secs
+SparsePauliOp(['IIIIIIIIIIIIIIII', 'IIIIIIIIIIIIIIIZ', 'IIIIIIIIIIIIIYZY', 'IIIIIIIIIIIIIXZX', 'IIIIIIIIIIIIIIZI', 'IIIIIIIIIIIIYZYI', 'IIIIIIIIIIIIXZXI', 'IIIIIIIIIIIIIZII', 'IIIIIIIIIIIIZIII', 'IIIIIIIIIIIZIIII', 'IIIIIIIIIYZYIIII', 'IIIIIIIIIXZXIIII', 'IIIIIIIIIIZIIIII', 'IIIIIIIIYZYIIIII', 'IIIIIIIIXZXIIIII', 'IIIIIIIIIZIIIIII', 'IIIIIIIIZIIIIIII', 'IIIIIIIZIIIIIIII', 'IIIIIYZYIIIIIIII', 'IIIIIXZXIIIIIIII', 'IIIIIIZIIIIIIIII', 'IIIIYZYIIIIIIIII', 'IIIIXZXIIIIIIIII', 'IIIIIZIIIIIIIIII', 'IIIIZIIIIIIIIIII', 'IIIZIIIIIIIIIIII', 'IYZYIIIIIIIIIIII', 'IXZXIIIIIIIIIIII', 'IIZIIIIIIIIIIIII', 'YZYIIIIIIIIIIIII', 'XZXIIIIIIIIIIIII', 'IZIIIIIIIIIIIIII', 'ZIIIIIIIIIIIIIII'],
+              coeffs=[-40. +0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,
+  -0.5+0.j,   2.5+0.j,   2.5+0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,
+   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,   2.5+0.j,   2.5+0.j,
+  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,
+   2.5+0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,
+  -0.5+0.j,   2.5+0.j,   2.5+0.j])
+SparsePauliOp(['IIIIIIIIIIIIIIII', 'IIIIIIIIIIIIIIIZ', 'IIIIIIIIIIIIIYZY', 'IIIIIIIIIIIIIXZX', 'IIIIIIIIIIIIIIZI', 'IIIIIIIIIIIIYZYI', 'IIIIIIIIIIIIXZXI', 'IIIIIIIIIIIIIZII', 'IIIIIIIIIIIYZYII', 'IIIIIIIIIIIXZXII', 'IIIIIIIIIIIIZIII', 'IIIIIIIIIIYZYIII', 'IIIIIIIIIIXZXIII', 'IIIIIIIIIIIZIIII', 'IIIIIIIIIYZYIIII', 'IIIIIIIIIXZXIIII', 'IIIIIIIIIIZIIIII', 'IIIIIIIIYZYIIIII', 'IIIIIIIIXZXIIIII', 'IIIIIIIIIZIIIIII', 'IIIIIIIYZYIIIIII', 'IIIIIIIXZXIIIIII', 'IIIIIIIIZIIIIIII', 'IIIIIIYZYIIIIIII', 'IIIIIIXZXIIIIIII', 'IIIIIIIZIIIIIIII', 'IIIIIYZYIIIIIIII', 'IIIIIXZXIIIIIIII', 'IIIIIIZIIIIIIIII', 'IIIIYZYIIIIIIIII', 'IIIIXZXIIIIIIIII', 'IIIIIZIIIIIIIIII', 'IIIYZYIIIIIIIIII', 'IIIXZXIIIIIIIIII', 'IIIIZIIIIIIIIIII', 'IIYZYIIIIIIIIIII', 'IIXZXIIIIIIIIIII', 'IIIZIIIIIIIIIIII', 'IYZYIIIIIIIIIIII', 'IXZXIIIIIIIIIIII', 'IIZIIIIIIIIIIIII', 'YZYIIIIIIIIIIIII', 'XZXIIIIIIIIIIIII', 'IZIIIIIIIIIIIIII', 'ZIIIIIIIIIIIIIII'],
+              coeffs=[-40. +0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,
+  -0.5+0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,
+  -0.5+0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,
+  -0.5+0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,
+  -0.5+0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,
+  -0.5+0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,
+  -0.5+0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,
+  -0.5+0.j,   2.5+0.j,   2.5+0.j])
+SparsePauliOp(['IIIIIIIIIIIIIIII', 'IIIIIIIIIIIIIIZI', 'IIIIIIIIIIIIIIIZ', 'IIIIIIIIIIIIIIZZ', 'IIIIIIIIIIIIZIII', 'IIIIIIIIIIIIIZII', 'IIIIIIIIIIIIZZII', 'IIIIIIIIIIZIIIII', 'IIIIIIIIIIIZIIII', 'IIIIIIIIIIZZIIII', 'IIIIIIIIZIIIIIII', 'IIIIIIIIIZIIIIII', 'IIIIIIIIZZIIIIII', 'IIIIIIZIIIIIIIII', 'IIIIIIIZIIIIIIII', 'IIIIIIZZIIIIIIII', 'IIIIZIIIIIIIIIII', 'IIIIIZIIIIIIIIII', 'IIIIZZIIIIIIIIII', 'IIZIIIIIIIIIIIII', 'IIIZIIIIIIIIIIII', 'IIZZIIIIIIIIIIII', 'ZIIIIIIIIIIIIIII', 'IZIIIIIIIIIIIIII', 'ZZIIIIIIIIIIIIII'],
+              coeffs=[40. +0.j, -2.5+0.j, -2.5+0.j,  2.5+0.j, -2.5+0.j, -2.5+0.j,  2.5+0.j,
+ -2.5+0.j, -2.5+0.j,  2.5+0.j, -2.5+0.j, -2.5+0.j,  2.5+0.j, -2.5+0.j,
+ -2.5+0.j,  2.5+0.j, -2.5+0.j, -2.5+0.j,  2.5+0.j, -2.5+0.j, -2.5+0.j,
+  2.5+0.j, -2.5+0.j, -2.5+0.j,  2.5+0.j])
+0.03574077800267365
+0.40000344832949586
+relative gap= 0.2646316985181021
+22 2.094409590956676 0.1437988611970349
+66 3.352484976650788 0.12228537096828701
+200 7.183896378537403 0.005542488174892518
+600 18.62094533939297 0.002262047859407377
+1200 35.77651878067632 0.0035851832867442204
+1860 54.647649566088006 0.002606072902413982
+3320 96.39287827321083 0.0006071342622136292
+9960 286.2478910234132 0.0002539883983369997
+29880 855.8129292740205 3.115862631959786e-05
+2.094409590956676  1.4379886119703489e-01
+3.352484976650788  1.2228537096828701e-01
+7.183896378537403  5.5424881748925179e-03
+18.62094533939297  2.2620478594073770e-03
+35.77651878067632  3.5851832867442204e-03
+54.647649566088006  2.6060729024139822e-03
+96.39287827321083  6.0713426221362923e-04
+286.2478910234132  2.5398839833699969e-04
+855.8129292740205  3.1158626319597858e-05
+22 58.6 0.21511654735415545
+66 93.8 0.13208154490145468
+200 201.0 0.019086398265756237
+600 521.0 0.007611932935960879
+1200 1001.0 0.003883533918816616
+1860 1529.0 0.0036638366052660254
+3320 2697.0 0.001334634435314482
+9960 8009.0 0.0003990719453835099
+29880 23945.0 0.0001227684647425932
+2.094409590956676  2.1511654735415545e-01
+3.352484976650788  1.3208154490145468e-01
+7.183896378537403  1.9086398265756237e-02
+18.62094533939297  7.6119329359608792e-03
+35.77651878067632  3.8835339188166159e-03
+54.647649566088006  3.6638366052660254e-03
+96.39287827321083  1.3346344353144821e-03
+286.2478910234132  3.9907194538350989e-04
+855.8129292740205  1.2276846474259319e-04
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+/home/mchan/venv_qiskit/lib/python3.11/site-packages/scipy/optimize/_slsqp_py.py:434: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+  fx = wrapped_fun(x)
+50 32.73942760723676
+100 27.11302553571405
+200 4.121925061199918
+300 2.8380217691095884
+400 2.1855927244310673
+800 0.011286541371125733
+1600 0.004897830778723326
+3200 0.005684715245560715
+6400 0.003141715517842671
+12800 0.0034750849178382414
+25600 0.0026276548810466025
+51200 0.0022614184280845217
+102400 0.002601938125298378
+204800 0.002509419975291154
+50  3.2739427607236763e+01
+100  2.7113025535714051e+01
+200  4.1219250611999181e+00
+300  2.8380217691095884e+00
+400  2.1855927244310673e+00
+800  1.1286541371125733e-02
+1600  4.8978307787233260e-03
+3200  5.6847152455607149e-03
+6400  3.1417155178426709e-03
+12800  3.4750849178382414e-03
+25600  2.6276548810466025e-03
+51200  2.2614184280845217e-03
+102400  2.6019381252983778e-03
+204800  2.5094199752911540e-03
+[# Coulomb, elapsed time = 4.008239 secs] memory usage:    2.16601 GiB
+[# 100%, elapsed time = 4.116971 secs] memory usage:    2.21384 GiB
+Bcast time = 0.019421 secs
+2 2.1148434201092483
+[# elapsed time = 2.694576 secs] memory usage:    2.21384 GiB
+4 1.9118074565700947
+[# elapsed time = 4.576523 secs] memory usage:    2.21384 GiB
+6 1.2122742093494498
+[# elapsed time = 6.560409 secs] memory usage:    2.21384 GiB
+8 0.8302067626732369
+[# elapsed time = 8.387777 secs] memory usage:    2.21384 GiB
+10 0.6379163919695277
+[# elapsed time = 10.374666 secs] memory usage:    2.21384 GiB
+20 0.6554761082914518
+[# elapsed time = 19.719497 secs] memory usage:    2.21384 GiB
+30 0.14951814903117241
+[# elapsed time = 29.219667 secs] memory usage:    2.21384 GiB
+40 0.5475901295208568
+[# elapsed time = 38.584316 secs] memory usage:    2.21384 GiB
+50 0.37339262931369976
+[# elapsed time = 48.258252 secs] memory usage:    2.21384 GiB
+75 0.05278153092731004
+[# elapsed time = 71.993185 secs] memory usage:    2.21384 GiB
+100 0.34557816673418423
+[# elapsed time = 95.085109 secs] memory usage:    2.21384 GiB
+200 0.03085183854790748
+[# elapsed time = 188.98339 secs] memory usage:    2.21384 GiB
+300 0.16164650589550505
+[# elapsed time = 282.772226 secs] memory usage:    2.21384 GiB
+400 0.04184987462744271
+[# elapsed time = 375.298031 secs] memory usage:    2.21384 GiB
+500 0.07068683539958201
+[# elapsed time = 470.283356 secs] memory usage:    2.21384 GiB
+1000 0.04477148170633107
+[# elapsed time = 937.811665 secs] memory usage:    2.21384 GiB
+2000 0.013482149898063518
+[# elapsed time = 1878.432291 secs] memory usage:    2.21384 GiB
+3000 0.007601561973735898
+[# elapsed time = 2809.850054 secs] memory usage:    2.21384 GiB
+4000 0.005198098357883181
+[# elapsed time = 3750.271158 secs] memory usage:    2.21384 GiB
+2.0  2.1148434201092483e+00
+4.0  1.9118074565700947e+00
+6.0  1.2122742093494498e+00
+8.0  8.3020676267323690e-01
+10.0  6.3791639196952765e-01
+20.0  6.5547610829145175e-01
+30.0  1.4951814903117241e-01
+40.0  5.4759012952085684e-01
+50.0  3.7339262931369976e-01
+75.0  5.2781530927310041e-02
+100.0  3.4557816673418423e-01
+200.0  3.0851838547907479e-02
+300.0  1.6164650589550505e-01
+400.0  4.1849874627442711e-02
+500.0  7.0686835399582010e-02
+1000.0  4.4771481706331072e-02
+2000.0  1.3482149898063518e-02
+3000.0  7.6015619737358981e-03
+4000.0  5.1980983578831814e-03

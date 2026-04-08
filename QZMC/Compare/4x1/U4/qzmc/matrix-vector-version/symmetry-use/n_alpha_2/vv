@@ -1,0 +1,470 @@
+41,42c41
+< first_run = True
+< n_x     = 8
+---
+> n_x     = 4
+56c55
+< Uc           = 10.0
+---
+> Uc           = 4.0
+222d220
+< # even more 
+266,294c264,273
+<     del eigen_e, eigen_v
+<     gc.collect()
+< if (first_run):
+<     comm.Barrier()
+<     bcast_start_time = datetime.now()
+<     for isec in range(nsec):
+<         for alpha in range(n_hamiltonians):
+<             i_core = alpha%cores
+<             comm.Bcast([eigen_energies_exact[isec][alpha,:] ,MPI.DOUBLE],root=i_core)
+<             comm.Bcast([eigen_vectors_exact[isec][alpha,:,:],MPI.DOUBLE_COMPLEX],root=i_core)
+<     end_time = datetime.now()
+<     elapsed = end_time-start_time
+<     elapsed = elapsed.total_seconds()
+<     # pickle kinetic part
+<     if (core==0):
+<         with open('eigen_exact','wb') as file_:
+<             pickle.dump([eigen_energies_exact, eigen_vectors_exact],file_)
+< else:
+<     if (core==0):
+<         with open('eigen_exact','rb') as file_:
+<             [eigen_energies_exact,eigen_vectors_exact] = pickle.load(file_)
+<     comm.Barrier()
+<     bcast_start_time = datetime.now()
+<     for isec in range(nsec):
+<         comm.Bcast([eigen_energies_exact[isec] ,MPI.DOUBLE],root=0)
+<         comm.Bcast([eigen_vectors_exact[isec],MPI.DOUBLE_COMPLEX],root=0)
+<     end_time = datetime.now()
+<     elapsed = end_time-start_time
+<     elapsed = elapsed.total_seconds()
+---
+> comm.Barrier()
+> bcast_start_time = datetime.now()
+> for isec in range(nsec):
+>     for alpha in range(n_hamiltonians):
+>         i_core = alpha%cores
+>         comm.Bcast([eigen_energies_exact[isec][alpha,:] ,MPI.DOUBLE],root=i_core)
+>         comm.Bcast([eigen_vectors_exact[isec][alpha,:,:],MPI.DOUBLE_COMPLEX],root=i_core)
+> end_time = datetime.now()
+> elapsed = end_time-start_time
+> elapsed = elapsed.total_seconds()
+445,447d423
+< else:
+<     eta_0 = 1.0
+< 
+541,606c517,582
+< #isec = 0
+< #indx_beta =0
+< #for beta in beta_list:
+< #    i_core = indx_beta%cores
+< #    if (core!=i_core):
+< #        indx_beta += 1
+< #        continue
+< #    eps = eigen_energies_exact[0][0,0]
+< #    norms_qzmc              = np.ones((n_hamiltonians),dtype=float)
+< #    eigen_energies_qzmc     = np.zeros((n_hamiltonians),dtype=float)
+< #    eigen_energies_qzmc[0] = eigen_energies_exact[0][0,0]
+< #    phi = copy.copy(phi_start)
+< #    phi = Apply_ExactGaussian(isec,0,eigen_energies_qzmc[0],beta,phi)
+< #    norms_qzmc[0] = np.real(phi.conj().T@phi)
+< #    for alpha in range(1,n_hamiltonians):
+< #        phi_1 = (H_subs[isec][alpha]-H_subs[isec][alpha-1])@phi
+< #        phi_1 = Apply_ExactGaussian(isec,alpha,eps,beta,phi_1)
+< #        phi = Apply_ExactGaussian(isec,alpha,eps,beta,phi)
+< #
+< #        norms_qzmc[alpha] = np.real(phi.conj().T@phi)
+< #        dE1 = np.real(phi.conj().T@phi_1)/norms_qzmc[alpha]
+< #        eigen_energies_qzmc[alpha] = eigen_energies_qzmc[alpha-1] + dE1
+< #        if (alpha<n_hamiltonians-1):
+< #            phi_2 = (H_subs[isec][alpha+1]-H_subs[isec][alpha])@phi
+< #            dE2 = np.real(phi.conj().T@phi_2)/norms_qzmc[alpha]
+< #            eps = eigen_energies_qzmc[alpha] + dE2
+< #        #if (core==0):
+< #        #    st = '# {percent:.1f}%, elapsed time = {elapsed} secs'.format(percent=((alpha)/(n_hamiltonians-1)*100),elapsed=elapsed)
+< #        #    memory_usage(st)
+< #        #    print(alpha, norms_qzmc[alpha], eigen_energies_qzmc[alpha]-eigen_energies_exact[isec][alpha,0])
+< #        #    if (alpha<n_hamiltonians-1):
+< #        #        print('precision of the predictor for next', eps-eigen_energies_exact[isec][alpha+1,0])
+< #        #    st = '# {percent:.1f}%'.format(percent=((alpha)/(n_hamiltonians-1)*100))
+< #        #    print(st)
+< #        gc.collect()
+< #    error = np.abs(eigen_energies_qzmc[-1] - eigen_energies_exact[0][-1,0])
+< #    norms_for_beta_list[indx_beta] = norms_qzmc[-1]
+< #    error_for_beta_list[indx_beta] = error
+< #    indx_beta += 1
+< #
+< #indx_beta =0
+< #for beta in beta_list:
+< #    i_core = indx_beta%cores
+< #    norm = comm.bcast(norms_for_beta_list[indx_beta],root=i_core)
+< #    norms_for_beta_list[indx_beta] = norm
+< #    error = comm.bcast(error_for_beta_list[indx_beta],root=i_core)
+< #    error_for_beta_list[indx_beta] = error
+< #    if (core==0):
+< #        print(beta,norms_for_beta_list[indx_beta],error_for_beta_list[indx_beta])
+< #    indx_beta += 1
+< #        
+< #
+< ## %%
+< #if (core==0):
+< #    with open('dE_vs_evolution','w') as file_:
+< #        s = '# from exact gaussian'
+< #        s += '\n'
+< #        file_.write(s)
+< #        indx_beta = 0
+< #        for beta in beta_list:
+< #            s = '{:}'.format(beta*C99)
+< #            s += '  {:.16e}'.format(error_for_beta_list[indx_beta])
+< #        #    print(s)
+< #            s += '\n'
+< #            file_.write(s)
+< #            indx_beta += 1
+---
+> isec = 0
+> indx_beta =0
+> for beta in beta_list:
+>     i_core = indx_beta%cores
+>     if (core!=i_core):
+>         indx_beta += 1
+>         continue
+>     eps = eigen_energies_exact[0][0,0]
+>     norms_qzmc              = np.ones((n_hamiltonians),dtype=float)
+>     eigen_energies_qzmc     = np.zeros((n_hamiltonians),dtype=float)
+>     eigen_energies_qzmc[0] = eigen_energies_exact[0][0,0]
+>     phi = copy.copy(phi_start)
+>     phi = Apply_ExactGaussian(isec,0,eigen_energies_qzmc[0],beta,phi)
+>     norms_qzmc[0] = np.real(phi.conj().T@phi)
+>     for alpha in range(1,n_hamiltonians):
+>         phi_1 = (H_subs[isec][alpha]-H_subs[isec][alpha-1])@phi
+>         phi_1 = Apply_ExactGaussian(isec,alpha,eps,beta,phi_1)
+>         phi = Apply_ExactGaussian(isec,alpha,eps,beta,phi)
+> 
+>         norms_qzmc[alpha] = np.real(phi.conj().T@phi)
+>         dE1 = np.real(phi.conj().T@phi_1)/norms_qzmc[alpha]
+>         eigen_energies_qzmc[alpha] = eigen_energies_qzmc[alpha-1] + dE1
+>         if (alpha<n_hamiltonians-1):
+>             phi_2 = (H_subs[isec][alpha+1]-H_subs[isec][alpha])@phi
+>             dE2 = np.real(phi.conj().T@phi_2)/norms_qzmc[alpha]
+>             eps = eigen_energies_qzmc[alpha] + dE2
+>         #if (core==0):
+>         #    st = '# {percent:.1f}%, elapsed time = {elapsed} secs'.format(percent=((alpha)/(n_hamiltonians-1)*100),elapsed=elapsed)
+>         #    memory_usage(st)
+>         #    print(alpha, norms_qzmc[alpha], eigen_energies_qzmc[alpha]-eigen_energies_exact[isec][alpha,0])
+>         #    if (alpha<n_hamiltonians-1):
+>         #        print('precision of the predictor for next', eps-eigen_energies_exact[isec][alpha+1,0])
+>         #    st = '# {percent:.1f}%'.format(percent=((alpha)/(n_hamiltonians-1)*100))
+>         #    print(st)
+>         gc.collect()
+>     error = np.abs(eigen_energies_qzmc[-1] - eigen_energies_exact[0][-1,0])
+>     norms_for_beta_list[indx_beta] = norms_qzmc[-1]
+>     error_for_beta_list[indx_beta] = error
+>     indx_beta += 1
+> 
+> indx_beta =0
+> for beta in beta_list:
+>     i_core = indx_beta%cores
+>     norm = comm.bcast(norms_for_beta_list[indx_beta],root=i_core)
+>     norms_for_beta_list[indx_beta] = norm
+>     error = comm.bcast(error_for_beta_list[indx_beta],root=i_core)
+>     error_for_beta_list[indx_beta] = error
+>     if (core==0):
+>         print(beta,norms_for_beta_list[indx_beta],error_for_beta_list[indx_beta])
+>     indx_beta += 1
+>         
+> 
+> # %%
+> if (core==0):
+>     with open('dE_vs_evolution','w') as file_:
+>         s = '# from exact gaussian'
+>         s += '\n'
+>         file_.write(s)
+>         indx_beta = 0
+>         for beta in beta_list:
+>             s = '{:}'.format(beta*C99)
+>             s += '  {:.16e}'.format(error_for_beta_list[indx_beta])
+>         #    print(s)
+>             s += '\n'
+>             file_.write(s)
+>             indx_beta += 1
+1244,1424c1220,1301
+< #eigen_energies_kinetic   = []
+< #eigen_vectors_kinetic = []
+< #H_subs_kinetic = []
+< #for isec in range(nsec):
+< #    eigen_energies_kinetic.append(np.zeros((n_hamiltonians,dim_sub[isec]),dtype=float))
+< #    eigen_vectors_kinetic.append(np.zeros((n_hamiltonians,dim_sub[isec],dim_sub[isec]),dtype=complex))
+< #    H_subs_kinetic.append([])
+< #
+< #for isec in range(nsec):
+< #    eigen_e               = np.zeros((dim_sub[isec]),dtype=float)
+< #    eigen_v               = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+< #    for alpha in range(n_hamiltonians):
+< #        start_time = datetime.now()
+< #        # project hamiltonian on to specified sector
+< #        H_sparse = hamiltonians_kinetic[alpha].to_matrix(sparse=True)
+< #        H_sparse.eliminate_zeros()
+< #        jsec = isec
+< #        row      = []
+< #        col      = []
+< #        data     = []
+< #        for ii in range(dim_sub[isec]):
+< #            i = indx_sub[isec][ii]
+< #            for ind in range(H_sparse.indptr[i],H_sparse.indptr[i+1]):
+< #                # j is always in indx_sub[isec], because the Hamiltonian does not mix it
+< #                #print(i,j)
+< #                j = H_sparse.indices[ind]
+< #                jj = iindx_sub[jsec][j]
+< #                row.append(jj)
+< #                col.append(ii)
+< #                #print(ii,jj)
+< #                data.append(H_sparse.data[ind])
+< #        H_sub = sparse.csc_matrix((data, (row, col)), shape=(dim_sub[jsec], dim_sub[isec]))
+< #
+< #        H_subs_kinetic[isec].append(H_sub)
+< #
+< #        # diagonalize sectorized hamiltonian
+< #        i_core = alpha%cores
+< #        if (first_run):
+< #            if (core==i_core):
+< #                eigen_e, eigen_v = np.linalg.eigh(H_sub.toarray())
+< #                eigen_energies_kinetic[isec][alpha,:]   = eigen_e
+< #                eigen_vectors_kinetic[isec][alpha,:,:] = eigen_v
+< #    del eigen_e, eigen_v
+< #    gc.collect()
+< #if (first_run):
+< #    comm.Barrier()
+< #    bcast_start_time = datetime.now()
+< #    for isec in range(nsec):
+< #        for alpha in range(n_hamiltonians):
+< #            i_core = alpha%cores
+< #            comm.Bcast([eigen_energies_kinetic[isec][alpha,:] ,MPI.DOUBLE],root=i_core)
+< #            comm.Bcast([eigen_vectors_kinetic[isec][alpha,:,:],MPI.DOUBLE_COMPLEX],root=i_core)
+< #    end_time = datetime.now()
+< #    elapsed = end_time-start_time
+< #    elapsed = elapsed.total_seconds()
+< #    # pickle kinetic part
+< #    if (core==0):
+< #        with open('eigen_kinetic','wb') as file_:
+< #            pickle.dump([eigen_energies_kinetic, eigen_vectors_kinetic],file_)
+< #else:
+< #    if (core==0):
+< #        with open('eigen_kinetic','rb') as file_:
+< #            [eigen_energies_kinetic,eigen_vectors_kinetic] = pickle.load(file_)
+< #    comm.Barrier()
+< #    bcast_start_time = datetime.now()
+< #    for isec in range(nsec):
+< #        comm.Bcast([eigen_energies_kinetic[isec] ,MPI.DOUBLE],root=0)
+< #        comm.Bcast([eigen_vectors_kinetic[isec],MPI.DOUBLE_COMPLEX],root=0)
+< #    end_time = datetime.now()
+< #    elapsed = end_time-start_time
+< #    elapsed = elapsed.total_seconds()
+< #
+< ##if (core==0): it's not sparse
+< ##    # check sparsity
+< ##    alpha = -1
+< ##    nnz = 0
+< ##    for i in range(dim_sub[isec]):
+< ##        for j in range(dim_sub[isec]):
+< ##            if (np.abs(eigen_vectors_kinetic[0][alpha,i,j])>1e-10):
+< ##                nnz += 1
+< ##    print('nnz: ',nnz, nnz/(dim_sub[isec]**2))
+< #if (core==0):
+< #    st = '# {percent}%, elapsed time = {elapsed} secs'.format(percent=(100),elapsed=elapsed)
+< #    memory_usage(st)
+< #    st = 'Bcast time = {elapsed} secs'.format(elapsed=(end_time-bcast_start_time).total_seconds())
+< #    print(st)
+< #
+< #
+< #def Apply_ExactEvolution_coulomb(isec, eps, time, v):
+< #    vec = np.exp(-1j*time*(eigen_energies_coulomb[isec][:]-eps))
+< #    w = vec * v
+< #    return w
+< #
+< #
+< ## %%
+< #
+< #def Apply_ExactEvolution_kinetic(isec, alpha, eps, time, v):
+< #    w = v.conj()@eigen_vectors_kinetic[isec][alpha,:,:]
+< #    vec = np.exp(-1j*time*(eigen_energies_kinetic[isec][alpha,:]-eps))
+< #    w = vec*w.conj()
+< #    w = eigen_vectors_kinetic[isec][alpha,:,:]@w
+< #    return w
+< #
+< #
+< #def Apply_TrotterEvolution(isec, alpha, time, eps, n_trotter, indx, v):
+< #    dt = time/n_trotter
+< #    if (indx==0): 
+< #        # first order trotter
+< #        w = v
+< #        for i_trotter in range(n_trotter):
+< #            w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+< #            w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+< #    elif (indx==1):
+< #        w = v
+< #        for i_trotter in range(n_trotter):
+< #            w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+< #            w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+< #    return w*np.exp(1j*eps*time)
+< #
+< #def Apply_TrotterEvolution2(isec, alpha, time, eps, n_trotter, indx, v):
+< #    dt = time/n_trotter
+< #    vec = np.exp(-1j*dt*(eigen_energies_kinetic[isec][alpha,:]-eps))
+< #    M = eigen_vectors_kinetic[isec][alpha,:,:]@np.diag(vec)@eigen_vectors_kinetic[isec][alpha,:,:].conj().T
+< #    if (indx==0): 
+< #        # first order trotter
+< #        w = v
+< #        for i_trotter in range(n_trotter):
+< #            w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+< #            w = M@w
+< #            #w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+< #    elif (indx==1):
+< #        w = v
+< #        for i_trotter in range(n_trotter):
+< #            w = M@w
+< #            #w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+< #            w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+< #    return w*np.exp(1j*eps*time)
+< #
+< ## check sparsity of phi_start
+< #if (core==0): 
+< #    # check sparsity
+< #    nnz = 0
+< #    for i in range(dim_sub[isec]):
+< #        if (np.abs(phi_start[i])>1e-10):
+< #            nnz += 1
+< #    print('nnz: ',nnz, nnz/(dim_sub[isec]))
+< #
+< ## test Trotter evolution
+< #v = phi_start
+< #time = 1
+< #n_trotter = 10
+< #
+< ## Trotter test #1
+< #start_time = datetime.now()
+< #w = Apply_TrotterEvolution(0,-1,time,0.0,n_trotter,1,v)
+< #if (core==0): 
+< #    # check sparsity
+< #    nnz = 0
+< #    for i in range(dim_sub[isec]):
+< #        print(i, w[i])
+< #        if (np.abs(w[i])>1e-10):
+< #            nnz += 1
+< #    print('w nnz: ',nnz, nnz/(dim_sub[isec]))
+< #end_time = datetime.now()
+< #elapsed = end_time-start_time
+< #elapsed = elapsed.total_seconds()
+< #if (core==0):
+< #    print('Ver # 1: ',n_trotter)
+< #    print('Trotter step: ',n_trotter)
+< #    print('Elapsed time: ',elapsed)
+< 
+< # Trotter test #2
+< #start_time = datetime.now()
+< #w = Apply_TrotterEvolution2(0,-1,time,0.0,n_trotter,1,v)
+< #end_time = datetime.now()
+< #elapsed = end_time-start_time
+< #elapsed = elapsed.total_seconds()
+< #if (core==0):
+< #    print('Ver # 2: ',n_trotter)
+< #    print('Trotter step: ',n_trotter)
+< #    print('Elapsed time: ',elapsed)
+---
+> eigen_energies_kinetic   = []
+> eigen_vectors_kinetic = []
+> H_subs_kinetic = []
+> for isec in range(nsec):
+>     eigen_energies_kinetic.append(np.zeros((n_hamiltonians,dim_sub[isec]),dtype=float))
+>     eigen_vectors_kinetic.append(np.zeros((n_hamiltonians,dim_sub[isec],dim_sub[isec]),dtype=complex))
+>     H_subs_kinetic.append([])
+> 
+> for isec in range(nsec):
+>     eigen_e               = np.zeros((dim_sub[isec]),dtype=float)
+>     eigen_v               = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+>     for alpha in range(n_hamiltonians):
+>         start_time = datetime.now()
+>         # project hamiltonian on to specified sector
+>         H_sparse = hamiltonians_kinetic[alpha].to_matrix(sparse=True)
+>         H_sparse.eliminate_zeros()
+>         jsec = isec
+>         row      = []
+>         col      = []
+>         data     = []
+>         for ii in range(dim_sub[isec]):
+>             i = indx_sub[isec][ii]
+>             for ind in range(H_sparse.indptr[i],H_sparse.indptr[i+1]):
+>                 # j is always in indx_sub[isec], because the Hamiltonian does not mix it
+>                 #print(i,j)
+>                 j = H_sparse.indices[ind]
+>                 jj = iindx_sub[jsec][j]
+>                 row.append(jj)
+>                 col.append(ii)
+>                 #print(ii,jj)
+>                 data.append(H_sparse.data[ind])
+>         H_sub = sparse.csc_matrix((data, (row, col)), shape=(dim_sub[jsec], dim_sub[isec]))
+> 
+>         H_subs_kinetic[isec].append(H_sub)
+> 
+>         # diagonalize sectorized hamiltonian
+>         i_core = alpha%cores
+>         if (core==i_core):
+>             eigen_e, eigen_v = np.linalg.eigh(H_sub.toarray())
+>             eigen_energies_kinetic[isec][alpha,:]   = eigen_e
+>             eigen_vectors_kinetic[isec][alpha,:,:] = eigen_v
+> comm.Barrier()
+> bcast_start_time = datetime.now()
+> for isec in range(nsec):
+>     for alpha in range(n_hamiltonians):
+>         i_core = alpha%cores
+>         comm.Bcast([eigen_energies_kinetic[isec][alpha,:] ,MPI.DOUBLE],root=i_core)
+>         comm.Bcast([eigen_vectors_kinetic[isec][alpha,:,:],MPI.DOUBLE_COMPLEX],root=i_core)
+> end_time = datetime.now()
+> elapsed = end_time-start_time
+> elapsed = elapsed.total_seconds()
+> if (core==0):
+>     # check sparsity
+>     alpha = -1
+>     nnz = 0
+>     for i in range(dim_sub[isec]):
+>         for j in range(dim_sub[isec])
+>             if (np.abs(eigen_vectors_kinetic[0][alpha,i,j])>1e-10):
+>                 nnz += 1
+>     print('nnz: ',nnz)
+> if (core==0):
+>     st = '# {percent}%, elapsed time = {elapsed} secs'.format(percent=(100),elapsed=elapsed)
+>     memory_usage(st)
+>     st = 'Bcast time = {elapsed} secs'.format(elapsed=(end_time-bcast_start_time).total_seconds())
+>     print(st)
+> 
+> 
+> def Apply_ExactEvolution_coulomb(isec, eps, time, v):
+>     vec = np.exp(-1j*time*(eigen_energies_coulomb[isec][:]-eps))
+>     w = vec * v
+>     return w
+> 
+> 
+> # %%
+> 
+> def Apply_ExactEvolution_kinetic(isec, alpha, eps, time, v):
+>     w = v.conj()@eigen_vectors_kinetic[isec][alpha,:,:]
+>     vec = np.exp(-1j*time*(eigen_energies_kinetic[isec][alpha,:]-eps))
+>     w = vec*w.conj()
+>     w = eigen_vectors_kinetic[isec][alpha,:,:]@w
+>     return w
+> 
+1425a1303,1316
+> def Apply_TrotterEvolution(isec, alpha, time, eps, n_trotter, indx, v):
+>     dt = time/n_trotter
+>     if (indx==0): 
+>         # first order trotter
+>         w = v
+>         for i_trotter in range(n_trotter):
+>             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+>             w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+>     elif (indx==1):
+>         w = v
+>         for i_trotter in range(n_trotter):
+>             w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+>             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+>     return w*np.exp(1j*eps*time)

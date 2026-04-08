@@ -1,0 +1,659 @@
+nbdiff predictor_corrector.ipynb ../fake_torino/predictor_corrector.ipynb
+--- predictor_corrector.ipynb  2024-11-18 13:58:40.035030
++++ ../fake_torino/predictor_corrector.ipynb  2024-11-18 13:57:31.692873
+[34m[1m## replaced /cells/0/execution_count:[0m
+[31m-  17
+[32m+  1
+
+[0m[34m[1m## replaced /cells/1/execution_count:[0m
+[31m-  18
+[32m+  2
+
+[0m[34m[1m## replaced /cells/2/execution_count:[0m
+[31m-  19
+[32m+  3
+
+[0m[34m[1m## replaced /cells/3/execution_count:[0m
+[31m-  20
+[32m+  4
+
+[0m[34m[1m## replaced /cells/4/execution_count:[0m
+[31m-  21
+[32m+  5
+
+[0m[34m[1m## replaced /cells/5/execution_count:[0m
+[31m-  22
+[32m+  6
+
+[0m[34m[1m## replaced /cells/6/execution_count:[0m
+[31m-  23
+[32m+  7
+
+[0m[34m[1m## replaced /cells/7/execution_count:[0m
+[31m-  24
+[32m+  8
+
+[0m[34m[1m## replaced /cells/8/execution_count:[0m
+[31m-  25
+[32m+  9
+
+[0m[34m[1m## replaced /cells/9/execution_count:[0m
+[31m-  26
+[32m+  10
+
+[0m[34m[1m## replaced /cells/10/execution_count:[0m
+[31m-  27
+[32m+  11
+
+[0m[34m[1m## replaced /cells/11/execution_count:[0m
+[31m-  28
+[32m+  12
+
+[0m[34m[1m## replaced /cells/12/execution_count:[0m
+[31m-  29
+[32m+  13
+
+[0m[34m[1m## replaced /cells/13/execution_count:[0m
+[31m-  30
+[32m+  14
+
+[0m[34m[1m## replaced /cells/14/execution_count:[0m
+[31m-  31
+[32m+  15
+
+[0m[34m[1m## replaced (type changed from int to NoneType) /cells/15/execution_count:[0m
+[31m-  32
+[32m+  None
+
+[0m[34m[1m## modified /cells/15/source:[0m
+[36m@@ -1,13 +1,14 @@[m
+[31m-from qiskit_ibm_runtime import QiskitRuntimeService[m
+[31m- [m
+[31m-# Load saved credentials[m
+[31m-service = QiskitRuntimeService()[m
+[31m-backend_name = "ibm_torino" [m
+[31m-backend = service.backend(name=backend_name)[m
+[32m+[m[32m# from qiskit_ibm_runtime import QiskitRuntimeService[m
+[32m+[m[32m#[m[41m  [m
+[32m+[m[32m# # Load saved credentials[m
+[32m+[m[32m# service = QiskitRuntimeService()[m
+[32m+[m[32m# backend_name = "ibm_torino"[m[41m [m
+[32m+[m[32m# backend = service.backend(name=backend_name)[m
+ [m
+ # use fake backend[m
+[31m-# from qiskit_ibm_runtime.fake_provider import FakeTorino[m
+[31m-# backend = FakeTorino()[m
+[32m+[m[32mfrom qiskit_ibm_runtime.fake_provider import FakeTorino[m
+[32m+[m[32mbackend = FakeTorino()[m
+[32m+[m
+ from qiskit_ibm_runtime import EstimatorOptions[m
+ from qiskit_ibm_runtime import EstimatorV2 as Estimator[m
+ options = EstimatorOptions()[m
+[36m@@ -17,4 +18,4 @@[m [moptions.dynamical_decoupling.enable = True[m
+ #options.twirling.enable_gates = True[m
+ options.dynamical_decoupling.sequence_type = "XY4"[m
+ estimator = Estimator(backend, options=options)[m
+[31m-max_circuits = backend.max_circuits[m
+[32m+[m[32mmax_circuits = 300 # backend.max_circuits[m
+[m
+
+[0m[34m[1m## inserted before /cells/16:[0m
+[32m+  code cell:
+[32m+    source:
+[32m+      
+[32m+      #from qiskit_ibm_runtime import QiskitRuntimeService
+[32m+      ## 
+[32m+      ### Load saved credentials
+[32m+      #service = QiskitRuntimeService()
+[32m+      #backend_name = "ibm_torino" 
+[32m+      #backend_real = service.backend(name=backend_name)
+[32m+      #
+[32m+      ## use fake backend
+[32m+      #from qiskit_ibm_runtime.fake_provider import FakeTorino
+[32m+      #backend = FakeTorino()
+[32m+      #from qiskit_aer import AerSimulator
+[32m+      # 
+[32m+      # 
+[32m+      ##noiseless
+[32m+      ## coupling_map = backend_real.coupling_map
+[32m+      ## print(coupling_map)
+[32m+      ## # Get basis gates from noise model
+[32m+      ## basis_gates = backend_real.basis_gates
+[32m+      ## print(basis_gates)
+[32m+      ## backend_ = AerSimulator(coupling_map=coupling_map,basis_gates=basis_gates)
+[32m+      #
+[32m+      ## # generate a simulator that mimics the real quantum system with the latest calibration results
+[32m+      #backend_ = AerSimulator.from_backend(backend_real)
+[32m+      #
+[32m+      #from qiskit_ibm_runtime import EstimatorOptions
+[32m+      #from qiskit_ibm_runtime import EstimatorV2 as Estimator
+[32m+      #options = EstimatorOptions()
+[32m+      #options.default_shots = n_shot
+[32m+      #options.resilience_level = 1
+[32m+      #options.dynamical_decoupling.enable = True
+[32m+      ##options.twirling.enable_gates = True
+[32m+      #options.dynamical_decoupling.sequence_type = "XY4"
+[32m+      #estimator = Estimator(backend_, options=options)
+[32m+      #max_circuits = 300 # backend.max_circuits
+[32m+      #
+
+[0m[34m[1m## replaced /cells/16/execution_count:[0m
+[31m-  33
+[32m+  18
+
+[0m[34m[1m## replaced /cells/17/execution_count:[0m
+[31m-  34
+[32m+  19
+
+[0m[34m[1m## replaced /cells/18/execution_count:[0m
+[31m-  35
+[32m+  20
+
+[0m[34m[1m## replaced /cells/19/execution_count:[0m
+[31m-  36
+[32m+  21
+
+[0m[34m[1m## replaced /cells/20/execution_count:[0m
+[31m-  37
+[32m+  22
+
+[0m[34m[1m## replaced /cells/21/execution_count:[0m
+[31m-  38
+[32m+  23
+
+[0m[34m[1m## replaced /cells/22/execution_count:[0m
+[31m-  39
+[32m+  24
+
+[0m[34m[1m## replaced /cells/23/execution_count:[0m
+[31m-  40
+[32m+  25
+
+[0m[34m[1m## replaced /cells/24/execution_count:[0m
+[31m-  41
+[32m+  26
+
+[0m[34m[1m## replaced /cells/25/execution_count:[0m
+[31m-  42
+[32m+  27
+
+[0m[34m[1m## replaced /cells/25/outputs/0/execution_count:[0m
+[31m-  42
+[32m+  27
+
+[0m[34m[1m## replaced /cells/26/execution_count:[0m
+[31m-  43
+[32m+  28
+
+[0m[34m[1m## replaced /cells/26/outputs/0/execution_count:[0m
+[31m-  43
+[32m+  28
+
+[0m[34m[1m## replaced /cells/27/execution_count:[0m
+[31m-  44
+[32m+  29
+
+[0m[34m[1m## replaced /cells/28/execution_count:[0m
+[31m-  45
+[32m+  30
+
+[0m[34m[1m## inserted before /cells/28/outputs/0:[0m
+[32m+  output:
+[32m+    output_type: stream
+[32m+    name: stdout
+[32m+    text:
+[32m+      1.0000000000000001e-07
+
+[0m[34m[1m## deleted /cells/28/outputs/0:[0m
+[31m-  output:
+[31m-    output_type: stream
+[31m-    name: stdout
+[31m-    text:
+[31m-      6.8e-08
+
+[0m[34m[1m## replaced /cells/29/execution_count:[0m
+[31m-  46
+[32m+  31
+
+[0m[34m[1m## replaced (type changed from int to NoneType) /cells/30/execution_count:[0m
+[31m-  52
+[32m+  None
+
+[0m[34m[1m## replaced /cells/31/execution_count:[0m
+[31m-  53
+[32m+  33
+
+[0m[34m[1m## replaced /cells/32/execution_count:[0m
+[31m-  49
+[32m+  34
+
+[0m[34m[1m## replaced /cells/33/execution_count:[0m
+[31m-  54
+[32m+  35
+
+[0m[34m[1m## modified /cells/33/outputs/0/data/text/html:[0m
+[36m@@ -6,5 +6,5 @@[m [mq_4 -> 31 ───────────────────────[m
+ «                                                  ┌────┐┌─────────┐[m
+ «q_3 -> 30 ──────────────────────────────────────■─┤ √X ├┤ Rz(π/2) ├[m
+ «          ┌───────────────┐ ░ ┌────┐┌─────────┐ │ └────┘└─────────┘[m
+[31m-«q_4 -> 31 ┤ Delay(17[dt]) ├─░─┤ √X ├┤ Rz(π/2) ├─■──────────────────[m
+[32m+[m[32m«q_4 -> 31 ┤ Delay(25[dt]) ├─░─┤ √X ├┤ Rz(π/2) ├─■──────────────────[m
+ «          └───────────────┘ ░ └────┘└─────────┘                    </pre>[m
+[m
+
+[0m[34m[1m## modified /cells/33/outputs/0/data/text/plain:[0m
+[36m@@ -6,5 +6,5 @@[m [mq_4 -> 31 ───────────────────────[m
+ «                                                  ┌────┐┌─────────┐[m
+ «q_3 -> 30 ──────────────────────────────────────■─┤ √X ├┤ Rz(π/2) ├[m
+ «          ┌───────────────┐ ░ ┌────┐┌─────────┐ │ └────┘└─────────┘[m
+[31m-«q_4 -> 31 ┤ Delay(17[dt]) ├─░─┤ √X ├┤ Rz(π/2) ├─■──────────────────[m
+[32m+[m[32m«q_4 -> 31 ┤ Delay(25[dt]) ├─░─┤ √X ├┤ Rz(π/2) ├─■──────────────────[m
+ «          └───────────────┘ ░ └────┘└─────────┘                    [m
+[m
+
+[0m[34m[1m## replaced /cells/33/outputs/0/execution_count:[0m
+[31m-  54
+[32m+  35
+
+[0m[34m[1m## replaced /cells/34/execution_count:[0m
+[31m-  55
+[32m+  36
+
+[0m[34m[1m## replaced /cells/34/outputs/0/execution_count:[0m
+[31m-  55
+[32m+  36
+
+[0m[34m[1m## modified /cells/34/source:[0m
+[36m@@ -1 +1 @@[m
+[31m-empty_paulis_opt[1].draw(idle_wires=False)[m
+[32m+[m[32mempty_paulis_opt[1].draw(idle_wires=False)[m
+[m
+
+[0m[34m[1m## replaced /cells/35/execution_count:[0m
+[31m-  56
+[32m+  37
+
+[0m[34m[1m## replaced /cells/36/execution_count:[0m
+[31m-  57
+[32m+  38
+
+[0m[34m[1m## replaced /cells/37/execution_count:[0m
+[31m-  58
+[32m+  39
+
+[0m[34m[1m## replaced /cells/38/execution_count:[0m
+[31m-  59
+[32m+  40
+
+[0m[34m[1m## replaced /cells/39/execution_count:[0m
+[31m-  60
+[32m+  41
+
+[0m[34m[1m## replaced /cells/40/execution_count:[0m
+[31m-  61
+[32m+  42
+
+[0m[34m[1m## replaced /cells/41/execution_count:[0m
+[31m-  62
+[32m+  43
+
+[0m[34m[1m## modified /cells/41/source:[0m
+[36m@@ -1,17 +1,17 @@[m
+[31m-#def fake_run_estimator (max_circuits_, estimator_, pubs_):[m
+[31m-#    len_circuits_ = len(pubs_)[m
+[31m-#    num_jobs_     = len_circuits_//max_circuits_[m
+[31m-#    remainder_    = len_circuits_%max_circuits_[m
+[31m-#    if (remainder_>0):[m
+[31m-#        num_jobs_ += 1[m
+[31m-#    i_start_ = 0[m
+[31m-#    list_out = [][m
+[31m-#    for _ in range(num_jobs_):[m
+[31m-#        i_end_ = min(i_start_ + max_circuits_,len_circuits_)[m
+[31m-#        job_ = estimator_.run(pubs_[i_start_:i_end_])[m
+[31m-#        job_result = job_.result()[m
+[31m-#        len_result = len(job_result)[m
+[31m-#        for i in range(len_result):[m
+[31m-#            list_out.append(job_result[i].data.evs)[m
+[31m-#        i_start_ += max_circuits_[m
+[31m-#    return list_out[m
+[m
+[32m+[m[32mdef fake_run_estimator (max_circuits_, estimator_, pubs_):[m
+[32m+[m[32m    len_circuits_ = len(pubs_)[m
+[32m+[m[32m    num_jobs_     = len_circuits_//max_circuits_[m
+[32m+[m[32m    remainder_    = len_circuits_%max_circuits_[m
+[32m+[m[32m    if (remainder_>0):[m
+[32m+[m[32m        num_jobs_ += 1[m
+[32m+[m[32m    i_start_ = 0[m
+[32m+[m[32m    list_out = [][m
+[32m+[m[32m    for _ in range(num_jobs_):[m
+[32m+[m[32m        i_end_ = min(i_start_ + max_circuits_,len_circuits_)[m
+[32m+[m[32m        job_ = estimator_.run(pubs_[i_start_:i_end_])[m
+[32m+[m[32m        job_result = job_.result()[m
+[32m+[m[32m        len_result = len(job_result)[m
+[32m+[m[32m        for i in range(len_result):[m
+[32m+[m[32m            list_out.append(job_result[i].data.evs)[m
+[32m+[m[32m        i_start_ += max_circuits_[m
+[32m+[m[32m    return list_out[m
+[m
+
+[0m[34m[1m## replaced /cells/42/execution_count:[0m
+[31m-  63
+[32m+  44
+
+[0m[34m[1m## replaced /cells/43/execution_count:[0m
+[31m-  64
+[32m+  45
+
+[0m[34m[1m## modified /cells/43/source:[0m
+[36m@@ -1,43 +1,44 @@[m
+ import time as time_lib[m
+ [m
+[31m-def moniter_jobs (service_, job_ids_):[m
+[31m-    num_jobs_       = len(job_ids_)[m
+[31m-    done_           = False[m
+[31m-    problem_        = False[m
+[31m-    while not done_:[m
+[31m-        done_ = True[m
+[31m-        i_start_ = 0[m
+[31m-        for ind_job_ in range(num_jobs_):[m
+[31m-            job_id_ = job_ids_[ind_job_][m
+[31m-            job_ = service_.job(job_id_)[m
+[31m-            if job_.status() == 'DONE':[m
+[31m-                continue[m
+[31m-            else:[m
+[31m-                done_ = False[m
+[31m-                # exit if there is a problem[m
+[31m-                if job_.status() in ['ERROR', 'CANCELLED']:[m
+[31m-                    s_ = ''[m
+[31m-                    s_ += '## There was a problem in submitting job_ids[{ind_job}], '.format(ind_job=ind_job_)[m
+[31m-                    s_ +='\n'[m
+[31m-                    s_ += '  {}'.format(job_id_)[m
+[31m-                    s_ +='\n'[m
+[31m-                    print(s_)[m
+[31m-                    problem_ = True[m
+[31m-                if (problem_):[m
+[31m-                    break[m
+[31m-        if (problem_):[m
+[31m-            break[m
+[31m-        time_lib.sleep(30)[m
+[31m-    return [done_, problem_][m
+[31m-[m
+[31m-def accumulate_job_results (service_, job_ids_):[m
+[31m-    list_out = [][m
+[31m-    for job_id_ in job_ids_:[m
+[31m-        job_ = service_.job(job_id_)[m
+[31m-        while job_.status() != 'DONE':[m
+[31m-            time_lib.sleep(30) [m
+[31m-        job_result = job_.result()[m
+[31m-        len_result = len(job_result)[m
+[31m-        for i in range(len_result):[m
+[31m-            list_out.append(job_result[i].data.evs)[m
+[31m-    return list_out[m
+[32m+[m[32m#def moniter_jobs (service_, job_ids_):[m
+[32m+[m[32m#    num_jobs_       = len(job_ids_)[m
+[32m+[m[32m#    done_           = False[m
+[32m+[m[32m#    problem_        = False[m
+[32m+[m[32m#    while not done_:[m
+[32m+[m[32m#        done_ = True[m
+[32m+[m[32m#        i_start_ = 0[m
+[32m+[m[32m#        for ind_job_ in range(num_jobs_):[m
+[32m+[m[32m#            job_id_ = job_ids_[ind_job_][m
+[32m+[m[32m#            job_ = service_.job(job_id_)[m
+[32m+[m[32m#            if job_.status() == 'DONE':[m
+[32m+[m[32m#                continue[m
+[32m+[m[32m#            else:[m
+[32m+[m[32m#                done_ = False[m
+[32m+[m[32m#                # exit if there is a problem[m
+[32m+[m[32m#                if job_.status() in ['ERROR', 'CANCELLED']:[m
+[32m+[m[32m#                    s_ = ''[m
+[32m+[m[32m#                    s_ += '## There was a problem in submitting job_ids[{ind_job}], '.format(ind_job=ind_job_)[m
+[32m+[m[32m#                    s_ +='\n'[m
+[32m+[m[32m#                    s_ += '  {}'.format(job_id_)[m
+[32m+[m[32m#                    s_ +='\n'[m
+[32m+[m[32m#                    print(s_)[m
+[32m+[m[32m#                    problem_ = True[m
+[32m+[m[32m#                if (problem_):[m
+[32m+[m[32m#                    break[m
+[32m+[m[32m#        if (problem_):[m
+[32m+[m[32m#            break[m
+[32m+[m[32m#        time_lib.sleep(30)[m
+[32m+[m[32m#    return [done_, problem_][m
+[32m+[m[32m#[m
+[32m+[m[32m#def accumulate_job_results (service_, job_ids_):[m
+[32m+[m[32m#    list_out = [][m
+[32m+[m[32m#    for job_id_ in job_ids_:[m
+[32m+[m[32m#        job_ = service_.job(job_id_)[m
+[32m+[m[32m#        while job_.status() != 'DONE':[m
+[32m+[m[32m#            time_lib.sleep(30)[m[41m [m
+[32m+[m[32m#        job_result = job_.result()[m
+[32m+[m[32m#        len_result = len(job_result)[m
+[32m+[m[32m#        for i in range(len_result):[m
+[32m+[m[32m#            list_out.append(job_result[i].data.evs)[m
+[32m+[m[32m#    return list_out[m
+[32m+[m[32m#[m
+[m
+
+[0m[34m[1m## replaced /cells/44/execution_count:[0m
+[31m-  65
+[32m+  46
+
+[0m[34m[1m## replaced /cells/45/execution_count:[0m
+[31m-  66
+[32m+  47
+
+[0m[34m[1m## replaced /cells/46/execution_count:[0m
+[31m-  67
+[32m+  48
+
+[0m[34m[1m## modified /cells/46/source:[0m
+[36m@@ -1,2 +1,2 @@[m
+[31m-job_ids_save = [None for _ in range(n_hamiltonians)][m
+[31m-num_jobs_save = [None for _ in range(n_hamiltonians)][m
+[m
+[32m+[m[32m#job_ids_save = [None for _ in range(n_hamiltonians)][m
+[32m+[m[32m#num_jobs_save = [None for _ in range(n_hamiltonians)][m
+[m
+
+[0m[34m[1m## replaced /cells/47/execution_count:[0m
+[31m-  69
+[32m+  49
+
+[0m[34m[1m## replaced (type changed from NoneType to int) /cells/48/execution_count:[0m
+[31m-  None
+[32m+  50
+
+[0m[34m[1m## inserted before /cells/48/outputs/0:[0m
+[32m+  output:
+[32m+    output_type: stream
+[32m+    name: stdout
+[32m+    text:
+[32m+      -4.140686651595626
+
+[0m[34m[1m## replaced (type changed from NoneType to int) /cells/49/execution_count:[0m
+[31m-  None
+[32m+  51
+
+[0m[34m[1m## inserted before /cells/49/outputs/1:[0m
+[32m+  output:
+[32m+    output_type: stream
+[32m+    name: stderr
+[32m+    text:
+[32m+      /home/mchan/Doc/venv_new_qiskit/lib/python3.10/site-packages/qiskit_ibm_runtime/fake_provider/local_service.py:187: UserWarning: The resilience_level option has no effect in local testing mode.
+[32m+        warnings.warn("The resilience_level option has no effect in local testing mode.")
+[32m+      /home/mchan/Doc/venv_new_qiskit/lib/python3.10/site-packages/qiskit_ibm_runtime/fake_provider/local_service.py:234: UserWarning: Options {'dynamical_decoupling': {'enable': True, 'sequence_type': 'XY4'}} have no effect in local testing mode.
+[32m+        warnings.warn(f"Options {options_copy} have no effect in local testing mode.")
+[32m+      /home/mchan/Doc/venv_new_qiskit/lib/python3.10/site-packages/qiskit_ibm_runtime/fake_provider/local_service.py:187: UserWarning: The resilience_level option has no effect in local testing mode.
+[32m+        warnings.warn("The resilience_level option has no effect in local testing mode.")
+[32m+      /home/mchan/Doc/venv_new_qiskit/lib/python3.10/site-packages/qiskit_ibm_runtime/fake_provider/local_service.py:234: UserWarning: Options {'dynamical_decoupling': {'enable': True, 'sequence_type': 'XY4'}} have no effect in local testing mode.
+[32m+        warnings.warn(f"Options {options_copy} have no effect in local testing mode.")
+[32m+      /home/mchan/Doc/venv_new_qiskit/lib/python3.10/site-packages/qiskit_ibm_runtime/fake_provider/local_service.py:187: UserWarning: The resilience_level option has no effect in local testing mode.
+[32m+        warnings.warn("The resilience_level option has no effect in local testing mode.")
+[32m+      /home/mchan/Doc/venv_new_qiskit/lib/python3.10/site-packages/qiskit_ibm_runtime/fake_provider/local_service.py:234: UserWarning: Options {'dynamical_decoupling': {'enable': True, 'sequence_type': 'XY4'}} have no effect in local testing mode.
+[32m+        warnings.warn(f"Options {options_copy} have no effect in local testing mode.")
+[32m+      /home/mchan/Doc/venv_new_qiskit/lib/python3.10/site-packages/qiskit_ibm_runtime/fake_provider/local_service.py:187: UserWarning: The resilience_level option has no effect in local testing mode.
+[32m+        warnings.warn("The resilience_level option has no effect in local testing mode.")
+[32m+      /home/mchan/Doc/venv_new_qiskit/lib/python3.10/site-packages/qiskit_ibm_runtime/fake_provider/local_service.py:234: UserWarning: Options {'dynamical_decoupling': {'enable': True, 'sequence_type': 'XY4'}} have no effect in local testing mode.
+[32m+        warnings.warn(f"Options {options_copy} have no effect in local testing mode.")
+
+[0m[34m[1m## modified /cells/49/source:[0m
+[36m@@ -180,17 +180,18 @@[m [mfor ihd in range(nhd):[m
+ [m
+ [m
+ # # for a fake backend[m
+[31m-# result = fake_run_estimator(max_circuits, estimator, pubs)[m
+[31m-job_ids = run_estimator(max_circuits, estimator, pubs)[m
+[31m-job_ids_save[alpha] = job_ids[m
+[31m-num_jobs_save[alpha] = len(job_ids)[m
+[31m-with open('XXZ'+str(n_site)+'.job_ids','w') as file_:[m
+[31m-    for alpha_ in range(1, n_hamiltonians):[m
+[31m-        s = ''[m
+[31m-        for job_id in job_ids_save[alpha_]:[m
+[31m-            s += '  {}'.format(job_id)[m
+[31m-        s += '\n'[m
+[31m-        file_.write(s)[m
+[32m+[m[32mresult_values_core = [0.0 for _ in range(n_pubs_for_[core])][m
+[32m+[m[32mresult = fake_run_estimator(max_circuits, estimator, pubs)[m
+[32m+[m[32m#job_ids = run_estimator(max_circuits, estimator, pubs)[m
+[32m+[m[32m#job_ids_save[alpha] = job_ids[m
+[32m+[m[32m#num_jobs_save[alpha] = len(job_ids)[m
+[32m+[m[32m#with open('XXZ'+str(n_site)+'.job_ids','w') as file_:[m
+[32m+[m[32m#    for alpha_ in range(1, n_hamiltonians):[m
+[32m+[m[32m#        s = ''[m
+[32m+[m[32m#        for job_id in job_ids_save[alpha_]:[m
+[32m+[m[32m#            s += '  {}'.format(job_id)[m
+[32m+[m[32m#        s += '\n'[m
+[32m+[m[32m#        file_.write(s)[m
+ [m
+ [m
+ #gc.collect()[m
+
+[0m[34m[1m## replaced /cells/50/execution_count:[0m
+[31m-  27
+[32m+  52
+
+[0m[34m[1m## deleted /cells/50/outputs/0:[0m
+[31m-  output:
+[31m-    output_type: stream
+[31m-    name: stdout
+[31m-    text:
+[31m-      ['cwvkh34997wg008xvrmg', 'cwvkh5c997wg008xvrn0', 'cwvkh7wtdtng0087a210', 'cwvkha55v39g008hmdb0']
+
+[0m[34m[1m## modified /cells/50/source:[0m
+[36m@@ -1,10 +1,10 @@[m
+[31m-with open('XXZ'+str(n_site)+'.job_ids','r') as file_:[m
+[31m-    lines = file_.readlines()[m
+[31m-    ind_line = 0[m
+[31m-    for alpha in range(1,n_hamiltonians):[m
+[31m-        line = lines[ind_line][m
+[31m-        job_ids = (line.split())[m
+[31m-        job_ids_save[alpha]=job_ids[m
+[31m-        num_jobs_save[alpha] = len(job_ids)[m
+[31m-        print(job_ids_save[alpha])[m
+[31m-        ind_line += 1[m
+[m
+[32m+[m[32m#with open('XXZ'+str(n_site)+'.job_ids','r') as file_:[m
+[32m+[m[32m#    lines = file_.readlines()[m
+[32m+[m[32m#    ind_line = 0[m
+[32m+[m[32m#    for alpha in range(1,n_hamiltonians):[m
+[32m+[m[32m#        line = lines[ind_line][m
+[32m+[m[32m#        job_ids = (line.split())[m
+[32m+[m[32m#        job_ids_save[alpha]=job_ids[m
+[32m+[m[32m#        num_jobs_save[alpha] = len(job_ids)[m
+[32m+[m[32m#        print(job_ids_save[alpha])[m
+[32m+[m[32m#        ind_line += 1[m
+[m
+
+[0m[34m[1m## replaced /cells/51/execution_count:[0m
+[31m-  28
+[32m+  57
+
+[0m[34m[1m## inserted before /cells/51/outputs/0:[0m
+[32m+  output:
+[32m+    output_type: error
+[32m+    ename: NameError
+[32m+    evalue: name 'result' is not defined
+[32m+    traceback:
+[32m+      item[0]: [0;31m---------------------------------------------------------------------------[0m
+[32m+      item[1]: [0;31mNameError[0m                                 Traceback (most recent call last)
+[32m+      item[2]:
+[32m+        Cell [0;32mIn[57], line 28[0m
+[32m+        [1;32m     12[0m [38;5;66;03m#[39;00m
+[32m+        [1;32m     13[0m [38;5;66;03m#for i in range(n_pubs_for_[core]):[39;00m
+[32m+        [1;32m     14[0m [38;5;66;03m#    #print(result[i])[39;00m
+[32m+        [0;32m   (...)[0m
+[32m+        [1;32m     23[0m [38;5;66;03m#    result_values_core[i] = computed_value[39;00m
+[32m+        [1;32m     24[0m [38;5;66;03m##print(core,result_values_core)[39;00m
+[32m+        [1;32m     27[0m [38;5;28;01mfor[39;00m i [38;5;129;01min[39;00m [38;5;28mrange[39m(n_pubs_for_[core]):
+[32m+        [0;32m---> 28[0m     result_values_core[i] [38;5;241m=[39m [43mresult[49m[i] [38;5;66;03m# no additional shot errors for real-hardware simulation[39;00m
+[32m+        [1;32m     29[0m [38;5;28;01mdel[39;00m result
+[32m+        [1;32m     32[0m [38;5;66;03m### bcast[39;00m
+[32m+        [1;32m     33[0m [38;5;66;03m#comm.Barrier()[39;00m
+[32m+      item[3]: [0;31mNameError[0m: name 'result' is not defined
+
+[0m[34m[1m## deleted /cells/51/outputs/0:[0m
+[31m-  output:
+[31m-    output_type: stream
+[31m-    name: stdout
+[31m-    text:
+[31m-      accumulation done
+[31m-      [array(0.27695351), array(0.44114738), array(0.46389713), array(0.18199802), array(0.2611276), array(0.30563798), array(0.33926805), array(0.20573689), array(0.43818002), array(0.26607319), array(0.26013848), array(0.371909), array(0.22057369), array(0.50642928), array(0.487636), array(0.50148368), array(0.28981207), array(0.31849654), array(0.40751731), array(0.29574679), array(0.5074184), array(0.50346192), array(0.41147379), array(0.22848665), array(0.47774481), array(-0.14243323), array(0.46785361), array(0.26310584), array(0.45103858), array(0.52522255), array(0.3214639), array(0.36993076), array(0.28684471), array(0.18793274), array(0.50346192), array(0.27794263), array(0.39366963), array(0.1810089), array(0.2512364), array(0.52423343), array(0.20276954), array(0.45598417), array(0.256182), array(0.24925816), array(0.33926805), array(0.52423343), array(0.40454995), array(0.28189911), array(0.30563798), array(0.20178042), array(0.34817013), array(0.52423343), array(0.56874382), array(0.34619189), array(0.47082097), array(0.25816024), array(0.06231454), array(0.3768546), array(0.22255193), array(-0.08407517), array(0.487636), array(0.18793274), array(0.19881306), array(0.47378833), array(0.44411474), array(0.32937685), array(0.1859545), array(0.33630069), array(0.30959446), array(0.51533136), array(0.20474777), array(0.38872404), array(0.20870425), array(0.53313551), array(0.4975272), array(0.30563798), array(0.52621167), array(0.22156281), array(0.24925816), array(0.43521266), array(-0.12363996), array(0.21760633), array(0.37982196), array(0.26508408), array(0.25914936), array(0.29772502), array(0.15924827), array(0.22947577), array(0.20672601), array(0.38476756), array(0.33234421), array(0.21958457), array(0.29179031), array(0.33432245), array(0.48961424), array(0.48664688), array(0.24233432), array(0.42532146), array(0.2611276), array(0.31256182), array(0.23738872), array(0.31454006), array(0.2611276), array(0.26805143), array(0.55687438), array(0.41938675), array(0.34322453), array(0.2413452), array(0.53214639), array(0.52917903), array(0.50840752), array(0.34322453), array(0.41246291), array(0.36399604), array(0.24925816), array(0.49653808), array(0.44906034), array(0.41938675), array(0.20573689), array(0.52423343), array(0.30267062), array(0.49455984), array(0.55489614), array(0.26706231), array(0.25816024), array(0.45400593), array(0.31552918), array(0.29574679), array(0.3165183), array(0.28981207), array(0.32443126), array(0.2512364), array(0.18892186), array(0.29376855), array(0.54203759), array(0.45004946), array(0.33630069), array(0.27299703), array(0.46587537), array(0.41938675), array(0.36498516), array(0.28981207), array(0.29277943), array(0.29179031), array(0.40553907), array(0.29376855), array(0.28189911), array(0.20672601), array(0.51829871), array(0.33531157), array(0.52324431), array(0.54104847), array(0.50445104), array(0.27992087), array(0.28189911), array(0.51829871), array(0.19881306), array(0.41839763), array(0.23837784), array(0.46884273), array(0.01285856), array(0.27695351), array(0.47873393), array(0.20771513), array(0.53214639), array(0.3214639), array(0.3867458), array(0.4223541), array(0.55588526), array(0.52818991), array(0.38377844), array(0.51829871), array(0.57171118), array(0.42532146), array(0.18892186), array(0.30464886), array(0.2611276), array(0.21859545), array(0.4925816), array(0.49455984), array(0.28288823), array(0.3620178), array(0.55588526), array(0.5529179), array(0.26409496), array(0.53214639), array(0.3016815), array(0.33728981), array(0.17507418), array(0.47477745), array(0.28882295), array(0.47873393), array(0.46884273), array(0.36597428), array(0.36300692), array(0.26706231), array(0.51434224), array(0.31750742), array(0.52522255), array(0.23936696), array(0.50544016), array(0.25420376), array(0.29772502), array(0.27695351), array(0.33333333), array(0.31849654), array(0.53115727), array(0.51928783), array(0.30464886), array(0.39663699), array(0.24925816), array(0.24035608), array(0.29970326), array(0.25321464), array(0.55093966), array(0.43323442), array(0.30959446), array(0.22848665), array(0.21661721), array(0.25321464), array(0.00197824), array(0.23936696), array(0.29574679), array(0.53412463), array(0.28288823), array(0.38278932), array(0.35014837), array(0.18892186), array(0.47082097), array(0.46983185), array(0.31256182), array(0.30860534), array(0.25816024), array(0.22354105), array(0.3264095), array(0.49851632), array(0.41048467), array(0.22453017), array(0.54995054), array(0.3620178), array(0.26409496), array(0.39960435), array(0.32047478), array(0.47279921), array(0.24826904), array(0.40850643), array(0.46785361), array(0.26904055), array(0.49357072), array(0.55093966), array(0.20375865), array(0.21958457), array(0.52621167), array(0.2363996), array(0.38476756), array(0.27002967), array(0.50939664), array(0.25024728), array(0.21760633), array(0.2363996), array(0.22354105), array(0.27101879), array(0.40652819), array(0.35608309), array(0.33333333), array(0.24530168), array(0.49455984), array(0.25717112), array(0.48367953), array(0.24332344), array(0.50346192), array(0.52126607), array(0.52522255), array(0.59347181), array(0.53412463), array(0.24035608), array(0.47477745), array(0.34619189), array(0.33333333), array(0.39268051), array(0.23738872), array(0.45400593), array(0.44609298), array(0.31058358), array(0.33036597), array(0.26805143), array(0.45400593), array(0.23442136), array(0.34421365), array(0.27398615), array(0.47378833), array(0.38773492), array(0.04352127), array(0.28981207), array(-0.08209693), array(0.51335312), array(0.25222552), array(0.38081108), array(0.27992087), array(0.20969337), array(0.31615461), array(0.43904856), array(0.48562934), array(0.25768087), array(0.29236868), array(0.27552032), array(0.43012884), array(0.29236868), array(0.48860258), array(0.26164519), array(0.28245788), array(0.40237859), array(0.26858276), array(0.48860258), array(0.5074331), array(0.53320119), array(0.2864222), array(0.33795837), array(0.41823588), array(0.25371655), array(0.4826561), array(0.56095144), array(0.37462834), array(0.2309217), array(0.4975223), array(-0.11298315), array(0.49554014), array(0.28741328), array(0.48166501), array(0.55203171), array(0.29831516), array(0.40634291), array(0.28543112), array(0.25173439), array(0.47571853), array(0.28047572), array(0.39444995), array(0.21308226), array(0.21902874), array(0.53121903), array(0.26660059), array(0.51437066), array(0.29038652), array(0.24876115), array(0.44103072), array(0.52527255), array(0.46283449), array(0.28543112), array(0.33498513), array(0.29236868), array(0.39544103), array(0.53914767), array(0.60059465), array(0.39345887), array(0.55996036), array(0.26263627), array(0.01783944), array(0.37462834), array(0.25470763), array(-0.14965312), array(0.51337958), array(0.24083251), array(0.27254708), array(0.49653122), array(0.47175421), array(0.35381566), array(0.25668979), array(0.34985134), array(0.20812686), array(0.50049554), array(0.21209118), array(0.40535183), array(0.24876115), array(0.56689792), array(0.53617443), array(0.33102081), array(0.55104063), array(0.2309217), array(0.27452924), array(0.45292369), array(-0.08325074), array(0.23885035), array(0.43607532), array(0.31714569), array(0.27552032), array(0.2864222), array(0.18632309), array(0.27948464), array(0.30822597), array(0.3716551), array(0.26957384), array(0.24777007), array(0.27750248), array(0.34786918), array(0.51139742), array(0.4975223), array(0.31119921), array(0.4420218), array(0.24777007), array(0.32804757), array(0.22200198), array(0.38354807), array(0.27056492), array(0.27254708), array(0.59960357), array(0.45787909), array(0.33300297), array(0.32309217), array(0.5728444), array(0.51536174), array(0.54806739), array(0.40931615), array(0.46679881), array(0.43409316), array(0.25074331), array(0.52031715), array(0.45688801), array(0.46382557), array(0.30525273), array(0.5579782), array(0.26660059), array(0.57482656), array(0.56590684), array(0.28444004), array(0.2864222), array(0.48959366), array(0.38751239), array(0.27552032), array(0.28344896), array(0.27948464), array(0.36273538), array(0.26660059), array(0.22001982), array(0.32111001), array(0.5123885), array(0.44103072), array(0.36868186), array(0.27353816), array(0.51337958), array(0.48067393), array(0.42814668), array(0.26858276), array(0.26263627), array(0.26461843), array(0.46481665), array(0.25569871), array(0.27452924), array(0.25074331), array(0.50445986), array(0.26362735), array(0.58176412), array(0.57086224), array(0.48860258), array(0.32011893), array(0.27948464), array(0.50941526), array(0.29534192), array(0.46580773), array(0.24777007), array(0.5074331), array(0.05351833), array(0.27452924), array(0.53518335), array(0.25966303), array(0.60356789), array(0.2864222), array(0.40436075), array(0.47373637), array(0.54112983), array(0.53221011), array(0.39246779), array(0.54608523), array(0.5728444), array(0.39841427), array(0.12190287), array(0.3468781), array(0.33597621), array(0.20218038), array(0.5074331), array(0.49058474), array(0.26263627), array(0.40931615), array(0.54509415), array(0.59266601), array(0.2913776), array(0.53914767), array(0.25470763), array(0.34786918), array(0.32309217), array(0.46184341), array(0.26560951), array(0.53617443), array(0.52725471), array(0.43310208), array(0.32507433), array(0.24380575), array(0.53419227), array(0.31516353), array(0.51833499), array(0.26660059), array(0.5024777), array(0.24876115), array(0.2913776), array(0.28939544), array(0.35877106), array(0.3666997), array(0.59068385), array(0.58176412), array(0.31813677), array(0.39643211), array(0.28047572), array(0.29930624), array(0.32903865), array(0.24975223), array(0.54608523), array(0.47175421), array(0.3716551), array(0.26362735), array(0.22299306), array(0.31318137), array(0.07234886), array(0.29534192), array(0.25966303), array(0.53914767), array(0.25668979), array(0.44103072), array(0.38057483), array(0.27056492), array(0.53716551), array(0.52329039), array(0.30227948), array(0.2864222), array(0.2160555), array(0.26164519), array(0.35976214), array(0.50445986), array(0.49454906), array(0.28543112), array(0.49454906), array(0.40535183), array(0.28047572), array(0.45986125), array(0.30029732), array(0.45391477), array(0.24578791), array(0.42517344), array(0.52130823), array(0.23984143), array(0.53518335), array(0.52725471), array(0.18632309), array(0.23885035), array(0.55104063), array(0.2111001), array(0.44697721), array(0.30227948), array(0.55996036), array(0.29831516), array(0.27750248), array(0.3012884), array(0.30723489), array(0.28939544), array(0.46580773), array(0.39048563), array(0.27552032), array(0.23290387), array(0.57680872), array(0.3012884), array(0.54112983), array(0.29435084), array(0.55104063), array(0.51437066), array(0.56987116), array(0.58473736), array(0.58176412), array(0.23587711), array(0.53914767), array(0.35480674), array(0.37462834), array(0.39841427), array(0.28245788), array(0.48662042), array(0.51337958), array(0.36570862), array(0.37859267), array(0.24677899), array(0.48860258), array(0.31912785), array(0.24479683), array(0.24281467), array(0.50545094), array(0.40931615), array(0.07829534), array(0.26362735), array(-0.02675917), array(0.54707631), array(0.20713578), array(0.46382557), array(0.29534192), array(0.27452924), array(0.04395604), array(0.11388611), array(0.03496503), array(-0.02097902), array(0.14285714), array(0.04395604), array(0.06893107), array(0.11288711), array(-0.01598402), array(0.06993007), array(0.07392607), array(0.03796204), array(0.02697303), array(0.03996004), array(0.04395604), array(0.07692308), array(0.03896104), array(0.00999001), array(0.12087912), array(0.04695305), array(0.06693307), array(0.01398601), array(0.01298701), array(0.1028971), array(0.09090909), array(0.07792208), array(0.03396603), array(0.06793207), array(0.06493506), array(0.06493506), array(0.04895105), array(0.02797203), array(0.11888112), array(0.04495504), array(0.03796204), array(0.01498501), array(0.003996), array(0.07392607), array(0.03796204), array(0.07692308), array(0.08391608), array(0.03496503), array(0.05994006), array(0.01598402), array(0.03096903), array(0.06593407), array(0.06693307), array(0.06993007), array(0.11688312), array(0.01898102), array(0.08591409), array(0.03196803), array(0.06893107), array(0.04495504), array(-0.00599401), array(0.0969031), array(0.09190809), array(-0.0989011), array(0.01598402), array(0.04995005), array(0.07792208), array(0.03696304), array(0.04595405), array(0.07992008), array(0.13486513), array(0.03796204), array(0.01298701), array(0.08791209), array(0.09090909), array(0.06193806), array(0.04895105), array(0.10789211), array(0.04195804), array(0.06593407), array(0.04595405), array(0.), array(0.10789211), array(0.06193806), array(0.04995005), array(0.01998002), array(0.06093906), array(0.07292707), array(0.13086913), array(0.01898102), array(0.06293706), array(0.08091908), array(0.06593407), array(0.07692308), array(0.07492507), array(0.02297702), array(0.06693307), array(-0.01198801), array(0.08891109), array(0.02197802), array(0.06593407), array(-0.004995), array(0.05894106), array(0.1048951), array(0.03096903), array(0.02697303), array(0.00999001), array(0.03396603), array(0.06493506), array(-0.003996), array(0.03896104), array(0.03996004), array(0.06493506), array(0.02097902), array(0.01898102), array(0.03696304), array(0.08491508), array(0.07392607), array(0.08991009), array(0.02497502), array(0.04095904), array(0.10789211), array(0.12387612), array(0.05094905), array(0.08391608), array(0.04195804), array(0.06293706), array(0.06193806), array(0.12687313), array(0.1038961), array(0.07092907), array(0.1008991), array(-0.01498501), array(0.11888112), array(0.09190809), array(0.10989011), array(0.03596404), array(0.04395604), array(0.05694306), array(0.08791209), array(0.04995005), array(0.08891109), array(0.04195804), array(0.05294705), array(0.0969031), array(0.04595405), array(0.12387612), array(0.07792208), array(0.001998), array(0.07192807), array(0.03996004), array(0.07392607), array(0.02597403), array(0.04595405), array(0.02097902), array(0.1018981), array(0.08291708), array(0.07092907), array(0.05194805), array(0.07892108), array(0.03496503), array(0.05594406), array(-0.00699301), array(-0.02097902), array(-0.0979021), array(0.10689311), array(0.04395604), array(0.14985015), array(0.04895105), array(0.05594406), array(0.08991009), array(0.13186813), array(0.004995), array(0.05894106), array(0.06693307), array(0.10689311), array(0.1028971), array(0.03196803), array(0.04195804), array(-0.02297702), array(-0.00899101), array(0.001998), array(-0.01798202), array(0.02297702), array(0.1048951), array(0.02297702), array(0.1018981), array(0.04095904), array(-0.003996), array(0.09290709), array(0.09390609), array(0.03696304), array(0.04295704), array(0.08891109), array(0.07592408), array(0.05894106), array(0.1038961), array(0.01598402), array(0.05894106), array(0.05894106), array(0.05994006), array(0.03096903), array(0.11588412), array(0.11388611), array(0.0979021), array(0.05194805), array(0.08891109), array(0.05594406), array(0.05694306), array(0.08991009), array(0.03096903), array(0.06193806), array(0.03096903), array(0.02197802), array(0.05594406), array(0.00599401), array(0.08391608), array(0.06093906), array(0.08291708), array(0.04995005), array(0.04395604), array(0.04695305), array(0.0999001), array(0.05794206), array(0.05294705), array(0.06393606), array(0.03496503), array(0.11688312), array(0.08791209), array(0.07492507), array(0.03996004), array(0.06093906), array(0.07992008), array(0.03796204), array(0.00899101), array(0.06293706), array(0.08191808), array(0.06193806), array(0.04395604), array(0.05094905), array(0.07192807), array(0.02597403), array(0.), array(0.13986014), array(0.09490509), array(0.1008991), array(0.07792208), array(0.08091908), array(0.08991009), array(0.04595405), array(0.06993007), array(-0.00699301), array(0.07192807), array(0.12787213), array(0.04695305), array(0.11288711), array(-0.04295704), array(0.05794206), array(0.12287712), array(0.08891109), array(0.04795205), array(0.18481518), array(0.07592408), array(0.04295704), array(0.06193806), array(0.04195804), array(0.07192807), array(0.1008991), array(0.03196803), array(0.14085914), array(0.03496503), array(0.08591409), array(0.03496503), array(-0.07492507), array(0.04995005), array(0.08291708), array(0.08491508), array(0.03896104), array(0.06893107), array(0.02197802), array(0.02497502), array(0.05394605), array(0.04495504), array(0.0969031), array(0.03796204), array(0.08891109), array(0.14985015), array(0.03096903), array(0.02797203), array(0.04895105), array(0.01398601), array(0.08491508), array(0.06593407), array(0.03696304), array(0.04895105), array(0.09390609), array(0.07392607), array(0.03496503), array(0.08391608), array(0.04495504), array(0.1048951), array(0.06893107), array(0.07792208), array(0.02497502), array(0.01898102), array(0.07092907), array(0.06336634), array(0.04554455), array(0.09207921), array(0.08118812), array(0.14455446), array(0.11584158), array(0.10792079), array(0.08811881), array(0.02277228), array(0.08019802), array(0.02772277), array(0.0990099), array(0.02277228), array(0.04257426), array(0.0990099), array(0.04950495), array(0.04950495), array(0.06039604), array(0.00693069), array(0.05544554), array(0.09405941), array(0.02673267), array(0.02178218), array(0.06633663), array(0.08217822), array(0.11485149), array(0.05742574), array(0.07326733), array(0.06930693), array(0.11287129), array(0.1019802), array(0.07227723), array(0.10792079), array(-0.00693069), array(0.02376238), array(0.02772277), array(0.02673267), array(0.01287129), array(0.0960396), array(0.06435644), array(0.04356436), array(0.07326733), array(0.1019802), array(0.11188119), array(0.07722772), array(0.06534653), array(0.00594059), array(0.12475248), array(0.0950495), array(0.03861386), array(0.06138614), array(0.08118812), array(0.05445545), array(0.08811881), array(0.01980198), array(0.08415842), array(0.0990099), array(-0.02475248), array(0.02376238), array(0.1019802), array(0.07623762), array(0.06138614), array(0.06831683), array(0.09405941), array(0.01881188), array(0.00693069), array(0.08316832), array(0.07821782), array(0.09405941), array(0.02376238), array(0.06435644), array(0.1), array(0.02178218), array(0.06039604), array(0.10990099), array(0.00594059), array(0.09009901), array(0.1029703), array(0.08316832), array(0.02772277), array(0.08019802), array(0.05148515), array(0.03366337), array(0.03366337), array(0.06138614), array(0.11287129), array(0.03861386), array(0.02673267), array(0.06732673), array(0.07623762), array(0.06138614), array(0.00693069), array(0.01188119), array(0.05148515), array(0.08118812), array(0.00891089), array(0.0970297), array(0.05940594), array(0.01683168), array(0.03663366), array(0.06633663), array(0.08316832), array(0.08910891), array(0.02475248), array(0.05742574), array(0.08019802), array(0.1009901), array(0.07128713), array(0.01980198), array(0.08118812), array(0.11980198), array(0.08019802), array(0.08613861), array(0.01485149), array(0.08415842), array(-0.01287129), array(-0.01089109), array(0.06633663), array(0.08316832), array(0.01386139), array(0.06435644), array(0.04653465), array(0.02079208), array(0.04554455), array(0.11485149), array(0.12178218), array(0.05643564), array(0.11485149), array(0.05148515), array(0.05643564), array(0.04752475), array(0.05544554), array(0.06039604), array(0.10693069), array(0.03960396), array(0.08019802), array(0.02079208), array(0.0960396), array(0.06336634), array(0.1009901), array(0.11881188), array(0.07326733), array(0.08415842), array(0.07623762), array(0.07722772), array(0.06732673), array(0.07425743), array(0.01683168), array(0.14356436), array(0.08415842), array(0.11386139), array(0.05445545), array(0.07722772), array(0.08910891), array(-0.01980198), array(0.03168317), array(0.07128713), array(0.01881188), array(-0.00792079), array(0.05841584), array(0.04653465), array(0.07722772), array(0.06336634), array(0.06336634), array(0.14059406), array(0.07326733), array(0.0039604), array(0.05247525), array(0.12277228), array(0.08514851), array(0.04950495), array(0.03366337), array(0.11089109), array(-0.00594059), array(0.0039604), array(0.00693069), array(-0.0009901), array(0.07029703), array(0.09405941), array(0.06633663), array(0.11089109), array(0.08019802), array(0.05445545), array(0.0990099), array(0.08019802), array(0.06237624), array(0.0960396), array(0.07326733), array(0.0970297), array(0.03069307), array(0.0960396), array(0.10792079), array(0.11881188), array(0.05940594), array(0.02871287), array(0.10594059), array(-0.02376238), array(0.0029703), array(0.06534653), array(0.10891089), array(0.09306931), array(0.06732673), array(0.06138614), array(0.1009901), array(0.02970297), array(0.11089109), array(0.12673267), array(0.05544554), array(0.04554455), array(0.02673267), array(0.06534653), array(0.09306931), array(0.09009901), array(0.05742574), array(0.06435644), array(0.08514851), array(0.08514851), array(0.12772277), array(0.08316832), array(-0.01386139), array(0.07425743), array(0.12376238), array(0.04356436), array(0.06633663), array(0.08316832), array(0.08514851), array(0.09306931), array(0.07029703), array(0.00792079), array(0.11089109), array(0.06930693), array(0.02673267), array(0.13366337), array(0.06534653), array(0.0960396), array(-0.01188119), array(0.02079208), array(0.11485149), array(0.0950495), array(0.06435644), array(0.07425743), array(0.1009901), array(0.10693069), array(0.05346535), array(0.06930693), array(0.06336634), array(0.05841584), array(0.06138614), array(0.1), array(0.09108911), array(-0.0049505), array(0.01683168), array(0.01881188), array(0.07623762), array(0.11584158), array(0.04158416), array(0.06534653), array(0.02772277), array(0.07722772), array(0.07821782), array(0.04752475), array(0.11584158), array(0.03168317), array(0.03069307), array(0.11683168), array(0.10594059), array(0.02970297), array(-0.03267327), array(0.02871287), array(0.12574257), array(0.11881188), array(0.07128713), array(0.01188119), array(0.12871287), array(0.07524752), array(0.07425743), array(0.06435644), array(0.0980198), array(-0.00594059), array(0.09405941), array(0.04752475), array(0.1019802), array(0.06237624), array(0.03366337), array(0.02376238), array(0.10792079), array(0.08217822), array(0.05841584), array(0.06336634), array(0.1029703), array(0.1009901), array(0.05148515), array(0.08613861), array(0.1009901), array(0.02376238), array(0.08019802), array(0.07722772), array(0.06039604), array(0.11089109), array(0.07425743)]
+[31m-      [0.3480877  0.37002643]
+[31m-      [0.05808192 0.06550495]
+[31m-      [# 100.0%, elapsed time = 29.581295 secs] memory usage:    0.35892 GiB
+[31m-      1 0.3590570653763344 -0.01575405290773446
+[31m-      # 100.0%
+
+[0m[34m[1m## modified /cells/51/source:[0m
+[36m@@ -1,9 +1,9 @@[m
+ #[done, problem] = moniter_jobs (service, job_ids_save[alpha])[m
+[31m-start_time = datetime.now()[m
+[31m-alpha = 1[m
+[31m-nhd = len(hamiltonian_diffs_reduced_list[alpha-1])[m
+[31m-result = accumulate_job_results(service, job_ids_save[alpha])[m
+[31m-print('accumulation done')[m
+[32m+[m[32m#start_time = datetime.now()[m
+[32m+[m[32m#alpha = 1[m
+[32m+[m[32m#nhd = len(hamiltonian_diffs_reduced_list[alpha-1])[m
+[32m+[m[32m#result = accumulate_job_results(service, job_ids_save[alpha])[m
+[32m+[m[32m#print('accumulation done')[m
+ #try:[m
+ #    result = pickle.loads(estimator_run.stdout)[m
+ #except EOFError: # empty list[m
+[36m@@ -23,15 +23,6 @@[m [mgc.collect()[m
+ #    result_values_core[i] = computed_value[m
+ ##print(core,result_values_core)[m
+ [m
+[31m-n_pubs = (2*nhd) * nmc  # nhd for norm, nhd for dE[m
+[31m-n_pubs_for_ = [0 for _ in range(cores)][m
+[31m-remainder         = n_pubs%cores[m
+[31m-for i_core in range(cores):[m
+[31m-    n_pubs_for_[i_core] = n_pubs//cores[m
+[31m-    if (i_core<remainder):[m
+[31m-        n_pubs_for_[i_core] += 1[m
+[31m-[m
+[31m-result_values_core = [0.0 for _ in range(n_pubs_for_[core])][m
+ [m
+ for i in range(n_pubs_for_[core]):[m
+     result_values_core[i] = result[i] # no additional shot errors for real-hardware simulation[m
+
+[0m[34m[1m## replaced /cells/52/execution_count:[0m
+[31m-  29
+[32m+  54
+
+[0m[34m[1m## inserted before /cells/52/outputs/0:[0m
+[32m+  output:
+[32m+    output_type: stream
+[32m+    name: stdout
+[32m+    text:
+[32m+      0.0  1.0000000000000000e+00  -3.7500000000000000e+00
+[32m+      1.0  8.2804620139905686e-04  -9.7033653846153882e+00
+
+[0m[34m[1m## deleted /cells/52/outputs/0:[0m
+[31m-  output:
+[31m-    output_type: stream
+[31m-    name: stdout
+[31m-    text:
+[31m-      0.0  1.0000000000000000e+00  -3.0000000000000000e+00
+[31m-      1.0  3.5905706537633442e-01  -3.3906866515956260e+00
+
+[0m

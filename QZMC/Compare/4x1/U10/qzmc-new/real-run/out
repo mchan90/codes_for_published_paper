@@ -1,0 +1,94 @@
+0 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'IIIIZZII', 'ZZIIIIII', 'IIZZIIII', 'IIIIIIZZ'],
+              coeffs=[-0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,
+ -0.5+0.j,  2.5+0.j,  2.5+0.j,  2.5+0.j,  2.5+0.j])
+1 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'IIIIZZII', 'ZZIIIIII', 'IIZZIIII', 'IIIIIIZZ'],
+              coeffs=[-0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.125+0.j, -0.125+0.j,
+ -0.125+0.j, -0.125+0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j,
+  2.5  +0.j,  2.5  +0.j,  2.5  +0.j,  2.5  +0.j])
+2 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'IIIIZZII', 'ZZIIIIII', 'IIZZIIII', 'IIIIIIZZ'],
+              coeffs=[-0.5 +0.j, -0.5 +0.j, -0.5 +0.j, -0.5 +0.j, -0.25+0.j, -0.25+0.j,
+ -0.25+0.j, -0.25+0.j, -0.5 +0.j, -0.5 +0.j, -0.5 +0.j, -0.5 +0.j,
+  2.5 +0.j,  2.5 +0.j,  2.5 +0.j,  2.5 +0.j])
+3 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'IIIIZZII', 'ZZIIIIII', 'IIZZIIII', 'IIIIIIZZ'],
+              coeffs=[-0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.375+0.j, -0.375+0.j,
+ -0.375+0.j, -0.375+0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j,
+  2.5  +0.j,  2.5  +0.j,  2.5  +0.j,  2.5  +0.j])
+4 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'IIIIZZII', 'ZZIIIIII', 'IIZZIIII', 'IIIIIIZZ'],
+              coeffs=[-0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,
+ -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,  2.5+0.j,  2.5+0.j,
+  2.5+0.j,  2.5+0.j])
+# Hamiltonian differences
+0 SparsePauliOp(['IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII'],              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j, -0.125+0.j])
+1 SparsePauliOp(['IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII'],              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j, -0.125+0.j])
+2 SparsePauliOp(['IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII'],              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j, -0.125+0.j])
+3 SparsePauliOp(['IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII'],              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j, -0.125+0.j])
+# Hamiltonian differences_list
+[('IIIYZYII', (-0.125+0j)), ('IIIXZXII', (-0.125+0j)), ('IIYZYIII', (-0.125+0j)), ('IIXZXIII', (-0.125+0j))]
+[('IIIYZYII', (-0.125+0j)), ('IIIXZXII', (-0.125+0j)), ('IIYZYIII', (-0.125+0j)), ('IIXZXIII', (-0.125+0j))]
+[('IIIYZYII', (-0.125+0j)), ('IIIXZXII', (-0.125+0j)), ('IIYZYIII', (-0.125+0j)), ('IIXZXIII', (-0.125+0j))]
+[('IIIYZYII', (-0.125+0j)), ('IIIXZXII', (-0.125+0j)), ('IIYZYIII', (-0.125+0j)), ('IIXZXIII', (-0.125+0j))]
+0 SparsePauliOp(['IIIXZXII'],              coeffs=[-0.5+0.j])
+1 SparsePauliOp(['IIIXZXII'],              coeffs=[-0.5+0.j])
+2 SparsePauliOp(['IIIXZXII'],              coeffs=[-0.5+0.j])
+3 SparsePauliOp(['IIIXZXII'],              coeffs=[-0.5+0.j])
+# Hamiltonian differences_reduced_list
+[('IIIXZXII', (-0.5+0j))]
+[('IIIXZXII', (-0.5+0j))]
+[('IIIXZXII', (-0.5+0j))]
+[('IIIXZXII', (-0.5+0j))]
+# dimension of subspace with (n_up,n_dn) = (2,2) = 36
+reduced dimension:  10
+[# 100%, elapsed time = 7.107758 secs] memory usage:    0.25307 GiB
+Bcast time = 0.008733 secs
+1 0.9991403024781347
+2 0.996479900991158
+3 0.9892709791761469
+4 0.97405735898986
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIIZIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-20. +0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,
+  -0.5+0.j,   2.5+0.j,   2.5+0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,
+   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,   2.5+0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIYZYII', 'IIIXZXII', 'IIIIZIII', 'IIYZYIII', 'IIXZXIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-20.   +0.j,   2.5  +0.j,  -0.5  +0.j,  -0.5  +0.j,   2.5  +0.j,
+  -0.5  +0.j,  -0.5  +0.j,   2.5  +0.j,  -0.125+0.j,  -0.125+0.j,
+   2.5  +0.j,  -0.125+0.j,  -0.125+0.j,   2.5  +0.j,  -0.5  +0.j,
+  -0.5  +0.j,   2.5  +0.j,  -0.5  +0.j,  -0.5  +0.j,   2.5  +0.j,
+   2.5  +0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIYZYII', 'IIIXZXII', 'IIIIZIII', 'IIYZYIII', 'IIXZXIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-20.  +0.j,   2.5 +0.j,  -0.5 +0.j,  -0.5 +0.j,   2.5 +0.j,  -0.5 +0.j,
+  -0.5 +0.j,   2.5 +0.j,  -0.25+0.j,  -0.25+0.j,   2.5 +0.j,  -0.25+0.j,
+  -0.25+0.j,   2.5 +0.j,  -0.5 +0.j,  -0.5 +0.j,   2.5 +0.j,  -0.5 +0.j,
+  -0.5 +0.j,   2.5 +0.j,   2.5 +0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIYZYII', 'IIIXZXII', 'IIIIZIII', 'IIYZYIII', 'IIXZXIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-20.   +0.j,   2.5  +0.j,  -0.5  +0.j,  -0.5  +0.j,   2.5  +0.j,
+  -0.5  +0.j,  -0.5  +0.j,   2.5  +0.j,  -0.375+0.j,  -0.375+0.j,
+   2.5  +0.j,  -0.375+0.j,  -0.375+0.j,   2.5  +0.j,  -0.5  +0.j,
+  -0.5  +0.j,   2.5  +0.j,  -0.5  +0.j,  -0.5  +0.j,   2.5  +0.j,
+   2.5  +0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIYZYII', 'IIIXZXII', 'IIIIZIII', 'IIYZYIII', 'IIXZXIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-20. +0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,
+  -0.5+0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,
+  -0.5+0.j,   2.5+0.j,  -0.5+0.j,  -0.5+0.j,   2.5+0.j,  -0.5+0.j,
+  -0.5+0.j,   2.5+0.j,   2.5+0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIZI', 'IIIIIIIZ', 'IIIIIIZZ', 'IIIIZIII', 'IIIIIZII', 'IIIIZZII', 'IIZIIIII', 'IIIZIIII', 'IIZZIIII', 'ZIIIIIII', 'IZIIIIII', 'ZZIIIIII'],
+              coeffs=[20. +0.j, -2.5+0.j, -2.5+0.j,  2.5+0.j, -2.5+0.j, -2.5+0.j,  2.5+0.j,
+ -2.5+0.j, -2.5+0.j,  2.5+0.j, -2.5+0.j, -2.5+0.j,  2.5+0.j])
+0.40000074731484675
+0.1 0.4338486409441921 0.07595738794552176
+0.6 0.4285931568127449 0.037248322979650084
+1.1 0.42236916716372264 0.025164534650130577
+1.6 0.419738905031111 0.01389297834927028
+2.1 0.4200713679716954 0.00664887883914389
+2.6 0.4212422647218329 0.002917775726929861
+3.1 0.42222274462257064 0.001210810902209758
+3.6 0.4228183370869466 0.00047730109910659735
+4.1 0.42311826037141076 0.00017644513966175168
+0.1 1.2829328000000002 0.07608236155148405
+0.6 7.6975967999999995 0.03716302627407385
+1.1 14.112260800000001 0.024806709356341727
+1.6 20.526924800000003 0.013830269816478117
+2.1 26.9415888 0.00584922435258702
+2.6 33.3562528 0.0032388878147634986
+3.1 39.7709168 0.002071231342886115
+3.6 46.185580800000004 0.0004621485442891426
+4.1 52.6002448 0.0002467064931112854

@@ -1,0 +1,117 @@
+41,42c41,42
+< n_x     = 6
+< n_y     = 1
+---
+> n_x     = 2
+> n_y     = 5
+49c49
+< n_inter = n_dimer 
+---
+> #n_inter = n_dimer 
+51c51
+< #n_inter = 2*n_dimer
+---
+> n_inter = 2*n_dimer
+155c155
+<     pauli_list = ['XZXII']
+---
+>     pauli_list = ['XZZZX']
+243c243,245
+< Or = np.zeros((dim_sub[0],dim_sub[0]),dtype=complex)
+---
+> row      = []
+> col      = []
+> data     = []
+248c250,253
+<     Or[ii,jj] = OrderReverseSign(i)
+---
+>     row.append(ii)
+>     col.append(jj)
+>     data.append(OrderReverseSign(i))
+> Or = sparse.csc_matrix((data, (row, col)), shape=(dim_sub[isec], dim_sub[isec]))
+250,269c255
+< 
+< def ParticleHoleSign(i):
+<     bit_expr = bin(i)[2:].zfill(n_qubit)
+<     operated = ''
+<     n_orbital = n_qubit//2
+<     sign_exp = 0
+<     for k in range(n_orbital):
+<         i_up = 2*k
+<         i_dn = 2*k+1
+<         sign_exp += (int(bit_expr[i_up]) + int(bit_expr[i_dn])) * k
+<     sign_exp = sign_exp % 2
+<     return (-1) ** sign_exp
+< # compose particle hole symmetry operator Ph
+< isec = 0
+< Ph = np.zeros((dim_sub[0],dim_sub[0]),dtype=complex)
+< for jj in range(dim_sub[0]):
+<     j = indx_sub[isec][jj]
+<     i = ApplyParticleHole(j)
+<     ii = iindx_sub[isec][i]
+<     Ph[ii,jj] = ParticleHoleSign(i)
+---
+> # no particle hole for ladder
+284c270,272
+< Sr = np.zeros((dim_sub[0],dim_sub[0]),dtype=complex)
+---
+> row      = []
+> col      = []
+> data     = []
+289c277,281
+<     Sr[ii,jj] = SpinReverseSign(i)
+---
+>     row.append(ii)
+>     col.append(jj)
+>     data.append(SpinReverseSign(i))
+> Sr = sparse.csc_matrix((data, (row, col)), shape=(dim_sub[isec], dim_sub[isec]))
+> 
+293,295c285,288
+< identity = np.identity((dim_sub[isec]),dtype=complex)
+< projection = (identity + Or) 
+< projection = (identity + Ph) @ projection
+---
+> identity = sparse.eye(dim_sub[isec])
+> projection = (identity + Or)
+> #projection = (identity)
+> #projection = (identity + Dx) @ projection
+300c293
+< projection /= 8
+---
+> projection /= 4
+330,338d322
+<     ss = []
+<     for l in S[indx_S]:
+<         j = ApplyParticleHole(indx_sub[isec][l])
+<         jj = iindx_sub[isec][j]
+<         if (jj not in S[indx_S]):
+<             ss += [jj]
+<             done[jj] = True
+<     S[indx_S] += ss
+< 
+346c330,334
+< basis_transform = np.zeros((num_S,dim_sub[isec]),dtype=complex)
+---
+> # find the reduced basis by finding eigenstate of projection operator
+> isec = 0
+> row = []
+> col = []
+> data = []
+357,358c345
+<     if (core==0):
+<         print(np.sum(np.abs(eigen_e)>0.5))
+---
+>     #print(np.sum(np.abs(eigen_e)>0.5))
+361c348,351
+<             basis_transform[indx_S,jj] = np.conj(eigen_v[jjj,-1])
+---
+>             row.append(indx_S)
+>             col.append(jj)
+>             data.append(np.conj(eigen_v[jjj,-1]))
+> basis_transform = sparse.csc_matrix((data, (row,col)),shape=(num_S,dim_sub[isec]))
+362a353
+> #print(basis_transform)#print(basis_transform[0,:])
+568c559
+< nmc       = int(16*n_site**2)
+---
+> nmc    = int(16*n_site**2 * 4**2/np.pi**2)

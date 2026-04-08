@@ -1,0 +1,82 @@
+0 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'IIIIIIZZ', 'IIZZIIII', 'IIIIZZII', 'ZZIIIIII'],
+              coeffs=[-0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,
+ -0.5+0.j,  1. +0.j,  1. +0.j,  1. +0.j,  1. +0.j])
+1 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'IIIIIIZZ', 'IIZZIIII', 'IIIIZZII', 'ZZIIIIII'],
+              coeffs=[-0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.125+0.j, -0.125+0.j,
+ -0.125+0.j, -0.125+0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j,
+  1.   +0.j,  1.   +0.j,  1.   +0.j,  1.   +0.j])
+2 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'IIIIIIZZ', 'IIZZIIII', 'IIIIZZII', 'ZZIIIIII'],
+              coeffs=[-0.5 +0.j, -0.5 +0.j, -0.5 +0.j, -0.5 +0.j, -0.25+0.j, -0.25+0.j,
+ -0.25+0.j, -0.25+0.j, -0.5 +0.j, -0.5 +0.j, -0.5 +0.j, -0.5 +0.j,
+  1.  +0.j,  1.  +0.j,  1.  +0.j,  1.  +0.j])
+3 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'IIIIIIZZ', 'IIZZIIII', 'IIIIZZII', 'ZZIIIIII'],
+              coeffs=[-0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.375+0.j, -0.375+0.j,
+ -0.375+0.j, -0.375+0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j,
+  1.   +0.j,  1.   +0.j,  1.   +0.j,  1.   +0.j])
+4 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'IIIIIIZZ', 'IIZZIIII', 'IIIIZZII', 'ZZIIIIII'],
+              coeffs=[-0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,
+ -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,  1. +0.j,  1. +0.j,
+  1. +0.j,  1. +0.j])
+# dimension of subspace with (n_up,n_dn) = (2,2) = 36
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIIZIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-8. +0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,
+  1. +0.j,  1. +0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,  1. +0.j, -0.5+0.j,
+ -0.5+0.j,  1. +0.j,  1. +0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIYZYII', 'IIIXZXII', 'IIIIZIII', 'IIYZYIII', 'IIXZXIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-8.   +0.j,  1.   +0.j, -0.5  +0.j, -0.5  +0.j,  1.   +0.j, -0.5  +0.j,
+ -0.5  +0.j,  1.   +0.j, -0.125+0.j, -0.125+0.j,  1.   +0.j, -0.125+0.j,
+ -0.125+0.j,  1.   +0.j, -0.5  +0.j, -0.5  +0.j,  1.   +0.j, -0.5  +0.j,
+ -0.5  +0.j,  1.   +0.j,  1.   +0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIYZYII', 'IIIXZXII', 'IIIIZIII', 'IIYZYIII', 'IIXZXIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-8.  +0.j,  1.  +0.j, -0.5 +0.j, -0.5 +0.j,  1.  +0.j, -0.5 +0.j,
+ -0.5 +0.j,  1.  +0.j, -0.25+0.j, -0.25+0.j,  1.  +0.j, -0.25+0.j,
+ -0.25+0.j,  1.  +0.j, -0.5 +0.j, -0.5 +0.j,  1.  +0.j, -0.5 +0.j,
+ -0.5 +0.j,  1.  +0.j,  1.  +0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIYZYII', 'IIIXZXII', 'IIIIZIII', 'IIYZYIII', 'IIXZXIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-8.   +0.j,  1.   +0.j, -0.5  +0.j, -0.5  +0.j,  1.   +0.j, -0.5  +0.j,
+ -0.5  +0.j,  1.   +0.j, -0.375+0.j, -0.375+0.j,  1.   +0.j, -0.375+0.j,
+ -0.375+0.j,  1.   +0.j, -0.5  +0.j, -0.5  +0.j,  1.   +0.j, -0.5  +0.j,
+ -0.5  +0.j,  1.   +0.j,  1.   +0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIYZYII', 'IIIXZXII', 'IIIIZIII', 'IIYZYIII', 'IIXZXIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-8. +0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,
+  1. +0.j, -0.5+0.j, -0.5+0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,  1. +0.j,
+ -0.5+0.j, -0.5+0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,  1. +0.j,  1. +0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIZI', 'IIIIIIIZ', 'IIIIIIZZ', 'IIIIZIII', 'IIIIIZII', 'IIIIZZII', 'IIZIIIII', 'IIIZIIII', 'IIZZIIII', 'ZIIIIIII', 'IZIIIIII', 'ZZIIIIII'],
+              coeffs=[ 8.+0.j, -1.+0.j, -1.+0.j,  1.+0.j, -1.+0.j, -1.+0.j,  1.+0.j, -1.+0.j,
+ -1.+0.j,  1.+0.j, -1.+0.j, -1.+0.j,  1.+0.j])
+0.1319299500806233
+0.4000000395498945
+relative gap= 0.5097975668097663
+1.319299500806233 5.145268053144309 0.045081155055380046
+2.638599001612466 6.464567553950542 0.038758030555509096
+5.277198003224932 9.103166555563009 0.00913345370313725
+10.554396006449863 14.38036455878794 0.003946217588325047
+21.108792012899727 24.934760565237806 0.0006536537418964117
+42.217584025799454 46.043552578137536 0.004217568953240301
+84.43516805159891 88.26113660393699 0.0009139793920502556
+168.87033610319781 172.6963046555359 4.075421270276111e-05
+337.74067220639563 341.56664075873374 6.46981900417058e-05
+675.4813444127913 679.3073129651294 0.0002204291904538237
+1350.9626888255825 1354.7886573779208 4.603811007372811e-05
+5.145268053144309  4.5081155055380046e-02
+6.464567553950542  3.8758030555509096e-02
+9.103166555563009  9.1334537031372495e-03
+14.38036455878794  3.9462175883250468e-03
+24.934760565237806  6.5365374189641173e-04
+46.043552578137536  4.2175689532403006e-03
+88.26113660393699  9.1397939205025563e-04
+172.6963046555359  4.0754212702761108e-05
+341.56664075873374  6.4698190041705798e-05
+679.3073129651294  2.2042919045382371e-04
+1354.7886573779208  4.6038110073728109e-05
+2 93.0 0.2138355539586124
+[# elapsed time = 185.394569 secs] memory usage:    0.30833 GiB
+4 93.0 0.08094979945851548
+[# elapsed time = 189.516157 secs] memory usage:    0.32510 GiB
+6 93.0 0.05516779056918814
+[# elapsed time = 198.28852 secs] memory usage:    0.34186 GiB
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd-grammar058: error: *** STEP 237621.0 ON grammar058 CANCELLED AT 2024-12-01T21:27:52 ***
+srun: got SIGCONT
+slurmstepd-grammar058: error: *** JOB 237621 ON grammar058 CANCELLED AT 2024-12-01T21:27:52 ***
+srun: forcing job termination

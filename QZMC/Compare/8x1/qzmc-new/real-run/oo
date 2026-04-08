@@ -1,0 +1,2145 @@
+41c41
+< n_x     = 8
+---
+> n_x     = 4
+681c681,683
+< beta_list = np.arange(0.1, 6.1, 0.1)
+---
+> #beta_list = np.arange(0.1, 5.1, 0.1)
+> beta_list = [0.1]
+> beta_list += [0.1+0.5 * j for j in range(1,9)]
+759c761
+<     with open('dE_vs_evolution','w') as file_:
+---
+>     with open('dE_vs_evolution_exact','w') as file_:
+772,776c774
+< # %%
+< # repetition test
+< beta = 4.2
+< nmcs = [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384]
+< error_for_nmcs = np.zeros((len(nmcs)),dtype=float)
+---
+> 
+777a776
+> nmc    = 16384
+780,782d778
+< 
+< # %%
+< # compute n_pubs_sum
+799,803c795,797
+<     #print(n_pubs_sum)
+< 
+< # preprocess
+< indx_nmc = 0
+< for nmc in nmcs:
+---
+> # %%
+> indx_beta =0
+> for beta in beta_list:
+804a799,802
+>     if (error_for_beta_list[indx_beta]>1e-3):
+>         nmc = 16384
+>     if (error_for_beta_list[indx_beta]<1e-3):
+>         nmc = 1638400
+808,827d805
+< #       no need to save timelists
+< #        n_obs = 3 
+< #        # 0; norm, 1; dE1, 2; dE2
+< #        O_timelists         = [[[None for _ in range(nmc)] for _ in range(n_obs)] for _ in range(n_hamiltonians)]
+< #        # %%
+< #        if (core==0):
+< #            for alpha in range(1,n_hamiltonians):
+< #                for i_obs in range(n_obs):
+< #                    for imc in range(nmc):
+< #                        times = np.random.normal(0.0, beta, size=2*(alpha+1))
+< #                        O_timelists[alpha][i_obs][imc] = times
+< #        comm.Barrier()
+< #        O_timelists = comm.bcast(O_timelists,root=0)
+< #        # max time
+< #        for alpha in range(1,n_hamiltonians):
+< #            for i_obs in range(n_obs):
+< #                for imc in range(nmc):
+< #                    time_sum = np.sum(np.abs(O_timelists[alpha][i_obs][imc]))
+< #                    max_time = max(max_time,time_sum)
+< 
+835d812
+<                         
+857c834,837
+<             result_values_core = [0.0 for _ in range(n_pubs_for_[core])]
+---
+>             norm_core = np.zeros((1),dtype=float)
+>             dE1_core  = np.zeros((1),dtype=float)
+> 
+>             #result_values_core = [0.0 for _ in range(n_pubs_for_[core])]
+894c874,884
+<                 result_values_core[ind_pub_core] = amplitude.real
+---
+>                 #result_values_core[ind_pub_core] = amplitude.real
+>                 computed_value = amplitude.real
+> 
+>                 # shot errors
+>                 p_up = (computed_value + 1.0)/2.0
+>                 sample = np.random.binomial(n_shot,p_up)
+>                 shot_error = 2*(sample/(n_shot) - p_up)
+>                 computed_value += shot_error
+> 
+>                 norm_core += computed_value
+> 
+899a890
+>                 coeff = hamiltonian_diffs_reduced_list[alpha-1][ihd][1]
+936c927,938
+<                     result_values_core[ind_pub_core] = amplitude.real
+---
+>                     #result_values_core[ind_pub_core] = amplitude.real
+>                     computed_value = amplitude.real
+> 
+>                     # shot errors
+>                     p_up = (computed_value + 1.0)/2.0
+>                     sample = np.random.binomial(n_shot,p_up)
+>                     shot_error = 2*(sample/(n_shot) - p_up)
+>                     computed_value += shot_error
+> 
+> 
+>                     dE1_core += np.real(coeff * computed_value)
+> 
+939,940c941,942
+<             for i in range(n_pubs_for_[core]):
+<                 computed_value = result_values_core[i]
+---
+>             #for i in range(n_pubs_for_[core]):
+>             #    computed_value = result_values_core[i]
+942,946c944,948
+<                 # shot errors
+<                 p_up = (computed_value + 1.0)/2.0
+<                 sample = np.random.binomial(n_shot,p_up)
+<                 shot_error = 2*(sample/(n_shot) - p_up)
+<                 computed_value += shot_error
+---
+>             #    # shot errors
+>             #    p_up = (computed_value + 1.0)/2.0
+>             #    sample = np.random.binomial(n_shot,p_up)
+>             #    shot_error = 2*(sample/(n_shot) - p_up)
+>             #    computed_value += shot_error
+948c950
+<                 result_values_core[i] = computed_value
+---
+>             #    result_values_core[i] = computed_value
+950a953
+> 
+952,958c955,961
+<             result_values = []
+<             for i_core in range(cores):
+<                 if (n_pubs_for_[i_core]==0):
+<                     continue
+<                 result_values_temp = comm.bcast(result_values_core,root=i_core)
+<                 result_values += result_values_temp
+<                 comm.Barrier()
+---
+>             #result_values = []
+>             #for i_core in range(cores):
+>             #    if (n_pubs_for_[i_core]==0):
+>             #        continue
+>             #    result_values_temp = comm.bcast(result_values_core,root=i_core)
+>             #    result_values += result_values_temp
+>             #    comm.Barrier()
+961c964
+<             i_meas = 0
+---
+>             #i_meas = 0
+963,976c966,982
+<             # 0; norm
+<             norm    = 0.0
+<             i_obs   = 0
+<             for imc in range(nmc):
+<                 norm   += result_values[i_meas]
+<                 i_meas += 1
+<             # 1; dE1
+<             dE1norm = 0.0
+<             i_obs   = 1
+<             for ihd in range(nhd1):
+<                 coeff = hamiltonian_diffs_reduced_list[alpha-1][ihd][1]
+<                 for imc in range(nmc):
+<                     dE1norm += coeff *result_values[i_meas]
+<                     i_meas += 1
+---
+>             ## 0; norm
+>             #norm    = 0.0
+>             #i_obs   = 0
+>             #for imc in range(nmc):
+>             #    norm   += result_values[i_meas]
+>             #    i_meas += 1
+>             ## 1; dE1
+>             #dE1norm = 0.0
+>             #i_obs   = 1
+>             #for ihd in range(nhd1):
+>             #    coeff = hamiltonian_diffs_reduced_list[alpha-1][ihd][1]
+>             #    for imc in range(nmc):
+>             #        dE1norm += coeff *result_values[i_meas]
+>             #        i_meas += 1
+> 
+>             comm.Allreduce(MPI.IN_PLACE, norm_core, op=MPI.SUM)
+>             comm.Allreduce(MPI.IN_PLACE, dE1_core, op=MPI.SUM)
+978,979c984,985
+<             norm = norm.real
+<             dE1norm = dE1norm.real
+---
+>             norm    = norm_core[0]
+>             dE1norm = dE1_core[0]
+1011c1017,1021
+<             result_values_core = [0.0 for _ in range(n_pubs_for_[core])]
+---
+>             norm_core = np.zeros((1),dtype=float)
+>             dE1_core  = np.zeros((1),dtype=float)
+>             dE2_core  = np.zeros((1),dtype=float)
+> 
+>             #result_values_core = [0.0 for _ in range(n_pubs_for_[core])]
+1048c1058,1068
+<                 result_values_core[ind_pub_core] = amplitude.real
+---
+>                 #result_values_core[ind_pub_core] = amplitude.real
+>                 computed_value = amplitude.real
+> 
+>                 # shot errors
+>                 p_up = (computed_value + 1.0)/2.0
+>                 sample = np.random.binomial(n_shot,p_up)
+>                 shot_error = 2*(sample/(n_shot) - p_up)
+>                 computed_value += shot_error
+> 
+>                 norm_core += computed_value
+> 
+1053a1074
+>                 coeff = hamiltonian_diffs_reduced_list[alpha-1][ihd][1]
+1090c1111,1122
+<                     result_values_core[ind_pub_core] = amplitude.real
+---
+>                     #result_values_core[ind_pub_core] = amplitude.real
+>                     computed_value = amplitude.real
+> 
+>                     # shot errors
+>                     p_up = (computed_value + 1.0)/2.0
+>                     sample = np.random.binomial(n_shot,p_up)
+>                     shot_error = 2*(sample/(n_shot) - p_up)
+>                     computed_value += shot_error
+> 
+> 
+>                     dE1_core += np.real(coeff * computed_value)
+> 
+1095a1128
+>                 coeff = hamiltonian_diffs_reduced_list[alpha][ihd][1]
+1133,1136c1166,1167
+<                     result_values_core[ind_pub_core] = amplitude.real
+<                     ind_pub_core += 1
+<             for i in range(n_pubs_for_[core]):
+<                 computed_value = result_values_core[i]
+---
+>                     #result_values_core[ind_pub_core] = amplitude.real
+>                     computed_value = amplitude.real
+1138,1142c1169,1173
+<                 # shot errors
+<                 p_up = (computed_value + 1.0)/2.0
+<                 sample = np.random.binomial(n_shot,p_up)
+<                 shot_error = 2*(sample/(n_shot) - p_up)
+<                 computed_value += shot_error
+---
+>                     # shot errors
+>                     p_up = (computed_value + 1.0)/2.0
+>                     sample = np.random.binomial(n_shot,p_up)
+>                     shot_error = 2*(sample/(n_shot) - p_up)
+>                     computed_value += shot_error
+1144,1154d1174
+<                 result_values_core[i] = computed_value
+<             # bcast
+<             #print(result_values_core)
+<             comm.Barrier()
+<             result_values = []
+<             for i_core in range(cores):
+<                 if (n_pubs_for_[i_core]==0):
+<                     continue
+<                 result_values_temp = comm.bcast(result_values_core,root=i_core)
+<                 result_values += result_values_temp
+<                 comm.Barrier()
+1156,1157c1176
+<             # compute energy eigenvalues
+<             i_meas = 0
+---
+>                     dE2_core += np.real(coeff * computed_value)
+1159,1180c1178,1186
+<             # 0; norm
+<             norm    = 0.0
+<             i_obs   = 0
+<             for imc in range(nmc):
+<                 norm   += result_values[i_meas]
+<                 i_meas += 1
+<             # 1; dE1
+<             dE1norm = 0.0
+<             i_obs   = 1
+<             for ihd in range(nhd1):
+<                 coeff = hamiltonian_diffs_reduced_list[alpha-1][ihd][1]
+<                 for imc in range(nmc):
+<                     dE1norm += coeff *result_values[i_meas]
+<                     i_meas += 1
+<             # 2; dE2
+<             dE2norm = 0.0
+<             i_obs   = 2
+<             for ihd in range(nhd2):
+<                 coeff = hamiltonian_diffs_reduced_list[alpha][ihd][1]
+<                 for imc in range(nmc):
+<                     dE2norm += coeff *result_values[i_meas]
+<                     i_meas += 1
+---
+>                     ind_pub_core += 1
+>             #for i in range(n_pubs_for_[core]):
+>             #    computed_value = result_values_core[i]
+> 
+>             #    # shot errors
+>             #    p_up = (computed_value + 1.0)/2.0
+>             #    sample = np.random.binomial(n_shot,p_up)
+>             #    shot_error = 2*(sample/(n_shot) - p_up)
+>             #    computed_value += shot_error
+1182,1184c1188,1232
+<             norm = norm.real
+<             dE1norm = dE1norm.real
+<             dE2norm = dE2norm.real
+---
+>             #    result_values_core[i] = computed_value
+>             # bcast
+>             #print(result_values_core)
+>             #comm.Barrier()
+>             #result_values = []
+>             #for i_core in range(cores):
+>             #    if (n_pubs_for_[i_core]==0):
+>             #        continue
+>             #    result_values_temp = comm.bcast(result_values_core,root=i_core)
+>             #    result_values += result_values_temp
+>             #    comm.Barrier()
+> 
+>             ## compute energy eigenvalues
+>             #i_meas = 0
+> 
+>             ## 0; norm
+>             #norm    = 0.0
+>             #i_obs   = 0
+>             #for imc in range(nmc):
+>             #    norm   += result_values[i_meas]
+>             #    i_meas += 1
+>             ## 1; dE1
+>             #dE1norm = 0.0
+>             #i_obs   = 1
+>             #for ihd in range(nhd1):
+>             #    coeff = hamiltonian_diffs_reduced_list[alpha-1][ihd][1]
+>             #    for imc in range(nmc):
+>             #        dE1norm += coeff *result_values[i_meas]
+>             #        i_meas += 1
+>             ## 2; dE2
+>             #dE2norm = 0.0
+>             #i_obs   = 2
+>             #for ihd in range(nhd2):
+>             #    coeff = hamiltonian_diffs_reduced_list[alpha][ihd][1]
+>             #    for imc in range(nmc):
+>             #        dE2norm += coeff *result_values[i_meas]
+>             #        i_meas += 1
+> 
+>             comm.Allreduce(MPI.IN_PLACE, norm_core, op=MPI.SUM)
+>             comm.Allreduce(MPI.IN_PLACE, dE1_core, op=MPI.SUM)
+>             comm.Allreduce(MPI.IN_PLACE, dE2_core, op=MPI.SUM)
+> 
+>             norm     = norm_core[0]
+>             dE1norm  = dE1_core[0]
+>             dE2norm  = dE2_core[0]
+1208d1255
+<     error_for_nmcs[indx_nmc] = error
+1210,1211c1257,1260
+<         print(n_pubs_sum*nmc, error)
+<     indx_nmc += 1
+---
+>         print(beta, beta*C99, error)
+>     error_for_beta_list[indx_beta] = error
+>     indx_beta += 1
+> #
+1213d1261
+< # %%
+1215,1216c1263,1264
+<     with open('dE_vs_repetitions_with_exact','w') as file_:
+<         s = '# beta = '+str(beta)+', n_shot= '+str(n_shot)+', n_iter='+str(n_iter)
+---
+>     with open('dE_vs_evolution_sample','w') as file_:
+>         s = '# from exact gaussian, total number of samples for each beta = ' + str(n_pubs_sum*nmc)
+1219,1222c1267,1270
+<         indx_nmc = 0
+<         for nmc in nmcs:
+<             s = '{:}'.format(n_pubs_sum*nmc)
+<             s += '  {:.16e}'.format(error_for_nmcs[indx_nmc])
+---
+>         indx_beta = 0
+>         for beta in beta_list:
+>             s = '{:}'.format(beta*C99)
+>             s += '  {:.16e}'.format(error_for_beta_list[indx_beta])
+1226,1346c1274
+<             indx_nmc += 1
+< ##
+< ##
+< ### %%
+< # prepare trotterization
+< del eigen_vectors_exact
+< gc.collect()
+< # exact eigenvalues for interaction parts
+< eigen_energies_coulomb  = []
+< H_subs_coulomb = []
+< for isec in range(nsec):
+<     eigen_energies_coulomb.append(np.zeros((dim_reduced),dtype=float))
+<     H_subs_coulomb.append([])
+< 
+< for isec in range(nsec):
+<     eigen_e               = np.zeros((dim_reduced),dtype=float)
+<     start_time = datetime.now()
+<     # project hamiltonian on to specified sector
+<     H_sparse = hamiltonian_coulomb.to_matrix(sparse=True)
+<     H_sparse.eliminate_zeros()
+<     jsec = isec
+<     row      = []
+<     col      = []
+<     data     = []
+<     for ii in range(dim_sub[isec]):
+<         i = indx_sub[isec][ii]
+<         for ind in range(H_sparse.indptr[i],H_sparse.indptr[i+1]):
+<             # j is always in indx_sub[isec], because the Hamiltonian does not mix it
+<             #print(i,j)
+<             j = H_sparse.indices[ind]
+<             jj = iindx_sub[jsec][j]
+<             row.append(jj)
+<             col.append(ii)
+<             #print(ii,jj)
+<             data.append(H_sparse.data[ind])
+<     H_sub = sparse.csc_matrix((data, (row, col)), shape=(dim_sub[jsec], dim_sub[isec]))
+< 
+<     H_sub_reduced = basis_transform@(H_sub.toarray())@basis_transform.conj().T
+< 
+<     H_subs_coulomb[isec].append(H_sub_reduced)
+< 
+<     eigen_e = H_sub_reduced.diagonal() # coulomb interaction matrix is diagonal in occupation number basis
+< 
+<     eigen_energies_coulomb[isec][:]   = eigen_e.real
+<     end_time = datetime.now()
+<     elapsed = end_time-start_time
+<     elapsed = elapsed.total_seconds()
+<     gc.collect()
+<     if (core==0):
+<         st = '# Coulomb, elapsed time = {elapsed} secs'.format(elapsed=elapsed)
+<         memory_usage(st)
+< 
+< 
+< # %%
+< # exact eigenvalues for kinetic parts
+< eigen_energies_kinetic   = []
+< eigen_vectors_kinetic = []
+< H_subs_kinetic = []
+< for isec in range(nsec):
+<     eigen_energies_kinetic.append(np.zeros((n_hamiltonians,dim_reduced),dtype=float))
+<     eigen_vectors_kinetic.append(np.zeros((n_hamiltonians,dim_reduced,dim_reduced),dtype=complex))
+<     H_subs_kinetic.append([])
+< 
+< for isec in range(nsec):
+<     eigen_e               = np.zeros((dim_reduced),dtype=float)
+<     eigen_v               = np.zeros((dim_reduced,dim_reduced),dtype=complex)
+<     for alpha in range(n_hamiltonians):
+<         start_time = datetime.now()
+<         # project hamiltonian on to specified sector
+<         H_sparse = hamiltonians_kinetic[alpha].to_matrix(sparse=True)
+<         H_sparse.eliminate_zeros()
+<         jsec = isec
+<         row      = []
+<         col      = []
+<         data     = []
+<         for ii in range(dim_sub[isec]):
+<             i = indx_sub[isec][ii]
+<             for ind in range(H_sparse.indptr[i],H_sparse.indptr[i+1]):
+<                 # j is always in indx_sub[isec], because the Hamiltonian does not mix it
+<                 #print(i,j)
+<                 j = H_sparse.indices[ind]
+<                 jj = iindx_sub[jsec][j]
+<                 row.append(jj)
+<                 col.append(ii)
+<                 #print(ii,jj)
+<                 data.append(H_sparse.data[ind])
+<         H_sub = sparse.csc_matrix((data, (row, col)), shape=(dim_sub[jsec], dim_sub[isec]))
+< 
+<         H_sub_reduced = basis_transform@(H_sub.toarray())@basis_transform.conj().T
+< 
+<         H_subs_kinetic[isec].append(H_sub_reduced)
+< 
+<         # diagonalize sectorized hamiltonian
+<         i_core = alpha%cores
+<         if (core==i_core):
+<             eigen_e, eigen_v = np.linalg.eigh(H_sub_reduced)
+<             eigen_energies_kinetic[isec][alpha,:]   = eigen_e
+<             eigen_vectors_kinetic[isec][alpha,:,:] = eigen_v
+<     del eigen_e, eigen_v
+<     gc.collect()
+< comm.Barrier()
+< bcast_start_time = datetime.now()
+< for isec in range(nsec):
+<     for alpha in range(n_hamiltonians):
+<         i_core = alpha%cores
+<         comm.Bcast([eigen_energies_kinetic[isec][alpha,:] ,MPI.DOUBLE],root=i_core)
+<         comm.Bcast([eigen_vectors_kinetic[isec][alpha,:,:],MPI.DOUBLE_COMPLEX],root=i_core)
+< end_time = datetime.now()
+< elapsed = end_time-start_time
+< elapsed = elapsed.total_seconds()
+< if (core==0):
+<     st = '# {percent}%, elapsed time = {elapsed} secs'.format(percent=(100),elapsed=elapsed)
+<     memory_usage(st)
+<     st = 'Bcast time = {elapsed} secs'.format(elapsed=(end_time-bcast_start_time).total_seconds())
+<     print(st)
+< 
+< 
+< def Apply_ExactEvolution_coulomb(isec, eps, time, v):
+<     vec = np.exp(-1j*time*(eigen_energies_coulomb[isec][:]-eps))
+<     w = vec * v
+<     return w
+---
+>             indx_beta += 1
+1350,1412c1278,1718
+< 
+< def Apply_ExactEvolution_kinetic(isec, alpha, eps, time, v):
+<     w = v.conj()@eigen_vectors_kinetic[isec][alpha,:,:]
+<     vec = np.exp(-1j*time*(eigen_energies_kinetic[isec][alpha,:]-eps))
+<     w = vec*w.conj()
+<     w = eigen_vectors_kinetic[isec][alpha,:,:]@w
+<     return w
+< 
+< 
+< def Apply_TrotterEvolution(isec, alpha, time, eps, n_trotter, indx, v):
+<     dt = time/n_trotter
+<     if (indx==0): 
+<         # first order trotter
+<         w = v
+<         for i_trotter in range(n_trotter):
+<             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+<             w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+<     elif (indx==1):
+<         w = v
+<         for i_trotter in range(n_trotter):
+<             w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+<             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+<     return w*np.exp(1j*eps*time)
+< 
+< def Apply_TrotterEvolution2(isec, alpha, time, eps, n_trotter, indx, v):
+<     dt = time/n_trotter
+<     vec = np.exp(-1j*dt*(eigen_energies_kinetic[isec][alpha,:]-eps))
+<     M = eigen_vectors_kinetic[isec][alpha,:,:]@np.diag(vec)@eigen_vectors_kinetic[isec][alpha,:,:].conj().T
+<     if (indx==0): 
+<         # first order trotter
+<         w = v
+<         for i_trotter in range(n_trotter):
+<             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+<             w = M@w
+<             #w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+<     elif (indx==1):
+<         w = v
+<         for i_trotter in range(n_trotter):
+<             w = M@w
+<             #w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+<             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+<     return w*np.exp(1j*eps*time)
+< #
+< ## check sparsity of phi_start
+< #if (core==0): 
+< #    # check sparsity
+< #    nnz = 0
+< #    for i in range(dim_sub[isec]):
+< #        if (np.abs(phi_start[i])>1e-10):
+< #            nnz += 1
+< #    print('nnz: ',nnz, nnz/(dim_sub[isec]))
+< #
+< ## test Trotter evolution
+< #v = phi_start
+< #time = 1
+< #n_trotter = 1000
+< ## 
+< ## # Trotter test #1
+< #start_time = datetime.now()
+< #w = Apply_TrotterEvolution(0,-1,time,0.0,n_trotter,1,v)
+< #end_time = datetime.now()
+< #elapsed = end_time-start_time
+< #elapsed = elapsed.total_seconds()
+---
+> # repetition test
+> #beta = 1.6
+> #nmcs = [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384]
+> #error_for_nmcs = np.zeros((len(nmcs)),dtype=float)
+> #n_shot = 2048
+> #n_iter = 30
+> #
+> #
+> ## %%
+> ## compute n_pubs_sum
+> #n_pubs_sum = 0
+> #for alpha in range(1,n_hamiltonians):
+> #    nhd1 = len(hamiltonian_diffs_reduced_list[alpha-1])
+> #    nhd1_ = nhd1 # no constant contribution
+> #    
+> #    if (alpha<n_hamiltonians-1):
+> #        nhd2 = len(hamiltonian_diffs_reduced_list[alpha])
+> #    else:
+> #        nhd2 = 0
+> #    nhd2_ = nhd2 # no constant contribution
+> #    
+> #    # rerun correction
+> #    n_pubs = (2+2*nhd1_+nhd2_)
+> #
+> #    n_pubs_sum += n_pubs
+> #
+> #    #print(n_pubs_sum)
+> #
+> ## preprocess
+> #indx_nmc = 0
+> #for nmc in nmcs:
+> #    error = 0.0
+> #    #max_time = 0.0
+> #    for i_iter in range(n_iter):
+> #        # pick timelists
+> ##       no need to save timelists
+> ##        n_obs = 3 
+> ##        # 0; norm, 1; dE1, 2; dE2
+> ##        O_timelists         = [[[None for _ in range(nmc)] for _ in range(n_obs)] for _ in range(n_hamiltonians)]
+> ##        # %%
+> ##        if (core==0):
+> ##            for alpha in range(1,n_hamiltonians):
+> ##                for i_obs in range(n_obs):
+> ##                    for imc in range(nmc):
+> ##                        times = np.random.normal(0.0, beta, size=2*(alpha+1))
+> ##                        O_timelists[alpha][i_obs][imc] = times
+> ##        comm.Barrier()
+> ##        O_timelists = comm.bcast(O_timelists,root=0)
+> ##        # max time
+> ##        for alpha in range(1,n_hamiltonians):
+> ##            for i_obs in range(n_obs):
+> ##                for imc in range(nmc):
+> ##                    time_sum = np.sum(np.abs(O_timelists[alpha][i_obs][imc]))
+> ##                    max_time = max(max_time,time_sum)
+> #
+> #        eps = eigen_energies_exact[0][0,0]
+> #        norms_qzmc              = np.ones((n_hamiltonians),dtype=float)
+> #        eigen_energies_qzmc     = np.zeros((n_hamiltonians),dtype=float)
+> #        eigen_energies_qzmc[0] = eigen_energies_exact[0][0,0]
+> #
+> #        for alpha in range(1,n_hamiltonians):
+> #            start_time = datetime.now()
+> #                        
+> #
+> #            nhd1 = len(hamiltonian_diffs_reduced_list[alpha-1])
+> #            nhd1_ = nhd1 # no constant contribution
+> #
+> #            n_pubs = nmc * (1+nhd1_)
+> #
+> #            n_pubs_for_ = [0 for _ in range(cores)]
+> #            remainder         = n_pubs%cores
+> #            for i_core in range(cores):
+> #                n_pubs_for_[i_core] = n_pubs//cores
+> #                if (i_core<remainder):
+> #                    n_pubs_for_[i_core] += 1
+> #            #if (core==0 and alpha==1):
+> #            #    print('# of different quantum circuits to run = ', n_pubs)
+> #
+> #            i_start         = sum(n_pubs_for_[:core])
+> #            i_end           = i_start + n_pubs_for_[core]
+> #
+> #            ind_pub = 0
+> #            ind_pub_core = 0
+> #
+> #            result_values_core = [0.0 for _ in range(n_pubs_for_[core])]
+> #
+> #            # norm (i_obs==0)
+> #            i_obs = 0
+> #            for imc in range(nmc):
+> #                # check my turn
+> #                my_turn = ind_pub>=i_start and ind_pub<i_end
+> #                ind_pub += 1
+> #                if (not my_turn):
+> #                    continue
+> #                # initialize
+> #                times = np.random.normal(0.0, beta, size=2*(alpha+1))
+> #                i_time = 0
+> #                phase  = 0.0
+> #                phi = copy.copy(phi_start)
+> #                # 
+> #                for alpha_ in range(alpha):
+> #                    phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                    phi = Apply_ExactEvolution(isec,alpha_,0.0,times[i_time],phi)
+> #                    i_time += 1
+> #                # P_{\alpha}
+> #                phase += eps * times[i_time]
+> #                phi = Apply_ExactEvolution(isec,alpha,0.0,times[i_time],phi)
+> #                i_time += 1
+> #
+> #                # P_{\alpha}
+> #                phase += eps * times[i_time]
+> #                phi = Apply_ExactEvolution(isec,alpha,0.0,times[i_time],phi)
+> #                i_time += 1
+> #
+> #                for alpha_ in reversed(range(alpha)):
+> #                    phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                    phi = Apply_ExactEvolution(isec,alpha_,0.0,times[i_time],phi)
+> #                    i_time += 1
+> #
+> #                amplitude = phi_start.conj().T@phi
+> #                amplitude *= np.exp(1j*phase)
+> #                result_values_core[ind_pub_core] = amplitude.real
+> #                ind_pub_core += 1
+> #
+> #            # dE1 (i_obs==1)
+> #            i_obs = 1
+> #            for ihd in range(nhd1):
+> #                for imc in range(nmc):
+> #                    # check my turn
+> #                    my_turn = ind_pub>=i_start and ind_pub<i_end
+> #                    ind_pub += 1
+> #                    if (not my_turn):
+> #                        continue
+> #                    # initialize
+> #                    times = np.random.normal(0.0, beta, size=2*(alpha+1))
+> #                    i_time = 0
+> #                    phase  = 0.0
+> #                    phi = copy.copy(phi_start)
+> #                    # 
+> #                    for alpha_ in range(alpha):
+> #                        phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                        phi = Apply_ExactEvolution(isec,alpha_,0.0,times[i_time],phi)
+> #                        i_time += 1
+> #                    # apply pauli
+> #                    phi = sectored_pauli[0][alpha-1][ihd]@phi
+> #
+> #                    # P_{\alpha}
+> #                    phase += eps * times[i_time]
+> #                    phi = Apply_ExactEvolution(isec,alpha,0.0,times[i_time],phi)
+> #                    i_time += 1
+> #
+> #                    # P_{\alpha}
+> #                    phase += eps * times[i_time]
+> #                    phi = Apply_ExactEvolution(isec,alpha,0.0,times[i_time],phi)
+> #                    i_time += 1
+> #
+> #                    for alpha_ in reversed(range(alpha)):
+> #                        phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                        phi = Apply_ExactEvolution(isec,alpha_,0.0,times[i_time],phi)
+> #                        i_time += 1
+> #
+> #                    amplitude = phi_start.conj().T@phi
+> #                    amplitude *= np.exp(1j*phase)
+> #                    result_values_core[ind_pub_core] = amplitude.real
+> #                    ind_pub_core += 1
+> #
+> #            for i in range(n_pubs_for_[core]):
+> #                computed_value = result_values_core[i]
+> #
+> #                # shot errors
+> #                p_up = (computed_value + 1.0)/2.0
+> #                sample = np.random.binomial(n_shot,p_up)
+> #                shot_error = 2*(sample/(n_shot) - p_up)
+> #                computed_value += shot_error
+> #
+> #                result_values_core[i] = computed_value
+> #            # bcast
+> #            #print(result_values_core)
+> #            comm.Barrier()
+> #            result_values = []
+> #            for i_core in range(cores):
+> #                if (n_pubs_for_[i_core]==0):
+> #                    continue
+> #                result_values_temp = comm.bcast(result_values_core,root=i_core)
+> #                result_values += result_values_temp
+> #                comm.Barrier()
+> #
+> #            # compute energy eigenvalues
+> #            i_meas = 0
+> #
+> #            # 0; norm
+> #            norm    = 0.0
+> #            i_obs   = 0
+> #            for imc in range(nmc):
+> #                norm   += result_values[i_meas]
+> #                i_meas += 1
+> #            # 1; dE1
+> #            dE1norm = 0.0
+> #            i_obs   = 1
+> #            for ihd in range(nhd1):
+> #                coeff = hamiltonian_diffs_reduced_list[alpha-1][ihd][1]
+> #                for imc in range(nmc):
+> #                    dE1norm += coeff *result_values[i_meas]
+> #                    i_meas += 1
+> #
+> #            norm = norm.real
+> #            dE1norm = dE1norm.real
+> #    
+> #            dE1norm /= norm
+> #            norm    /= nmc
+> #
+> #            eps = eigen_energies_qzmc[alpha-1] + dE1norm
+> #
+> #            # rerun
+> #
+> #            if (alpha<n_hamiltonians-1):
+> #                nhd2 = len(hamiltonian_diffs_reduced_list[alpha])
+> #            else:
+> #                nhd2 = 0
+> #            nhd2_ = nhd2 # no constant contribution
+> #
+> #            n_pubs = nmc * (1+nhd1_+nhd2_)
+> #
+> #            n_pubs_for_ = [0 for _ in range(cores)]
+> #            remainder         = n_pubs%cores
+> #            for i_core in range(cores):
+> #                n_pubs_for_[i_core] = n_pubs//cores
+> #                if (i_core<remainder):
+> #                    n_pubs_for_[i_core] += 1
+> #            #if (core==0 and alpha==1):
+> #            #    print('# of different quantum circuits to run = ', n_pubs)
+> #
+> #            i_start         = sum(n_pubs_for_[:core])
+> #            i_end           = i_start + n_pubs_for_[core]
+> #
+> #            ind_pub = 0
+> #            ind_pub_core = 0
+> #
+> #            result_values_core = [0.0 for _ in range(n_pubs_for_[core])]
+> #
+> #            # norm (i_obs==0)
+> #            i_obs = 0
+> #            for imc in range(nmc):
+> #                # check my turn
+> #                my_turn = ind_pub>=i_start and ind_pub<i_end
+> #                ind_pub += 1
+> #                if (not my_turn):
+> #                    continue
+> #                # initialize
+> #                times = np.random.normal(0.0, beta, size=2*(alpha+1))
+> #                i_time = 0
+> #                phase  = 0.0
+> #                phi = copy.copy(phi_start)
+> #                # 
+> #                for alpha_ in range(alpha):
+> #                    phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                    phi = Apply_ExactEvolution(isec,alpha_,0.0,times[i_time],phi)
+> #                    i_time += 1
+> #                # P_{\alpha}
+> #                phase += eps * times[i_time]
+> #                phi = Apply_ExactEvolution(isec,alpha,0.0,times[i_time],phi)
+> #                i_time += 1
+> #
+> #                # P_{\alpha}
+> #                phase += eps * times[i_time]
+> #                phi = Apply_ExactEvolution(isec,alpha,0.0,times[i_time],phi)
+> #                i_time += 1
+> #
+> #                for alpha_ in reversed(range(alpha)):
+> #                    phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                    phi = Apply_ExactEvolution(isec,alpha_,0.0,times[i_time],phi)
+> #                    i_time += 1
+> #
+> #                amplitude = phi_start.conj().T@phi
+> #                amplitude *= np.exp(1j*phase)
+> #                result_values_core[ind_pub_core] = amplitude.real
+> #                ind_pub_core += 1
+> #
+> #            # dE1 (i_obs==1)
+> #            i_obs = 1
+> #            for ihd in range(nhd1):
+> #                for imc in range(nmc):
+> #                    # check my turn
+> #                    my_turn = ind_pub>=i_start and ind_pub<i_end
+> #                    ind_pub += 1
+> #                    if (not my_turn):
+> #                        continue
+> #                    # initialize
+> #                    times = np.random.normal(0.0, beta, size=2*(alpha+1))
+> #                    i_time = 0
+> #                    phase  = 0.0
+> #                    phi = copy.copy(phi_start)
+> #                    # 
+> #                    for alpha_ in range(alpha):
+> #                        phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                        phi = Apply_ExactEvolution(isec,alpha_,0.0,times[i_time],phi)
+> #                        i_time += 1
+> #                    # apply pauli
+> #                    phi = sectored_pauli[0][alpha-1][ihd]@phi
+> #
+> #                    # P_{\alpha}
+> #                    phase += eps * times[i_time]
+> #                    phi = Apply_ExactEvolution(isec,alpha,0.0,times[i_time],phi)
+> #                    i_time += 1
+> #
+> #                    # P_{\alpha}
+> #                    phase += eps * times[i_time]
+> #                    phi = Apply_ExactEvolution(isec,alpha,0.0,times[i_time],phi)
+> #                    i_time += 1
+> #
+> #                    for alpha_ in reversed(range(alpha)):
+> #                        phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                        phi = Apply_ExactEvolution(isec,alpha_,0.0,times[i_time],phi)
+> #                        i_time += 1
+> #
+> #                    amplitude = phi_start.conj().T@phi
+> #                    amplitude *= np.exp(1j*phase)
+> #                    result_values_core[ind_pub_core] = amplitude.real
+> #                    ind_pub_core += 1
+> #
+> #            # dE2 (i_obs==2)
+> #            i_obs = 2
+> #            for ihd in range(nhd2):
+> #                for imc in range(nmc):
+> #                    # check my turn
+> #                    my_turn = ind_pub>=i_start and ind_pub<i_end
+> #                    ind_pub += 1
+> #                    if (not my_turn):
+> #                        continue
+> #                    # initialize
+> #                    times = np.random.normal(0.0, beta, size=2*(alpha+1))
+> #                    i_time = 0
+> #                    phase  = 0.0
+> #                    phi = copy.copy(phi_start)
+> #                    # 
+> #                    for alpha_ in range(alpha):
+> #                        phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                        phi = Apply_ExactEvolution(isec,alpha_,0.0,times[i_time],phi)
+> #                        i_time += 1
+> #                    # P_{\alpha}
+> #
+> #                    phase += eps * times[i_time]
+> #                    phi = Apply_ExactEvolution(isec,alpha,0.0,times[i_time],phi)
+> #                    i_time += 1
+> #
+> #                    # apply pauli
+> #                    phi = sectored_pauli[0][alpha][ihd]@phi
+> #
+> #                    # P_{\alpha}
+> #                    phase += eps * times[i_time]
+> #                    phi = Apply_ExactEvolution(isec,alpha,0.0,times[i_time],phi)
+> #                    i_time += 1
+> #
+> #                    for alpha_ in reversed(range(alpha)):
+> #                        phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                        phi = Apply_ExactEvolution(isec,alpha_,0.0,times[i_time],phi)
+> #                        i_time += 1
+> #
+> #                    amplitude = phi_start.conj().T@phi
+> #                    amplitude *= np.exp(1j*phase)
+> #                    result_values_core[ind_pub_core] = amplitude.real
+> #                    ind_pub_core += 1
+> #            for i in range(n_pubs_for_[core]):
+> #                computed_value = result_values_core[i]
+> #
+> #                # shot errors
+> #                p_up = (computed_value + 1.0)/2.0
+> #                sample = np.random.binomial(n_shot,p_up)
+> #                shot_error = 2*(sample/(n_shot) - p_up)
+> #                computed_value += shot_error
+> #
+> #                result_values_core[i] = computed_value
+> #            # bcast
+> #            #print(result_values_core)
+> #            comm.Barrier()
+> #            result_values = []
+> #            for i_core in range(cores):
+> #                if (n_pubs_for_[i_core]==0):
+> #                    continue
+> #                result_values_temp = comm.bcast(result_values_core,root=i_core)
+> #                result_values += result_values_temp
+> #                comm.Barrier()
+> #
+> #            # compute energy eigenvalues
+> #            i_meas = 0
+> #
+> #            # 0; norm
+> #            norm    = 0.0
+> #            i_obs   = 0
+> #            for imc in range(nmc):
+> #                norm   += result_values[i_meas]
+> #                i_meas += 1
+> #            # 1; dE1
+> #            dE1norm = 0.0
+> #            i_obs   = 1
+> #            for ihd in range(nhd1):
+> #                coeff = hamiltonian_diffs_reduced_list[alpha-1][ihd][1]
+> #                for imc in range(nmc):
+> #                    dE1norm += coeff *result_values[i_meas]
+> #                    i_meas += 1
+> #            # 2; dE2
+> #            dE2norm = 0.0
+> #            i_obs   = 2
+> #            for ihd in range(nhd2):
+> #                coeff = hamiltonian_diffs_reduced_list[alpha][ihd][1]
+> #                for imc in range(nmc):
+> #                    dE2norm += coeff *result_values[i_meas]
+> #                    i_meas += 1
+> #
+> #            norm = norm.real
+> #            dE1norm = dE1norm.real
+> #            dE2norm = dE2norm.real
+> #    
+> #            dE1norm /= norm
+> #            dE2norm /= norm
+> #            norm    /= nmc
+> #
+> #            eigen_energies_qzmc[alpha] = eigen_energies_qzmc[alpha-1] + dE1norm
+> #            norms_qzmc[alpha] = norm
+> #
+> #            if (alpha<n_hamiltonians-1):
+> #                eps = eigen_energies_qzmc[alpha] + dE2norm
+> #                eps = eps.real
+> #
+> #
+> #            #if (core==0):
+> #            #    st = '# {percent:.1f}%, elapsed time = {elapsed} secs'.format(percent=((alpha)/(n_hamiltonians-1)*100),elapsed=elapsed)
+> #            #    memory_usage(st)
+> #            #    print(alpha, norms_qzmc[alpha], eigen_energies_qzmc[alpha]-eigen_energies_exact[isec][alpha,0])
+> #            #    if (alpha<n_hamiltonians-1):
+> #            #        print('precision of the predictor for next', eps-eigen_energies_exact[isec][alpha+1,0])
+> #            #    st = '# {percent:.1f}%'.format(percent=((alpha)/(n_hamiltonians-1)*100))
+> #            #    print(st)
+> #        error += np.abs(eigen_energies_qzmc[-1] - eigen_energies_exact[0][-1,0])
+> #    error /= n_iter
+> #    error_for_nmcs[indx_nmc] = error
+> #    if (core==0):
+> #        print(n_pubs_sum*nmc, error)
+> #    indx_nmc += 1
+> #
+> ## %%
+1414,1420c1720,1837
+< #    print('Ver # 1: ',n_trotter)
+< #    print('Trotter step: ',n_trotter)
+< #    print('Elapsed time: ',elapsed)
+< #
+< ## Trotter test #2
+< #start_time = datetime.now()
+< #w = Apply_TrotterEvolution2(0,-1,time,0.0,n_trotter,1,v)
+---
+> #    with open('dE_vs_repetitions_with_exact','w') as file_:
+> #        s = '# beta = '+str(beta)+', n_shot= '+str(n_shot)+', n_iter='+str(n_iter)
+> #        s += '\n'
+> #        file_.write(s)
+> #        indx_nmc = 0
+> #        for nmc in nmcs:
+> #            s = '{:}'.format(n_pubs_sum*nmc)
+> #            s += '  {:.16e}'.format(error_for_nmcs[indx_nmc])
+> #        #    print(s)
+> #            s += '\n'
+> #            file_.write(s)
+> #            indx_nmc += 1
+> ##
+> ##
+> ### %%
+> ## prepare trotterization
+> #del eigen_vectors_exact
+> #gc.collect()
+> ## exact eigenvalues for interaction parts
+> #eigen_energies_coulomb  = []
+> #H_subs_coulomb = []
+> #for isec in range(nsec):
+> #    eigen_energies_coulomb.append(np.zeros((dim_reduced),dtype=float))
+> #    H_subs_coulomb.append([])
+> #
+> #for isec in range(nsec):
+> #    eigen_e               = np.zeros((dim_reduced),dtype=float)
+> #    start_time = datetime.now()
+> #    # project hamiltonian on to specified sector
+> #    H_sparse = hamiltonian_coulomb.to_matrix(sparse=True)
+> #    H_sparse.eliminate_zeros()
+> #    jsec = isec
+> #    row      = []
+> #    col      = []
+> #    data     = []
+> #    for ii in range(dim_sub[isec]):
+> #        i = indx_sub[isec][ii]
+> #        for ind in range(H_sparse.indptr[i],H_sparse.indptr[i+1]):
+> #            # j is always in indx_sub[isec], because the Hamiltonian does not mix it
+> #            #print(i,j)
+> #            j = H_sparse.indices[ind]
+> #            jj = iindx_sub[jsec][j]
+> #            row.append(jj)
+> #            col.append(ii)
+> #            #print(ii,jj)
+> #            data.append(H_sparse.data[ind])
+> #    H_sub = sparse.csc_matrix((data, (row, col)), shape=(dim_sub[jsec], dim_sub[isec]))
+> #
+> #    H_sub_reduced = basis_transform@(H_sub.toarray())@basis_transform.conj().T
+> #
+> #    H_subs_coulomb[isec].append(H_sub_reduced)
+> #
+> #    eigen_e = H_sub_reduced.diagonal() # coulomb interaction matrix is diagonal in occupation number basis
+> #
+> #    eigen_energies_coulomb[isec][:]   = eigen_e.real
+> #    end_time = datetime.now()
+> #    elapsed = end_time-start_time
+> #    elapsed = elapsed.total_seconds()
+> #    gc.collect()
+> #    if (core==0):
+> #        st = '# Coulomb, elapsed time = {elapsed} secs'.format(elapsed=elapsed)
+> #        memory_usage(st)
+> #
+> #
+> ## %%
+> ## exact eigenvalues for kinetic parts
+> #eigen_energies_kinetic   = []
+> #eigen_vectors_kinetic = []
+> #H_subs_kinetic = []
+> #for isec in range(nsec):
+> #    eigen_energies_kinetic.append(np.zeros((n_hamiltonians,dim_reduced),dtype=float))
+> #    eigen_vectors_kinetic.append(np.zeros((n_hamiltonians,dim_reduced,dim_reduced),dtype=complex))
+> #    H_subs_kinetic.append([])
+> #
+> #for isec in range(nsec):
+> #    eigen_e               = np.zeros((dim_reduced),dtype=float)
+> #    eigen_v               = np.zeros((dim_reduced,dim_reduced),dtype=complex)
+> #    for alpha in range(n_hamiltonians):
+> #        start_time = datetime.now()
+> #        # project hamiltonian on to specified sector
+> #        H_sparse = hamiltonians_kinetic[alpha].to_matrix(sparse=True)
+> #        H_sparse.eliminate_zeros()
+> #        jsec = isec
+> #        row      = []
+> #        col      = []
+> #        data     = []
+> #        for ii in range(dim_sub[isec]):
+> #            i = indx_sub[isec][ii]
+> #            for ind in range(H_sparse.indptr[i],H_sparse.indptr[i+1]):
+> #                # j is always in indx_sub[isec], because the Hamiltonian does not mix it
+> #                #print(i,j)
+> #                j = H_sparse.indices[ind]
+> #                jj = iindx_sub[jsec][j]
+> #                row.append(jj)
+> #                col.append(ii)
+> #                #print(ii,jj)
+> #                data.append(H_sparse.data[ind])
+> #        H_sub = sparse.csc_matrix((data, (row, col)), shape=(dim_sub[jsec], dim_sub[isec]))
+> #
+> #        H_sub_reduced = basis_transform@(H_sub.toarray())@basis_transform.conj().T
+> #
+> #        H_subs_kinetic[isec].append(H_sub_reduced)
+> #
+> #        # diagonalize sectorized hamiltonian
+> #        i_core = alpha%cores
+> #        if (core==i_core):
+> #            eigen_e, eigen_v = np.linalg.eigh(H_sub_reduced)
+> #            eigen_energies_kinetic[isec][alpha,:]   = eigen_e
+> #            eigen_vectors_kinetic[isec][alpha,:,:] = eigen_v
+> #    del eigen_e, eigen_v
+> #    gc.collect()
+> #comm.Barrier()
+> #bcast_start_time = datetime.now()
+> #for isec in range(nsec):
+> #    for alpha in range(n_hamiltonians):
+> #        i_core = alpha%cores
+> #        comm.Bcast([eigen_energies_kinetic[isec][alpha,:] ,MPI.DOUBLE],root=i_core)
+> #        comm.Bcast([eigen_vectors_kinetic[isec][alpha,:,:],MPI.DOUBLE_COMPLEX],root=i_core)
+1425,1432c1842,1937
+< #    print('Ver # 2: ',n_trotter)
+< #    print('Trotter step: ',n_trotter)
+< #    print('Elapsed time: ',elapsed)
+< 
+< 
+< # for trotter
+< beta = 4.2
+< nmc  = 8192
+---
+> #    st = '# {percent}%, elapsed time = {elapsed} secs'.format(percent=(100),elapsed=elapsed)
+> #    memory_usage(st)
+> #    st = 'Bcast time = {elapsed} secs'.format(elapsed=(end_time-bcast_start_time).total_seconds())
+> #    print(st)
+> #
+> #
+> #def Apply_ExactEvolution_coulomb(isec, eps, time, v):
+> #    vec = np.exp(-1j*time*(eigen_energies_coulomb[isec][:]-eps))
+> #    w = vec * v
+> #    return w
+> #
+> #
+> ## %%
+> #
+> #def Apply_ExactEvolution_kinetic(isec, alpha, eps, time, v):
+> #    w = v.conj()@eigen_vectors_kinetic[isec][alpha,:,:]
+> #    vec = np.exp(-1j*time*(eigen_energies_kinetic[isec][alpha,:]-eps))
+> #    w = vec*w.conj()
+> #    w = eigen_vectors_kinetic[isec][alpha,:,:]@w
+> #    return w
+> #
+> #
+> #def Apply_TrotterEvolution(isec, alpha, time, eps, n_trotter, indx, v):
+> #    dt = time/n_trotter
+> #    if (indx==0): 
+> #        # first order trotter
+> #        w = v
+> #        for i_trotter in range(n_trotter):
+> #            w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+> #            w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+> #    elif (indx==1):
+> #        w = v
+> #        for i_trotter in range(n_trotter):
+> #            w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+> #            w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+> #    return w*np.exp(1j*eps*time)
+> #
+> #def Apply_TrotterEvolution2(isec, alpha, time, eps, n_trotter, indx, v):
+> #    dt = time/n_trotter
+> #    vec = np.exp(-1j*dt*(eigen_energies_kinetic[isec][alpha,:]-eps))
+> #    M = eigen_vectors_kinetic[isec][alpha,:,:]@np.diag(vec)@eigen_vectors_kinetic[isec][alpha,:,:].conj().T
+> #    if (indx==0): 
+> #        # first order trotter
+> #        w = v
+> #        for i_trotter in range(n_trotter):
+> #            w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+> #            w = M@w
+> #            #w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+> #    elif (indx==1):
+> #        w = v
+> #        for i_trotter in range(n_trotter):
+> #            w = M@w
+> #            #w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+> #            w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+> #    return w*np.exp(1j*eps*time)
+> ##
+> ### check sparsity of phi_start
+> ##if (core==0): 
+> ##    # check sparsity
+> ##    nnz = 0
+> ##    for i in range(dim_sub[isec]):
+> ##        if (np.abs(phi_start[i])>1e-10):
+> ##            nnz += 1
+> ##    print('nnz: ',nnz, nnz/(dim_sub[isec]))
+> ##
+> ### test Trotter evolution
+> ##v = phi_start
+> ##time = 1
+> ##n_trotter = 1000
+> ### 
+> ### # Trotter test #1
+> ##start_time = datetime.now()
+> ##w = Apply_TrotterEvolution(0,-1,time,0.0,n_trotter,1,v)
+> ##end_time = datetime.now()
+> ##elapsed = end_time-start_time
+> ##elapsed = elapsed.total_seconds()
+> ##if (core==0):
+> ##    print('Ver # 1: ',n_trotter)
+> ##    print('Trotter step: ',n_trotter)
+> ##    print('Elapsed time: ',elapsed)
+> ##
+> ### Trotter test #2
+> ##start_time = datetime.now()
+> ##w = Apply_TrotterEvolution2(0,-1,time,0.0,n_trotter,1,v)
+> ##end_time = datetime.now()
+> ##elapsed = end_time-start_time
+> ##elapsed = elapsed.total_seconds()
+> ##if (core==0):
+> ##    print('Ver # 2: ',n_trotter)
+> ##    print('Trotter step: ',n_trotter)
+> ##    print('Elapsed time: ',elapsed)
+> #
+> #
+> ## for trotter
+> #beta = 1.6
+> #nmc  = 16384
+1434,1885c1939,2390
+< max_n_trotter_list = [50, 80, 100, 150, 200, 250, 300, 350, 400, 450, 500]#, 600, 700, 800, 900, 1000]
+< error_for_trotter_list = np.zeros((len(max_n_trotter_list)),dtype=float)
+< max_n_trotter_run_list = np.zeros((len(max_n_trotter_list)),dtype=float)
+< n_shot = 2048
+< n_iter = 30
+< trotter_permutation_indx     = 1
+< trotter_permutation_indx_dag = 1 # fixed to 1 for a fair comparision
+< 
+< 
+< # %%
+< def NumberOfTrotterSteps(alpha, max_n_trotter):
+<     trotter_factor = (n_dimer + t_inters[alpha]/t_intra * n_inter)/(n_dimer + n_inter)
+<     return max(1,int(trotter_factor*max_n_trotter))
+< 
+< # %%
+< # trotterized case
+< indx_max_n_trotter = 0
+< for max_n_trotter in max_n_trotter_list:
+<     start_time = datetime.now()
+< 
+<     n_trotters = [NumberOfTrotterSteps(alpha, max_n_trotter) for alpha in range(n_hamiltonians)]
+< 
+<     error = 0.0
+<     #max_time = 0.0
+<     for i_iter in range(n_iter):
+<         # pick timelists
+<         # n_obs = 3
+<         # 0; norm, 1; dE1, 2; dE2
+<         # O_timelists         = [[[None for _ in range(nmc)] for _ in range(n_obs)] for _ in range(n_hamiltonians)]
+<         # # %%
+<         # if (core==0):
+<         #     for alpha in range(1,n_hamiltonians):
+<         #         for i_obs in range(n_obs):
+<         #             for imc in range(nmc):
+<         #                 times = np.random.normal(0.0, beta, size=2*(alpha+1))
+<         #                 O_timelists[alpha][i_obs][imc] = times
+<         # comm.Barrier()
+<         # O_timelists = comm.bcast(O_timelists,root=0)
+<         # max time
+<         #for alpha in range(1,n_hamiltonians):
+<         #    for i_obs in range(n_obs):
+<         #        for imc in range(nmc):
+<         #            time_sum = np.sum(np.abs(O_timelists[alpha][i_obs][imc]))
+<         #            max_time = max(max_time,time_sum)
+< 
+<         eps = eigen_energies_exact[0][0,0]
+<         norms_qzmc              = np.ones((n_hamiltonians),dtype=float)
+<         eigen_energies_qzmc     = np.zeros((n_hamiltonians),dtype=float)
+<         eigen_energies_qzmc[0] = eigen_energies_exact[0][0,0]
+< 
+<         for alpha in range(1,n_hamiltonians):
+<                         
+< 
+<             nhd1 = len(hamiltonian_diffs_reduced_list[alpha-1])
+<             nhd1_ = nhd1 # no constant contribution
+< 
+<             n_pubs = nmc * (1+nhd1_)
+< 
+<             n_pubs_for_ = [0 for _ in range(cores)]
+<             remainder         = n_pubs%cores
+<             for i_core in range(cores):
+<                 n_pubs_for_[i_core] = n_pubs//cores
+<                 if (i_core<remainder):
+<                     n_pubs_for_[i_core] += 1
+<             #if (core==0 and alpha==1):
+<             #    print('# of different quantum circuits to run = ', n_pubs)
+< 
+<             i_start         = sum(n_pubs_for_[:core])
+<             i_end           = i_start + n_pubs_for_[core]
+< 
+<             ind_pub = 0
+<             ind_pub_core = 0
+< 
+<             result_values_core = [0.0 for _ in range(n_pubs_for_[core])]
+< 
+<             # norm (i_obs==0)
+<             i_obs = 0
+<             for imc in range(nmc):
+<                 # check my turn
+<                 my_turn = ind_pub>=i_start and ind_pub<i_end
+<                 ind_pub += 1
+<                 if (not my_turn):
+<                     continue
+<                 # initialize
+<                 times = np.random.normal(0.0, beta, size=2*(alpha+1))
+<                 i_time = 0
+<                 phase  = 0.0
+<                 phi = copy.copy(phi_start)
+<                 # 
+<                 for alpha_ in range(alpha):
+<                     phase += eigen_energies_qzmc[alpha_] * times[i_time]
+<                     phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx,phi)
+<                     i_time += 1
+<                 # P_{\alpha}
+<                 phase += eps * times[i_time]
+<                 phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx,phi)
+<                 i_time += 1
+< 
+<                 # P_{\alpha}
+<                 phase += eps * times[i_time]
+<                 phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx_dag,phi)
+<                 i_time += 1
+< 
+<                 for alpha_ in reversed(range(alpha)):
+<                     phase += eigen_energies_qzmc[alpha_] * times[i_time]
+<                     phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx_dag,phi)
+<                     i_time += 1
+< 
+<                 amplitude = phi_start.conj().T@phi
+<                 amplitude *= np.exp(1j*phase)
+<                 result_values_core[ind_pub_core] = amplitude.real
+<                 ind_pub_core += 1
+< 
+<             # dE1 (i_obs==1)
+<             i_obs = 1
+<             for ihd in range(nhd1):
+<                 for imc in range(nmc):
+<                     # check my turn
+<                     my_turn = ind_pub>=i_start and ind_pub<i_end
+<                     ind_pub += 1
+<                     if (not my_turn):
+<                         continue
+<                     # initialize
+<                     times = np.random.normal(0.0, beta, size=2*(alpha+1))
+<                     i_time = 0
+<                     phase  = 0.0
+<                     phi = copy.copy(phi_start)
+<                     # 
+<                     for alpha_ in range(alpha):
+<                         phase += eigen_energies_qzmc[alpha_] * times[i_time]
+<                         phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx,phi)
+<                         i_time += 1
+<                     # apply pauli
+<                     phi = sectored_pauli[0][alpha-1][ihd]@phi
+< 
+<                     # P_{\alpha}
+<                     phase += eps * times[i_time]
+<                     phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx,phi)
+<                     i_time += 1
+< 
+<                     # P_{\alpha}
+<                     phase += eps * times[i_time]
+<                     phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx_dag,phi)
+<                     i_time += 1
+< 
+<                     for alpha_ in reversed(range(alpha)):
+<                         phase += eigen_energies_qzmc[alpha_] * times[i_time]
+<                         phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx_dag,phi)
+<                         i_time += 1
+< 
+<                     amplitude = phi_start.conj().T@phi
+<                     amplitude *= np.exp(1j*phase)
+<                     result_values_core[ind_pub_core] = amplitude.real
+<                     ind_pub_core += 1
+< 
+<             for i in range(n_pubs_for_[core]):
+<                 computed_value = result_values_core[i]
+< 
+<                 # shot errors
+<                 p_up = (computed_value + 1.0)/2.0
+<                 sample = np.random.binomial(n_shot,p_up)
+<                 shot_error = 2*(sample/(n_shot) - p_up)
+<                 computed_value += shot_error
+< 
+<                 result_values_core[i] = computed_value
+<             # bcast
+<             #print(result_values_core)
+<             comm.Barrier()
+<             result_values = []
+<             for i_core in range(cores):
+<                 if (n_pubs_for_[i_core]==0):
+<                     continue
+<                 result_values_temp = comm.bcast(result_values_core,root=i_core)
+<                 result_values += result_values_temp
+<                 comm.Barrier()
+< 
+<             # compute energy eigenvalues
+<             i_meas = 0
+< 
+<             # 0; norm
+<             norm    = 0.0
+<             i_obs   = 0
+<             for imc in range(nmc):
+<                 norm   += result_values[i_meas]
+<                 i_meas += 1
+<             # 1; dE1
+<             dE1norm = 0.0
+<             i_obs   = 1
+<             for ihd in range(nhd1):
+<                 coeff = hamiltonian_diffs_reduced_list[alpha-1][ihd][1]
+<                 for imc in range(nmc):
+<                     dE1norm += coeff *result_values[i_meas]
+<                     i_meas += 1
+< 
+<             norm = norm.real
+<             dE1norm = dE1norm.real
+<     
+<             dE1norm /= norm
+<             norm    /= nmc
+< 
+<             eps = eigen_energies_qzmc[alpha-1] + dE1norm
+< 
+<             # rerun 
+<             if (alpha<n_hamiltonians-1):
+<                 nhd2 = len(hamiltonian_diffs_reduced_list[alpha])
+<             else:
+<                 nhd2 = 0
+<             nhd2_ = nhd2 # no constant contribution
+< 
+<             n_pubs = nmc * (1+nhd1_+nhd2_)
+< 
+<             n_pubs_for_ = [0 for _ in range(cores)]
+<             remainder         = n_pubs%cores
+<             for i_core in range(cores):
+<                 n_pubs_for_[i_core] = n_pubs//cores
+<                 if (i_core<remainder):
+<                     n_pubs_for_[i_core] += 1
+<             #if (core==0 and alpha==1):
+<             #    print('# of different quantum circuits to run = ', n_pubs)
+< 
+<             i_start         = sum(n_pubs_for_[:core])
+<             i_end           = i_start + n_pubs_for_[core]
+< 
+<             ind_pub = 0
+<             ind_pub_core = 0
+< 
+<             result_values_core = [0.0 for _ in range(n_pubs_for_[core])]
+< 
+<             # norm (i_obs==0)
+<             i_obs = 0
+<             for imc in range(nmc):
+<                 # check my turn
+<                 my_turn = ind_pub>=i_start and ind_pub<i_end
+<                 ind_pub += 1
+<                 if (not my_turn):
+<                     continue
+<                 # initialize
+<                 times = np.random.normal(0.0, beta, size=2*(alpha+1))
+<                 i_time = 0
+<                 phase  = 0.0
+<                 phi = copy.copy(phi_start)
+<                 # 
+<                 for alpha_ in range(alpha):
+<                     phase += eigen_energies_qzmc[alpha_] * times[i_time]
+<                     phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx,phi)
+<                     i_time += 1
+<                 # P_{\alpha}
+<                 phase += eps * times[i_time]
+<                 phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx,phi)
+<                 i_time += 1
+< 
+<                 # P_{\alpha}
+<                 phase += eps * times[i_time]
+<                 phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx_dag,phi)
+<                 i_time += 1
+< 
+<                 for alpha_ in reversed(range(alpha)):
+<                     phase += eigen_energies_qzmc[alpha_] * times[i_time]
+<                     phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx_dag,phi)
+<                     i_time += 1
+< 
+<                 amplitude = phi_start.conj().T@phi
+<                 amplitude *= np.exp(1j*phase)
+<                 result_values_core[ind_pub_core] = amplitude.real
+<                 ind_pub_core += 1
+< 
+<             # dE1 (i_obs==1)
+<             i_obs = 1
+<             for ihd in range(nhd1):
+<                 for imc in range(nmc):
+<                     # check my turn
+<                     my_turn = ind_pub>=i_start and ind_pub<i_end
+<                     ind_pub += 1
+<                     if (not my_turn):
+<                         continue
+<                     # initialize
+<                     times = np.random.normal(0.0, beta, size=2*(alpha+1))
+<                     i_time = 0
+<                     phase  = 0.0
+<                     phi = copy.copy(phi_start)
+<                     # 
+<                     for alpha_ in range(alpha):
+<                         phase += eigen_energies_qzmc[alpha_] * times[i_time]
+<                         phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx,phi)
+<                         i_time += 1
+<                     # apply pauli
+<                     phi = sectored_pauli[0][alpha-1][ihd]@phi
+< 
+<                     # P_{\alpha}
+<                     phase += eps * times[i_time]
+<                     phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx,phi)
+<                     i_time += 1
+< 
+<                     # P_{\alpha}
+<                     phase += eps * times[i_time]
+<                     phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx_dag,phi)
+<                     i_time += 1
+< 
+<                     for alpha_ in reversed(range(alpha)):
+<                         phase += eigen_energies_qzmc[alpha_] * times[i_time]
+<                         phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx_dag,phi)
+<                         i_time += 1
+< 
+<                     amplitude = phi_start.conj().T@phi
+<                     amplitude *= np.exp(1j*phase)
+<                     result_values_core[ind_pub_core] = amplitude.real
+<                     ind_pub_core += 1
+< 
+<             # dE2 (i_obs==2)
+<             i_obs = 2
+<             for ihd in range(nhd2):
+<                 for imc in range(nmc):
+<                     # check my turn
+<                     my_turn = ind_pub>=i_start and ind_pub<i_end
+<                     ind_pub += 1
+<                     if (not my_turn):
+<                         continue
+<                     # initialize
+<                     times = np.random.normal(0.0, beta, size=2*(alpha+1))
+<                     i_time = 0
+<                     phase  = 0.0
+<                     phi = copy.copy(phi_start)
+<                     # 
+<                     for alpha_ in range(alpha):
+<                         phase += eigen_energies_qzmc[alpha_] * times[i_time]
+<                         phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx,phi)
+<                         i_time += 1
+<                     # P_{\alpha}
+< 
+<                     phase += eps * times[i_time]
+<                     phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx,phi)
+<                     i_time += 1
+< 
+<                     # apply pauli
+<                     phi = sectored_pauli[0][alpha][ihd]@phi
+< 
+<                     # P_{\alpha}
+<                     phase += eps * times[i_time]
+<                     phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx_dag,phi)
+<                     i_time += 1
+< 
+<                     for alpha_ in reversed(range(alpha)):
+<                         phase += eigen_energies_qzmc[alpha_] * times[i_time]
+<                         phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx_dag,phi)
+<                         i_time += 1
+< 
+<                     amplitude = phi_start.conj().T@phi
+<                     amplitude *= np.exp(1j*phase)
+<                     result_values_core[ind_pub_core] = amplitude.real
+<                     ind_pub_core += 1
+<             for i in range(n_pubs_for_[core]):
+<                 computed_value = result_values_core[i]
+< 
+<                 # shot errors
+<                 p_up = (computed_value + 1.0)/2.0
+<                 sample = np.random.binomial(n_shot,p_up)
+<                 shot_error = 2*(sample/(n_shot) - p_up)
+<                 computed_value += shot_error
+< 
+<                 result_values_core[i] = computed_value
+<             # bcast
+<             #print(result_values_core)
+<             comm.Barrier()
+<             result_values = []
+<             for i_core in range(cores):
+<                 if (n_pubs_for_[i_core]==0):
+<                     continue
+<                 result_values_temp = comm.bcast(result_values_core,root=i_core)
+<                 result_values += result_values_temp
+<                 comm.Barrier()
+< 
+<             # compute energy eigenvalues
+<             i_meas = 0
+< 
+<             # 0; norm
+<             norm    = 0.0
+<             i_obs   = 0
+<             for imc in range(nmc):
+<                 norm   += result_values[i_meas]
+<                 i_meas += 1
+<             # 1; dE1
+<             dE1norm = 0.0
+<             i_obs   = 1
+<             for ihd in range(nhd1):
+<                 coeff = hamiltonian_diffs_reduced_list[alpha-1][ihd][1]
+<                 for imc in range(nmc):
+<                     dE1norm += coeff *result_values[i_meas]
+<                     i_meas += 1
+<             # 2; dE2
+<             dE2norm = 0.0
+<             i_obs   = 2
+<             for ihd in range(nhd2):
+<                 coeff = hamiltonian_diffs_reduced_list[alpha][ihd][1]
+<                 for imc in range(nmc):
+<                     dE2norm += coeff *result_values[i_meas]
+<                     i_meas += 1
+< 
+<             norm = norm.real
+<             dE1norm = dE1norm.real
+<             dE2norm = dE2norm.real
+<     
+<             dE1norm /= norm
+<             dE2norm /= norm
+<             norm    /= nmc
+< 
+<             eigen_energies_qzmc[alpha] = eigen_energies_qzmc[alpha-1] + dE1norm
+<             norms_qzmc[alpha] = norm
+< 
+<             if (alpha<n_hamiltonians-1):
+<                 eps = eigen_energies_qzmc[alpha] + dE2norm
+<                 eps = eps.real
+< 
+< 
+<             #if (core==0):
+<             #    st = '# {percent:.1f}%, elapsed time = {elapsed} secs'.format(percent=((alpha)/(n_hamiltonians-1)*100),elapsed=elapsed)
+<             #    memory_usage(st)
+<             #    print(alpha, norms_qzmc[alpha], eigen_energies_qzmc[alpha]-eigen_energies_exact[isec][alpha,0])
+<             #    if (alpha<n_hamiltonians-1):
+<             #        print('precision of the predictor for next', eps-eigen_energies_exact[isec][alpha+1,0])
+<             #    st = '# {percent:.1f}%'.format(percent=((alpha)/(n_hamiltonians-1)*100))
+<             #    print(st)
+<         error += np.abs(eigen_energies_qzmc[-1] - eigen_energies_exact[0][-1,0])
+<     error /= n_iter
+<     error_for_trotter_list[indx_max_n_trotter] = error
+<     max_n_trotter_run_list[indx_max_n_trotter] = 2*np.sum(n_trotters)
+<     if (core==0):
+<         print(2*np.sum(n_trotters), error)
+<     indx_max_n_trotter += 1
+<     end_time = datetime.now()
+<     elapsed = end_time-start_time
+<     elapsed = elapsed.total_seconds()
+<     if (core==0):
+<         st = '# elapsed time = {elapsed} secs'.format(elapsed=elapsed)
+<         memory_usage(st)
+< 
+< 
+< 
+< # %%
+< if (core==0):
+<     with open('dE_vs_n_trotter','w') as file_:
+<         s = '# beta= '+str(beta)+', n_shot= '+str(n_shot)+', n_iter= '+str(n_iter)+', nmc= '+str(nmc)
+<         s += '\n'
+<         file_.write(s)
+<         indx_n_trotter = 0
+<         for max_n_trotter in max_n_trotter_list:
+<             s = '{:}'.format(max_n_trotter_run_list[indx_n_trotter])
+<             s += '  {:.16e}'.format(error_for_trotter_list[indx_n_trotter])
+<             print(s)
+<             s += '\n'
+<             file_.write(s)
+<             indx_n_trotter += 1
+< 
+---
+> ##max_n_trotter_list = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+> #error_for_trotter_list = np.zeros((len(max_n_trotter_list)),dtype=float)
+> #max_n_trotter_run_list = np.zeros((len(max_n_trotter_list)),dtype=float)
+> #n_shot = 2048
+> #n_iter = 30
+> #trotter_permutation_indx     = 1
+> #trotter_permutation_indx_dag = 1 # fixed to 1 for a fair comparision
+> #
+> #
+> ## %%
+> #def NumberOfTrotterSteps(alpha, max_n_trotter):
+> #    trotter_factor = (n_dimer + t_inters[alpha]/t_intra * n_inter)/(n_dimer + n_inter)
+> #    return max(1,int(trotter_factor*max_n_trotter))
+> #
+> ## %%
+> ## trotterized case
+> #indx_max_n_trotter = 0
+> #for max_n_trotter in max_n_trotter_list:
+> #    start_time = datetime.now()
+> #
+> #    n_trotters = [NumberOfTrotterSteps(alpha, max_n_trotter) for alpha in range(n_hamiltonians)]
+> #
+> #    error = 0.0
+> #    #max_time = 0.0
+> #    for i_iter in range(n_iter):
+> #        # pick timelists
+> #        # n_obs = 3
+> #        # 0; norm, 1; dE1, 2; dE2
+> #        # O_timelists         = [[[None for _ in range(nmc)] for _ in range(n_obs)] for _ in range(n_hamiltonians)]
+> #        # # %%
+> #        # if (core==0):
+> #        #     for alpha in range(1,n_hamiltonians):
+> #        #         for i_obs in range(n_obs):
+> #        #             for imc in range(nmc):
+> #        #                 times = np.random.normal(0.0, beta, size=2*(alpha+1))
+> #        #                 O_timelists[alpha][i_obs][imc] = times
+> #        # comm.Barrier()
+> #        # O_timelists = comm.bcast(O_timelists,root=0)
+> #        # max time
+> #        #for alpha in range(1,n_hamiltonians):
+> #        #    for i_obs in range(n_obs):
+> #        #        for imc in range(nmc):
+> #        #            time_sum = np.sum(np.abs(O_timelists[alpha][i_obs][imc]))
+> #        #            max_time = max(max_time,time_sum)
+> #
+> #        eps = eigen_energies_exact[0][0,0]
+> #        norms_qzmc              = np.ones((n_hamiltonians),dtype=float)
+> #        eigen_energies_qzmc     = np.zeros((n_hamiltonians),dtype=float)
+> #        eigen_energies_qzmc[0] = eigen_energies_exact[0][0,0]
+> #
+> #        for alpha in range(1,n_hamiltonians):
+> #                        
+> #
+> #            nhd1 = len(hamiltonian_diffs_reduced_list[alpha-1])
+> #            nhd1_ = nhd1 # no constant contribution
+> #
+> #            n_pubs = nmc * (1+nhd1_)
+> #
+> #            n_pubs_for_ = [0 for _ in range(cores)]
+> #            remainder         = n_pubs%cores
+> #            for i_core in range(cores):
+> #                n_pubs_for_[i_core] = n_pubs//cores
+> #                if (i_core<remainder):
+> #                    n_pubs_for_[i_core] += 1
+> #            #if (core==0 and alpha==1):
+> #            #    print('# of different quantum circuits to run = ', n_pubs)
+> #
+> #            i_start         = sum(n_pubs_for_[:core])
+> #            i_end           = i_start + n_pubs_for_[core]
+> #
+> #            ind_pub = 0
+> #            ind_pub_core = 0
+> #
+> #            result_values_core = [0.0 for _ in range(n_pubs_for_[core])]
+> #
+> #            # norm (i_obs==0)
+> #            i_obs = 0
+> #            for imc in range(nmc):
+> #                # check my turn
+> #                my_turn = ind_pub>=i_start and ind_pub<i_end
+> #                ind_pub += 1
+> #                if (not my_turn):
+> #                    continue
+> #                # initialize
+> #                times = np.random.normal(0.0, beta, size=2*(alpha+1))
+> #                i_time = 0
+> #                phase  = 0.0
+> #                phi = copy.copy(phi_start)
+> #                # 
+> #                for alpha_ in range(alpha):
+> #                    phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                    phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx,phi)
+> #                    i_time += 1
+> #                # P_{\alpha}
+> #                phase += eps * times[i_time]
+> #                phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx,phi)
+> #                i_time += 1
+> #
+> #                # P_{\alpha}
+> #                phase += eps * times[i_time]
+> #                phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx_dag,phi)
+> #                i_time += 1
+> #
+> #                for alpha_ in reversed(range(alpha)):
+> #                    phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                    phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx_dag,phi)
+> #                    i_time += 1
+> #
+> #                amplitude = phi_start.conj().T@phi
+> #                amplitude *= np.exp(1j*phase)
+> #                result_values_core[ind_pub_core] = amplitude.real
+> #                ind_pub_core += 1
+> #
+> #            # dE1 (i_obs==1)
+> #            i_obs = 1
+> #            for ihd in range(nhd1):
+> #                for imc in range(nmc):
+> #                    # check my turn
+> #                    my_turn = ind_pub>=i_start and ind_pub<i_end
+> #                    ind_pub += 1
+> #                    if (not my_turn):
+> #                        continue
+> #                    # initialize
+> #                    times = np.random.normal(0.0, beta, size=2*(alpha+1))
+> #                    i_time = 0
+> #                    phase  = 0.0
+> #                    phi = copy.copy(phi_start)
+> #                    # 
+> #                    for alpha_ in range(alpha):
+> #                        phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                        phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx,phi)
+> #                        i_time += 1
+> #                    # apply pauli
+> #                    phi = sectored_pauli[0][alpha-1][ihd]@phi
+> #
+> #                    # P_{\alpha}
+> #                    phase += eps * times[i_time]
+> #                    phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx,phi)
+> #                    i_time += 1
+> #
+> #                    # P_{\alpha}
+> #                    phase += eps * times[i_time]
+> #                    phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx_dag,phi)
+> #                    i_time += 1
+> #
+> #                    for alpha_ in reversed(range(alpha)):
+> #                        phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                        phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx_dag,phi)
+> #                        i_time += 1
+> #
+> #                    amplitude = phi_start.conj().T@phi
+> #                    amplitude *= np.exp(1j*phase)
+> #                    result_values_core[ind_pub_core] = amplitude.real
+> #                    ind_pub_core += 1
+> #
+> #            for i in range(n_pubs_for_[core]):
+> #                computed_value = result_values_core[i]
+> #
+> #                # shot errors
+> #                p_up = (computed_value + 1.0)/2.0
+> #                sample = np.random.binomial(n_shot,p_up)
+> #                shot_error = 2*(sample/(n_shot) - p_up)
+> #                computed_value += shot_error
+> #
+> #                result_values_core[i] = computed_value
+> #            # bcast
+> #            #print(result_values_core)
+> #            comm.Barrier()
+> #            result_values = []
+> #            for i_core in range(cores):
+> #                if (n_pubs_for_[i_core]==0):
+> #                    continue
+> #                result_values_temp = comm.bcast(result_values_core,root=i_core)
+> #                result_values += result_values_temp
+> #                comm.Barrier()
+> #
+> #            # compute energy eigenvalues
+> #            i_meas = 0
+> #
+> #            # 0; norm
+> #            norm    = 0.0
+> #            i_obs   = 0
+> #            for imc in range(nmc):
+> #                norm   += result_values[i_meas]
+> #                i_meas += 1
+> #            # 1; dE1
+> #            dE1norm = 0.0
+> #            i_obs   = 1
+> #            for ihd in range(nhd1):
+> #                coeff = hamiltonian_diffs_reduced_list[alpha-1][ihd][1]
+> #                for imc in range(nmc):
+> #                    dE1norm += coeff *result_values[i_meas]
+> #                    i_meas += 1
+> #
+> #            norm = norm.real
+> #            dE1norm = dE1norm.real
+> #    
+> #            dE1norm /= norm
+> #            norm    /= nmc
+> #
+> #            eps = eigen_energies_qzmc[alpha-1] + dE1norm
+> #
+> #            # rerun 
+> #            if (alpha<n_hamiltonians-1):
+> #                nhd2 = len(hamiltonian_diffs_reduced_list[alpha])
+> #            else:
+> #                nhd2 = 0
+> #            nhd2_ = nhd2 # no constant contribution
+> #
+> #            n_pubs = nmc * (1+nhd1_+nhd2_)
+> #
+> #            n_pubs_for_ = [0 for _ in range(cores)]
+> #            remainder         = n_pubs%cores
+> #            for i_core in range(cores):
+> #                n_pubs_for_[i_core] = n_pubs//cores
+> #                if (i_core<remainder):
+> #                    n_pubs_for_[i_core] += 1
+> #            #if (core==0 and alpha==1):
+> #            #    print('# of different quantum circuits to run = ', n_pubs)
+> #
+> #            i_start         = sum(n_pubs_for_[:core])
+> #            i_end           = i_start + n_pubs_for_[core]
+> #
+> #            ind_pub = 0
+> #            ind_pub_core = 0
+> #
+> #            result_values_core = [0.0 for _ in range(n_pubs_for_[core])]
+> #
+> #            # norm (i_obs==0)
+> #            i_obs = 0
+> #            for imc in range(nmc):
+> #                # check my turn
+> #                my_turn = ind_pub>=i_start and ind_pub<i_end
+> #                ind_pub += 1
+> #                if (not my_turn):
+> #                    continue
+> #                # initialize
+> #                times = np.random.normal(0.0, beta, size=2*(alpha+1))
+> #                i_time = 0
+> #                phase  = 0.0
+> #                phi = copy.copy(phi_start)
+> #                # 
+> #                for alpha_ in range(alpha):
+> #                    phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                    phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx,phi)
+> #                    i_time += 1
+> #                # P_{\alpha}
+> #                phase += eps * times[i_time]
+> #                phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx,phi)
+> #                i_time += 1
+> #
+> #                # P_{\alpha}
+> #                phase += eps * times[i_time]
+> #                phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx_dag,phi)
+> #                i_time += 1
+> #
+> #                for alpha_ in reversed(range(alpha)):
+> #                    phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                    phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx_dag,phi)
+> #                    i_time += 1
+> #
+> #                amplitude = phi_start.conj().T@phi
+> #                amplitude *= np.exp(1j*phase)
+> #                result_values_core[ind_pub_core] = amplitude.real
+> #                ind_pub_core += 1
+> #
+> #            # dE1 (i_obs==1)
+> #            i_obs = 1
+> #            for ihd in range(nhd1):
+> #                for imc in range(nmc):
+> #                    # check my turn
+> #                    my_turn = ind_pub>=i_start and ind_pub<i_end
+> #                    ind_pub += 1
+> #                    if (not my_turn):
+> #                        continue
+> #                    # initialize
+> #                    times = np.random.normal(0.0, beta, size=2*(alpha+1))
+> #                    i_time = 0
+> #                    phase  = 0.0
+> #                    phi = copy.copy(phi_start)
+> #                    # 
+> #                    for alpha_ in range(alpha):
+> #                        phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                        phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx,phi)
+> #                        i_time += 1
+> #                    # apply pauli
+> #                    phi = sectored_pauli[0][alpha-1][ihd]@phi
+> #
+> #                    # P_{\alpha}
+> #                    phase += eps * times[i_time]
+> #                    phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx,phi)
+> #                    i_time += 1
+> #
+> #                    # P_{\alpha}
+> #                    phase += eps * times[i_time]
+> #                    phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx_dag,phi)
+> #                    i_time += 1
+> #
+> #                    for alpha_ in reversed(range(alpha)):
+> #                        phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                        phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx_dag,phi)
+> #                        i_time += 1
+> #
+> #                    amplitude = phi_start.conj().T@phi
+> #                    amplitude *= np.exp(1j*phase)
+> #                    result_values_core[ind_pub_core] = amplitude.real
+> #                    ind_pub_core += 1
+> #
+> #            # dE2 (i_obs==2)
+> #            i_obs = 2
+> #            for ihd in range(nhd2):
+> #                for imc in range(nmc):
+> #                    # check my turn
+> #                    my_turn = ind_pub>=i_start and ind_pub<i_end
+> #                    ind_pub += 1
+> #                    if (not my_turn):
+> #                        continue
+> #                    # initialize
+> #                    times = np.random.normal(0.0, beta, size=2*(alpha+1))
+> #                    i_time = 0
+> #                    phase  = 0.0
+> #                    phi = copy.copy(phi_start)
+> #                    # 
+> #                    for alpha_ in range(alpha):
+> #                        phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                        phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx,phi)
+> #                        i_time += 1
+> #                    # P_{\alpha}
+> #
+> #                    phase += eps * times[i_time]
+> #                    phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx,phi)
+> #                    i_time += 1
+> #
+> #                    # apply pauli
+> #                    phi = sectored_pauli[0][alpha][ihd]@phi
+> #
+> #                    # P_{\alpha}
+> #                    phase += eps * times[i_time]
+> #                    phi = Apply_TrotterEvolution(isec, alpha, times[i_time], 0.0, n_trotters[alpha], trotter_permutation_indx_dag,phi)
+> #                    i_time += 1
+> #
+> #                    for alpha_ in reversed(range(alpha)):
+> #                        phase += eigen_energies_qzmc[alpha_] * times[i_time]
+> #                        phi = Apply_TrotterEvolution(isec, alpha_, times[i_time], 0.0, n_trotters[alpha_], trotter_permutation_indx_dag,phi)
+> #                        i_time += 1
+> #
+> #                    amplitude = phi_start.conj().T@phi
+> #                    amplitude *= np.exp(1j*phase)
+> #                    result_values_core[ind_pub_core] = amplitude.real
+> #                    ind_pub_core += 1
+> #            for i in range(n_pubs_for_[core]):
+> #                computed_value = result_values_core[i]
+> #
+> #                # shot errors
+> #                p_up = (computed_value + 1.0)/2.0
+> #                sample = np.random.binomial(n_shot,p_up)
+> #                shot_error = 2*(sample/(n_shot) - p_up)
+> #                computed_value += shot_error
+> #
+> #                result_values_core[i] = computed_value
+> #            # bcast
+> #            #print(result_values_core)
+> #            comm.Barrier()
+> #            result_values = []
+> #            for i_core in range(cores):
+> #                if (n_pubs_for_[i_core]==0):
+> #                    continue
+> #                result_values_temp = comm.bcast(result_values_core,root=i_core)
+> #                result_values += result_values_temp
+> #                comm.Barrier()
+> #
+> #            # compute energy eigenvalues
+> #            i_meas = 0
+> #
+> #            # 0; norm
+> #            norm    = 0.0
+> #            i_obs   = 0
+> #            for imc in range(nmc):
+> #                norm   += result_values[i_meas]
+> #                i_meas += 1
+> #            # 1; dE1
+> #            dE1norm = 0.0
+> #            i_obs   = 1
+> #            for ihd in range(nhd1):
+> #                coeff = hamiltonian_diffs_reduced_list[alpha-1][ihd][1]
+> #                for imc in range(nmc):
+> #                    dE1norm += coeff *result_values[i_meas]
+> #                    i_meas += 1
+> #            # 2; dE2
+> #            dE2norm = 0.0
+> #            i_obs   = 2
+> #            for ihd in range(nhd2):
+> #                coeff = hamiltonian_diffs_reduced_list[alpha][ihd][1]
+> #                for imc in range(nmc):
+> #                    dE2norm += coeff *result_values[i_meas]
+> #                    i_meas += 1
+> #
+> #            norm = norm.real
+> #            dE1norm = dE1norm.real
+> #            dE2norm = dE2norm.real
+> #    
+> #            dE1norm /= norm
+> #            dE2norm /= norm
+> #            norm    /= nmc
+> #
+> #            eigen_energies_qzmc[alpha] = eigen_energies_qzmc[alpha-1] + dE1norm
+> #            norms_qzmc[alpha] = norm
+> #
+> #            if (alpha<n_hamiltonians-1):
+> #                eps = eigen_energies_qzmc[alpha] + dE2norm
+> #                eps = eps.real
+> #
+> #
+> #            #if (core==0):
+> #            #    st = '# {percent:.1f}%, elapsed time = {elapsed} secs'.format(percent=((alpha)/(n_hamiltonians-1)*100),elapsed=elapsed)
+> #            #    memory_usage(st)
+> #            #    print(alpha, norms_qzmc[alpha], eigen_energies_qzmc[alpha]-eigen_energies_exact[isec][alpha,0])
+> #            #    if (alpha<n_hamiltonians-1):
+> #            #        print('precision of the predictor for next', eps-eigen_energies_exact[isec][alpha+1,0])
+> #            #    st = '# {percent:.1f}%'.format(percent=((alpha)/(n_hamiltonians-1)*100))
+> #            #    print(st)
+> #        error += np.abs(eigen_energies_qzmc[-1] - eigen_energies_exact[0][-1,0])
+> #    error /= n_iter
+> #    error_for_trotter_list[indx_max_n_trotter] = error
+> #    max_n_trotter_run_list[indx_max_n_trotter] = 2*np.sum(n_trotters)
+> #    if (core==0):
+> #        print(2*np.sum(n_trotters), error)
+> #    indx_max_n_trotter += 1
+> #    end_time = datetime.now()
+> #    elapsed = end_time-start_time
+> #    elapsed = elapsed.total_seconds()
+> #    if (core==0):
+> #        st = '# elapsed time = {elapsed} secs'.format(elapsed=elapsed)
+> #        memory_usage(st)
+> #
+> #
+> #
+> ## %%
+> #if (core==0):
+> #    with open('dE_vs_n_trotter','w') as file_:
+> #        s = '# beta= '+str(beta)+', n_shot= '+str(n_shot)+', n_iter= '+str(n_iter)+', nmc= '+str(nmc)
+> #        s += '\n'
+> #        file_.write(s)
+> #        indx_n_trotter = 0
+> #        for max_n_trotter in max_n_trotter_list:
+> #            s = '{:}'.format(max_n_trotter_run_list[indx_n_trotter])
+> #            s += '  {:.16e}'.format(error_for_trotter_list[indx_n_trotter])
+> #            print(s)
+> #            s += '\n'
+> #            file_.write(s)
+> #            indx_n_trotter += 1
+> #

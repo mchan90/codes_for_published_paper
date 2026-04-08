@@ -1,0 +1,41 @@
+40c40
+< n_x     = 8
+---
+> n_x     = 4
+644c644
+< time_max_list = [22, 66, 200, 600, 1200, 1860, 3320, 9960, 29880]
+---
+> time_max_list = [20, 60, 180, 540, 1080, 1620, 4860, 14850]
+845c845,846
+< n_sample = int(15/eta**2*np.log(d))
+---
+> #n_sample = int(15/eta**2*np.log(d))
+> n_sample = 2048
+957c958
+< time_max = time_max_list[5]
+---
+> time_max = time_max_list[3]
+1070,1073c1071,1074
+< #
+< #
+< ## %%
+< ## prepare trotterization
+---
+> ##
+> ##
+> ### %%
+> ### prepare jrotterization
+1238c1239
+< time_max = time_max_list[5]
+---
+> time_max = time_max_list[3]
+1240,1243c1241,1244
+< n_sample = int(15/eta**2*np.log(d))
+< max_n_trotter_list = [2, 4, 6, 8]
+< max_n_trotter_list+= [10, 20, 30, 40, 50, 75, 100]
+< max_n_trotter_list+= [200, 300, 400, 500, 1000, 2000, 3000, 4000]
+---
+> #n_sample = int(15/eta**2*np.log(d))
+> n_sample = 2048
+> max_n_trotter_list= [12, 30, 48, 64, 80, 100, 130, 164, 248, 330, 412, 500, 580, 664, 748, 830] # qzmc values
+> max_n_trotter_list+= [2000, 3000, 4000, 5000]

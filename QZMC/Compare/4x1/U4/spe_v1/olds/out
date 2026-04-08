@@ -1,0 +1,1770 @@
+0 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'ZZIIIIII', 'IIIIIIZZ', 'IIIIZZII', 'IIZZIIII'],
+              coeffs=[-0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,
+ -0.5+0.j,  1. +0.j,  1. +0.j,  1. +0.j,  1. +0.j])
+1 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'ZZIIIIII', 'IIIIIIZZ', 'IIIIZZII', 'IIZZIIII'],
+              coeffs=[-0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.125+0.j, -0.125+0.j,
+ -0.125+0.j, -0.125+0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j,
+  1.   +0.j,  1.   +0.j,  1.   +0.j,  1.   +0.j])
+2 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'ZZIIIIII', 'IIIIIIZZ', 'IIIIZZII', 'IIZZIIII'],
+              coeffs=[-0.5 +0.j, -0.5 +0.j, -0.5 +0.j, -0.5 +0.j, -0.25+0.j, -0.25+0.j,
+ -0.25+0.j, -0.25+0.j, -0.5 +0.j, -0.5 +0.j, -0.5 +0.j, -0.5 +0.j,
+  1.  +0.j,  1.  +0.j,  1.  +0.j,  1.  +0.j])
+3 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'ZZIIIIII', 'IIIIIIZZ', 'IIIIZZII', 'IIZZIIII'],
+              coeffs=[-0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.375+0.j, -0.375+0.j,
+ -0.375+0.j, -0.375+0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j, -0.5  +0.j,
+  1.   +0.j,  1.   +0.j,  1.   +0.j,  1.   +0.j])
+4 SparsePauliOp(['IIIIIYZY', 'IIIIIXZX', 'IIIIYZYI', 'IIIIXZXI', 'IIIYZYII', 'IIIXZXII', 'IIYZYIII', 'IIXZXIII', 'IYZYIIII', 'IXZXIIII', 'YZYIIIII', 'XZXIIIII', 'ZZIIIIII', 'IIIIIIZZ', 'IIIIZZII', 'IIZZIIII'],
+              coeffs=[-0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,
+ -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j, -0.5+0.j,  1. +0.j,  1. +0.j,
+  1. +0.j,  1. +0.j])
+# dimension of subspace with (n_up,n_dn) = (2,2) = 36
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIIZIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-8. +0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,
+  1. +0.j,  1. +0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,  1. +0.j, -0.5+0.j,
+ -0.5+0.j,  1. +0.j,  1. +0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIYZYII', 'IIIXZXII', 'IIIIZIII', 'IIYZYIII', 'IIXZXIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-8.   +0.j,  1.   +0.j, -0.5  +0.j, -0.5  +0.j,  1.   +0.j, -0.5  +0.j,
+ -0.5  +0.j,  1.   +0.j, -0.125+0.j, -0.125+0.j,  1.   +0.j, -0.125+0.j,
+ -0.125+0.j,  1.   +0.j, -0.5  +0.j, -0.5  +0.j,  1.   +0.j, -0.5  +0.j,
+ -0.5  +0.j,  1.   +0.j,  1.   +0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIYZYII', 'IIIXZXII', 'IIIIZIII', 'IIYZYIII', 'IIXZXIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-8.  +0.j,  1.  +0.j, -0.5 +0.j, -0.5 +0.j,  1.  +0.j, -0.5 +0.j,
+ -0.5 +0.j,  1.  +0.j, -0.25+0.j, -0.25+0.j,  1.  +0.j, -0.25+0.j,
+ -0.25+0.j,  1.  +0.j, -0.5 +0.j, -0.5 +0.j,  1.  +0.j, -0.5 +0.j,
+ -0.5 +0.j,  1.  +0.j,  1.  +0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIYZYII', 'IIIXZXII', 'IIIIZIII', 'IIYZYIII', 'IIXZXIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-8.   +0.j,  1.   +0.j, -0.5  +0.j, -0.5  +0.j,  1.   +0.j, -0.5  +0.j,
+ -0.5  +0.j,  1.   +0.j, -0.375+0.j, -0.375+0.j,  1.   +0.j, -0.375+0.j,
+ -0.375+0.j,  1.   +0.j, -0.5  +0.j, -0.5  +0.j,  1.   +0.j, -0.5  +0.j,
+ -0.5  +0.j,  1.   +0.j,  1.   +0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIIZ', 'IIIIIYZY', 'IIIIIXZX', 'IIIIIIZI', 'IIIIYZYI', 'IIIIXZXI', 'IIIIIZII', 'IIIYZYII', 'IIIXZXII', 'IIIIZIII', 'IIYZYIII', 'IIXZXIII', 'IIIZIIII', 'IYZYIIII', 'IXZXIIII', 'IIZIIIII', 'YZYIIIII', 'XZXIIIII', 'IZIIIIII', 'ZIIIIIII'],
+              coeffs=[-8. +0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,
+  1. +0.j, -0.5+0.j, -0.5+0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,  1. +0.j,
+ -0.5+0.j, -0.5+0.j,  1. +0.j, -0.5+0.j, -0.5+0.j,  1. +0.j,  1. +0.j])
+SparsePauliOp(['IIIIIIII', 'IIIIIIZI', 'IIIIIIIZ', 'IIIIIIZZ', 'IIIIZIII', 'IIIIIZII', 'IIIIZZII', 'IIZIIIII', 'IIIZIIII', 'IIZZIIII', 'ZIIIIIII', 'IZIIIIII', 'ZZIIIIII'],
+              coeffs=[ 8.+0.j, -1.+0.j, -1.+0.j,  1.+0.j, -1.+0.j, -1.+0.j,  1.+0.j, -1.+0.j,
+ -1.+0.j,  1.+0.j, -1.+0.j, -1.+0.j,  1.+0.j])
+0.1319299500806228
+0.40000003954989516
+12 11.0 0.778319249094996
+24 21.0 0.39097503034192727
+36 31.0 0.2612881851679605
+48 41.0 0.19410376511351224
+60 51.0 0.1565364791793522
+72 61.0 0.12970473868837562
+84 69.0 0.11136992840475823
+96 79.0 0.09740231231690366
+108 89.0 0.08656709279860664
+120 99.0 0.07786558872490001
+132 109.0 0.07077401816488127
+144 119.0 0.06494993732786636
+156 127.0 0.05978462454543365
+168 137.0 0.05567603553414724
+180 147.0 0.05185314297980703
+192 157.0 0.048617743011819314
+204 165.0 0.04581178811774489
+216 175.0 0.04318811914025744
+228 185.0 0.040964990455871764
+240 195.0 0.03888944750978762
+252 203.0 0.03705209345655813
+264 213.0 0.03534299444981315
+276 223.0 0.03383514364496154
+288 231.0 0.032408562569299804
+300 241.0 0.031100335281507796
+312 251.0 0.029943849062489036
+324 261.0 0.02878794118661876
+336 269.0 0.027794473121092622
+348 279.0 0.026827151911835045
+360 289.0 0.02592599281540231
+372 297.0 0.025103053598559022
+384 307.0 0.024312102315254158
+396 317.0 0.023581092908417034
+408 325.0 0.022879574241953193
+420 335.0 0.022244219835094725
+432 345.0 0.02160652909440497
+444 353.0 0.021037024340873955
+456 363.0 0.02048514663007328
+468 373.0 0.019946088495066405
+480 381.0 0.01946680497418729
+492 391.0 0.018978207106306044
+504 401.0 0.01853247758731058
+516 409.0 0.018100591229910812
+528 419.0 0.017690394542048793
+540 427.0 0.017294129556549187
+552 437.0 0.01691952424163734
+564 447.0 0.01656367245145951
+576 455.0 0.016206891627242648
+588 465.0 0.01588967056838264
+600 475.0 0.015561548951750659
+612 483.0 0.015257799493137547
+624 493.0 0.01496895529332054
+636 501.0 0.014678864839714478
+648 510.99999999999994 0.014411838276329192
+660 521.0 0.014146631661632547
+672 529.0 0.013896268683749824
+684 539.0 0.01364748635366464
+696 547.0 0.01341775766847686
+708 557.0 0.013186400676922005
+720 567.0 0.012964892543827489
+732 575.0 0.012759021796961534
+744 585.0 0.01254444183435055
+756 595.0 0.012351789143409064
+768 603.0 0.012156604033405571
+780 613.0 0.011968726383646988
+792 621.0 0.01178901584043679
+804 631.0 0.011612629729613744
+816 639.0 0.011442500742466777
+828 649.0 0.011274634557191021
+840 659.0 0.011118642187442518
+852 667.0 0.010956359334887367
+864 677.0 0.010808482642247874
+876 685.0 0.010660561128527313
+888 695.0 0.01051319445535892
+900 705.0 0.010378010155664974
+912 713.0 0.010238045139815632
+924 723.0 0.01010689826557698
+936 731.0 0.00997670861356248
+948 741.0 0.009851736015871637
+960 749.0 0.009726857727259564
+972 759.0 0.00960784301046047
+984 769.0 0.00949200071519396
+996 777.0 0.00937373800689656
+1008 787.0 0.009266934038436148
+1020 795.0 0.009154332824399702
+1032 805.0 0.009048629128532326
+1044 813.0 0.008945854334415415
+1056 823.0 0.008842105834520275
+1068 833.0 0.008743944512882962
+1080 841.0 0.008645869809245532
+1092 851.0 0.008551892678304363
+1104 859.0 0.00845651715204454
+1116 869.0 0.008368232765048056
+1128 877.0000000000001 0.008277268801728077
+1140 887.0 0.008189585513772357
+1152 895.0 0.008106756025910045
+1164 905.0 0.008019731912123795
+1176 914.9999999999999 0.007940332403665984
+1188 923.0 0.007859114570607062
+1200 933.0 0.007780437874413515
+1212 941.0 0.007703478716059919
+1224 951.0 0.0076282508909546465
+1236 959.0 0.007554124047816302
+1248 969.0 0.007480536457721065
+1260 977.0 0.00741170673455116
+1272 987.0 0.007338993650224168
+1284 996.9999999999999 0.0072724810891919844
+1296 1004.9999999999999 0.00720504214492923
+1308 1015.0 0.007137663795931282
+1320 1023.0 0.00707475678376035
+1332 1033.0 0.007009741668712266
+1344 1041.0 0.006947943926951972
+1356 1051.0 0.006885992438244948
+1368 1059.0 0.00682665406894678
+1380 1069.0 0.006766092052409078
+1392 1077.0 0.006708577384001657
+1404 1087.0 0.006651854336898744
+1416 1095.0 0.006593604927584984
+1428 1105.0 0.006540609329243274
+1440 1113.0 0.006484371604279282
+1452 1123.0 0.0064312733337388295
+1464 1133.0 0.006378979285181607
+1476 1141.0 0.006326449071903717
+1488 1151.0 0.006275727532042197
+1500 1159.0 0.006225224982640221
+1512 1169.0 0.006176448054181272
+1524 1177.0 0.006126330973541982
+1536 1187.0 0.00608010012888105
+1548 1195.0 0.006031776750184292
+1560 1205.0 0.005985177312338941
+1572 1213.0 0.005940682785195328
+1584 1223.0 0.005893960924757913
+1596 1231.0 0.005850800296125946
+1608 1241.0 0.0058065654736383365
+1620 1249.0 0.005763658202651456
+1632 1259.0 0.00572097522374726
+1644 1267.0 0.0056796496272824015
+1656 1277.0 0.005638253373679625
+1668 1285.0 0.0055971398793079885
+1680 1295.0 0.005558558635987865
+1692 1303.0 0.005517460281098785
+1704 1313.0 0.005479809397220592
+1716 1321.0 0.0054413317408146256
+1728 1331.0 0.005402960378133592
+1740 1341.0 0.005366593382071905
+1752 1349.0 0.005329298677380301
+1764 1359.0 0.005293427662699024
+1776 1367.0 0.005257291100384975
+1788 1377.0 0.005222853333567201
+1800 1385.0 0.0051871249025667865
+1812 1395.0 0.005153405299761715
+1824 1403.0 0.005119824715112742
+1836 1413.0 0.005085305071883539
+1848 1421.0 0.00505369140650469
+1860 1431.0 0.005020120809058781
+1872 1439.0 0.004988291886752982
+1884 1449.0 0.004956648315762813
+1896 1457.0 0.004925132095632279
+1908 1467.0 0.00489414204250771
+1920 1475.0 0.004863501298864037
+1932 1485.0 0.004833726025833762
+1944 1493.0 0.004802883839341021
+1956 1503.0 0.004774547339803092
+1968 1511.0 0.004744630789830673
+1980 1521.0 0.004715821979521806
+1992 1529.0 0.004688059100213415
+2004 1539.0 0.0046590493697493685
+2016 1547.0 0.004631917644434935
+2028 1557.0 0.004604162848227844
+2040 1565.0 0.004577240368850433
+2052 1575.0 0.004550075527084196
+2064 1583.0 0.004524064907485581
+2076 1593.0 0.004497636337376321
+2088 1601.0 0.004471439974439662
+2100 1611.0 0.0044467800169201155
+2112 1619.0 0.004420408047193902
+2124 1629.0 0.004396196076468684
+2136 1637.0 0.004371334302748053
+2148 1647.0 0.00434663448974959
+2160 1655.0 0.004322883050496884
+2172 1665.0 0.0042987890221244385
+2184 1673.0000000000002 0.004275348884972274
+2196 1681.0000000000002 0.00425168369036566
+2208 1691.0 0.004229250356774017
+2220 1699.0 0.004205667859952911
+2232 1709.0 0.0041835544902601995
+2244 1717.0 0.004161354801251349
+2256 1727.0 0.004138576097056479
+2268 1735.0 0.004117555999581413
+2280 1745.0 0.004095308857348989
+2292 1753.0 0.004074124316351124
+2304 1763.0 0.0040529060615348556
+2316 1771.0 0.00403198536941396
+2328 1780.9999999999998 0.0040110591516606675
+2340 1788.9999999999998 0.00399054765491158
+2352 1798.9999999999998 0.003970501729904541
+2364 1806.9999999999998 0.003949631757848238
+2376 1817.0 0.003930512626757476
+2388 1825.0 0.003910193313692467
+2400 1834.9999999999998 0.00389066024564233
+1.4512294508868508  7.7831924909499595e-01
+2.7705289516930787  3.9097503034192727e-01
+4.089828452499307  2.6128818516796048e-01
+5.409127953305535  1.9410376511351224e-01
+6.728427454111763  1.5653647917935221e-01
+8.04772695491799  1.2970473868837562e-01
+9.103166555562973  1.1136992840475823e-01
+10.4224660563692  9.7402312316903661e-02
+11.74176555717543  8.6567092798606637e-02
+13.061065057981658  7.7865588724900014e-02
+14.380364558787885  7.0774018164881269e-02
+15.699664059594113  6.4949937327866358e-02
+16.755103660239097  5.9784624545433651e-02
+18.074403161045325  5.5676035534147239e-02
+19.393702661851552  5.1853142979807032e-02
+20.71300216265778  4.8617743011819314e-02
+21.768441763302764  4.5811788117744889e-02
+23.087741264108992  4.3188119140257442e-02
+24.40704076491522  4.0964990455871764e-02
+25.726340265721447  3.8889447509787622e-02
+26.781779866366428  3.7052093456558133e-02
+28.10107936717266  3.5342994449813148e-02
+29.420378867978886  3.3835143644961541e-02
+30.475818468623867  3.2408562569299804e-02
+31.795117969430095  3.1100335281507796e-02
+33.114417470236326  2.9943849062489036e-02
+34.43371697104255  2.8787941186618760e-02
+35.48915657168754  2.7794473121092622e-02
+36.80845607249376  2.6827151911835045e-02
+38.12775557329999  2.5925992815402310e-02
+39.18319517394497  2.5103053598559022e-02
+40.5024946747512  2.4312102315254158e-02
+41.82179417555743  2.3581092908417034e-02
+42.87723377620241  2.2879574241953193e-02
+44.19653327700864  2.2244219835094725e-02
+45.515832777814865  2.1606529094404969e-02
+46.57127237845985  2.1037024340873955e-02
+47.890571879266076  2.0485146630073281e-02
+49.20987138007231  1.9946088495066405e-02
+50.26531098071729  1.9466804974187291e-02
+51.58461048152352  1.8978207106306044e-02
+52.90390998232974  1.8532477587310581e-02
+53.959349582974724  1.8100591229910812e-02
+55.278649083780955  1.7690394542048793e-02
+56.334088684425936  1.7294129556549187e-02
+57.65338818523217  1.6919524241637340e-02
+58.97268768603839  1.6563672451459510e-02
+60.02812728668338  1.6206891627242648e-02
+61.3474267874896  1.5889670568382641e-02
+62.666726288295834  1.5561548951750659e-02
+63.722165888940815  1.5257799493137547e-02
+65.04146538974705  1.4968955293320541e-02
+66.09690499039202  1.4678864839714478e-02
+67.41620449119824  1.4411838276329192e-02
+68.73550399200448  1.4146631661632547e-02
+69.79094359264947  1.3896268683749824e-02
+71.1102430934557  1.3647486353664640e-02
+72.16568269410067  1.3417757668476860e-02
+73.4849821949069  1.3186400676922005e-02
+74.80428169571313  1.2964892543827489e-02
+75.85972129635812  1.2759021796961534e-02
+77.17902079716434  1.2544441834350550e-02
+78.49832029797057  1.2351789143409064e-02
+79.55375989861555  1.2156604033405571e-02
+80.87305939942178  1.1968726383646988e-02
+81.92849900006676  1.1789015840436790e-02
+83.24779850087299  1.1612629729613744e-02
+84.30323810151798  1.1442500742466777e-02
+85.6225376023242  1.1274634557191021e-02
+86.94183710313042  1.1118642187442518e-02
+87.99727670377541  1.0956359334887367e-02
+89.31657620458164  1.0808482642247874e-02
+90.37201580522662  1.0660561128527313e-02
+91.69131530603285  1.0513194455358921e-02
+93.01061480683907  1.0378010155664974e-02
+94.06605440748406  1.0238045139815632e-02
+95.38535390829028  1.0106898265576980e-02
+96.44079350893527  9.9767086135624794e-03
+97.7600930097415  9.8517360158716372e-03
+98.81553261038648  9.7268577272595635e-03
+100.13483211119271  9.6078430104604706e-03
+101.45413161199893  9.4920007151939600e-03
+102.50957121264392  9.3737380068965592e-03
+103.82887071345014  9.2669340384361476e-03
+104.88431031409513  9.1543328243997024e-03
+106.20360981490136  9.0486291285323261e-03
+107.25904941554634  8.9458543344154151e-03
+108.57834891635257  8.8421058345202752e-03
+109.89764841715879  8.7439445128829618e-03
+110.95308801780378  8.6458698092455322e-03
+112.27238751861  8.5518926783043625e-03
+113.32782711925499  8.4565171520445404e-03
+114.64712662006121  8.3682327650480559e-03
+115.70256622070622  8.2772688017280771e-03
+117.02186572151243  8.1895855137723572e-03
+118.07730532215741  8.1067560259100446e-03
+119.39660482296364  8.0197319121237953e-03
+120.71590432376985  7.9403324036659839e-03
+121.77134392441485  7.8591145706070620e-03
+123.09064342522107  7.7804378744135150e-03
+124.14608302586606  7.7034787160599194e-03
+125.46538252667229  7.6282508909546465e-03
+126.52082212731727  7.5541240478163019e-03
+127.8401216281235  7.4805364577210653e-03
+128.89556122876849  7.4117067345511600e-03
+130.2148607295747  7.3389936502241682e-03
+131.53416023038093  7.2724810891919844e-03
+132.5895998310259  7.2050421449292301e-03
+133.90889933183215  7.1376637959312816e-03
+134.96433893247712  7.0747567837603498e-03
+136.28363843328336  7.0097416687122660e-03
+137.33907803392833  6.9479439269519716e-03
+138.65837753473457  6.8859924382449478e-03
+139.71381713537954  6.8266540689467803e-03
+141.03311663618578  6.7660920524090784e-03
+142.08855623683075  6.7085773840016572e-03
+143.407855737637  6.6518543368987437e-03
+144.46329533828197  6.5936049275849840e-03
+145.7825948390882  6.5406093292432743e-03
+146.83803443973318  6.4843716042792821e-03
+148.15733394053942  6.4312733337388295e-03
+149.47663344134563  6.3789792851816074e-03
+150.53207304199063  6.3264490719037170e-03
+151.85137254279684  6.2757275320421968e-03
+152.90681214344184  6.2252249826402206e-03
+154.22611164424805  6.1764480541812716e-03
+155.28155124489305  6.1263309735419824e-03
+156.60085074569926  6.0801001288810497e-03
+157.65629034634426  6.0317767501842923e-03
+158.97558984715047  5.9851773123389407e-03
+160.03102944779548  5.9406827851953281e-03
+161.35032894860169  5.8939609247579128e-03
+162.40576854924666  5.8508002961259464e-03
+163.7250680500529  5.8065654736383365e-03
+164.78050765069787  5.7636582026514560e-03
+166.0998071515041  5.7209752237472600e-03
+167.15524675214908  5.6796496272824015e-03
+168.47454625295532  5.6382533736796248e-03
+169.5299858536003  5.5971398793079885e-03
+170.84928535440653  5.5585586359878647e-03
+171.9047249550515  5.5174602810987849e-03
+173.22402445585774  5.4798093972205919e-03
+174.27946405650272  5.4413317408146256e-03
+175.59876355730896  5.4029603781335922e-03
+176.9180630581152  5.3665933820719047e-03
+177.97350265876017  5.3292986773803008e-03
+179.29280215956638  5.2934276626990240e-03
+180.34824176021138  5.2572911003849754e-03
+181.6675412610176  5.2228533335672012e-03
+182.7229808616626  5.1871249025667865e-03
+184.0422803624688  5.1534052997617152e-03
+185.0977199631138  5.1198247151127418e-03
+186.41701946392  5.0853050718835391e-03
+187.47245906456502  5.0536914065046901e-03
+188.79175856537123  5.0201208090587812e-03
+189.84719816601623  4.9882918867529824e-03
+191.16649766682244  4.9566483157628127e-03
+192.22193726746744  4.9251320956322786e-03
+193.54123676827365  4.8941420425077098e-03
+194.59667636891862  4.8635012988640369e-03
+195.91597586972486  4.8337260258337622e-03
+196.97141547036983  4.8028838393410211e-03
+198.29071497117607  4.7745473398030924e-03
+199.34615457182105  4.7446307898306728e-03
+200.66545407262728  4.7158219795218059e-03
+201.72089367327226  4.6880591002134153e-03
+203.0401931740785  4.6590493697493685e-03
+204.09563277472347  4.6319176444349353e-03
+205.4149322755297  4.6041628482278441e-03
+206.47037187617468  4.5772403688504326e-03
+207.78967137698092  4.5500755270841964e-03
+208.8451109776259  4.5240649074855810e-03
+210.16441047843213  4.4976363373763206e-03
+211.2198500790771  4.4714399744396616e-03
+212.53914957988334  4.4467800169201155e-03
+213.59458918052832  4.4204080471939022e-03
+214.91388868133456  4.3961960764686836e-03
+215.96932828197953  4.3713343027480533e-03
+217.28862778278577  4.3466344897495901e-03
+218.34406738343074  4.3228830504968840e-03
+219.66336688423698  4.2987890221244385e-03
+220.71880648488198  4.2753488849722743e-03
+221.77424608552695  4.2516836903656596e-03
+223.09354558633316  4.2292503567740170e-03
+224.14898518697814  4.2056678599529107e-03
+225.46828468778438  4.1835544902601995e-03
+226.52372428842935  4.1613548012513490e-03
+227.8430237892356  4.1385760970564789e-03
+228.89846338988056  4.1175559995814126e-03
+230.2177628906868  4.0953088573489893e-03
+231.27320249133177  4.0741243163511243e-03
+232.592501992138  4.0529060615348556e-03
+233.64794159278298  4.0319853694139596e-03
+234.9672410935892  4.0110591516606675e-03
+236.02268069423417  3.9905476549115804e-03
+237.3419801950404  3.9705017299045409e-03
+238.39741979568538  3.9496317578482376e-03
+239.71671929649165  3.9305126267574764e-03
+240.77215889713662  3.9101933136924671e-03
+242.0914583979428  3.8906602456423300e-03
+10 1.3360975573604963
+20 1.2000055514246373
+40 1.1700675109533099
+60 1.1351197984580954
+80 0.7435496103459457
+100 0.8559131588003293
+200 0.3183123108448284
+400 0.32172479475109095
+600 0.0056627551519244255
+800 0.005580477040513839
+1000 0.005606471289186565
+2000 0.005723032387523001
+3000 0.005740536311351215
+4000 0.005494527415533342
+5000 0.005540302197141026
+10  1.3360975573604963e+00
+20  1.2000055514246373e+00
+40  1.1700675109533099e+00
+60  1.1351197984580954e+00
+80  7.4354961034594569e-01
+100  8.5591315880032925e-01
+200  3.1831231084482842e-01
+400  3.2172479475109095e-01
+600  5.6627551519244255e-03
+800  5.5804770405138392e-03
+1000  5.6064712891865653e-03
+2000  5.7230323875230010e-03
+3000  5.7405363113512149e-03
+4000  5.4945274155333420e-03
+5000  5.5403021971410261e-03
+2 2 0.5623594676339603
+[# elapsed time = 11.101262 secs] memory usage:    0.25549 GiB
+4 4 0.3658908355836374
+[# elapsed time = 6.372872 secs] memory usage:    0.25549 GiB
+6 6 0.21064315582195842
+[# elapsed time = 7.290272 secs] memory usage:    0.25549 GiB
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+    continue
+    continue
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+    continue
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+8 8 0.14091777865848432
+[# elapsed time = 8.054989 secs] memory usage:    0.25549 GiB
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+^^^^^^^^^^^^^
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+Traceback (most recent call last):
+  File "/home/mchan/compare-run/4x1/U4/spe_v1/spe.py", line 1380, in <module>
+    continue
+^^^^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'list'
+srun: error: grammar104: tasks 64-127: Exited with exit code 1
+srun: error: grammar103: tasks 0-63: Exited with exit code 1
+srun: error: grammar105: tasks 128-191: Exited with exit code 1
+srun: error: grammar106: tasks 192-255: Exited with exit code 1

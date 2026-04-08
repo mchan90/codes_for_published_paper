@@ -1,0 +1,1129 @@
+61c61
+< Uc           = 10.0
+---
+> Uc           = 4.0
+634c634
+< d_list = [21, 41, 81, 201, 401, 801, 1601, 4001, 8001, 16001, 32001]
+---
+> d_list = [11, 21, 41, 81, 201, 401, 801, 1601, 4001, 8001, 16001]
+861,871c861,1020
+< #d = 4001
+< #delta = 4/d
+< #n_samples = [10, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000, 2000, 3000, 4000, 5000]
+< #error_for_n_samples = np.zeros((len(n_samples)),dtype=float)
+< #n_shot = 2048
+< #n_iter = 30
+< ## n_samples~d is enough to get a converged values?
+< #
+< #
+< ## %%
+< ## parameters are from LinLin2022
+---
+> d = 4001
+> delta = 4/d
+> n_samples = [10, 20, 40, 60, 80, 100, 200, 400, 600, 800, 1000, 2000, 3000, 4000, 5000]
+> error_for_n_samples = np.zeros((len(n_samples)),dtype=float)
+> n_shot = 2048
+> n_iter = 30
+> # n_samples~d is enough to get a converged values?
+> 
+> 
+> # %%
+> # parameters are from LinLin2022
+> 
+> indx_n_sample = 0
+> 
+> t_max = tau_scale*d
+> 
+> # compute step function expansion coeffs
+> C = F_fourier_coeffs(d,delta)
+> Coeffs = C[:d+1] # only positive coefficients are needed, because negative ones are just - of that, and 0th value is 0.5
+> 
+> # prepare importance sampling
+> Coeffs_sum = 0.0
+> for j in range(1,d+1):
+>     Coeffs_sum += np.abs(Coeffs[j])
+> #print(Coeffs_sum)
+> Coeffs_prob = np.abs(Coeffs)/Coeffs_sum
+> Coeffs_prob[0] = 0.0
+> #print(Coeffs_prob[1::2])
+> #print(np.sum(Coeffs_prob))
+> ks = [j for j in range(d+1)]
+> 
+> # compute amplitudes first
+> amplitudes = np.zeros((d+1),dtype=complex)
+> # only odd parts contributes
+> n_alive = 0
+> k_alive = []
+> for k in range(1,d+1):
+>     if (Coeffs_prob[k]<1e-10):
+>         continue
+>     k_alive.append(k)
+>     n_alive += 1
+> #if (core==0):
+> #    print(n_alive)
+> for ii in range(core,n_alive,cores):
+>     k = k_alive[ii]
+>     isec = 0
+>     alpha = n_hamiltonians-1
+>     time = tau_scale * k
+>     phi = copy.copy(phi_start)
+>     phi = Apply_ExactEvolution(isec,alpha,0.0,time,phi)
+>     amplitudes[k] = phi_start.conj()@phi
+> # collect and bcast
+> for ii in range(n_alive):
+>     i_core = ii%cores
+>     k = k_alive[ii]
+>     amplitude = comm.bcast(amplitudes[k],root=i_core)
+>     amplitudes[k] = amplitude
+>     comm.Barrier()
+> 
+> 
+> for n_sample in n_samples:
+> 
+>     error_avg = 0.0
+>     for i_iter in range(n_iter):
+>         # find ground state energy estimation through binary search
+> 
+>         samples = np.random.choice(ks, size=n_sample, p=Coeffs_prob)
+>     
+>         amplitudes_sample = np.zeros((n_sample),dtype=complex)
+>         for i_sample in range(n_sample):
+>             k = samples[i_sample]
+>             # real part
+>             computed_value = amplitudes[k].real
+> 
+>             # # shot errors
+>             p_up = (computed_value + 1.0)/2.0
+>             sample_shot = np.random.binomial(n_shot,p_up)
+>             shot_error = 2*(sample_shot/(n_shot) - p_up)
+>             computed_value += shot_error
+> 
+>             amp_sample_real = computed_value
+>             
+> 
+>             # imag part
+>             computed_value = amplitudes[k].imag
+> 
+>             # # shot errors
+>             p_up = (computed_value + 1.0)/2.0
+>             sample_shot = np.random.binomial(n_shot,p_up)
+>             shot_error = 2*(sample_shot/(n_shot) - p_up)
+>             computed_value += shot_error
+> 
+>             amp_sample_imag = computed_value
+> 
+>             amplitudes_sample[i_sample] = amp_sample_real + 1j * amp_sample_imag
+>     
+>         # energy estimation
+>         if (sol_method==1):
+>             x_min = -np.pi/3.0
+>             x_max = np.pi/3.0
+> 
+>             cdf_1 = lambda x: CDF_from_evolution_importance2(amplitudes_sample,Coeffs_sum,samples,x) - (eta/4.0)
+> 
+>             result = find_all_roots(cdf_1, x_min, x_max) 
+>             if (len(result)<1):
+>                 x_min_opt = x_min # no root
+>             else:
+>                 x_min_opt = result[0]
+> 
+>             eigen_energy_estimate = x_min_opt
+>         elif (sol_method==2):
+>             # search step and find maximum in the region
+>             x_min = -np.pi/3.0
+>             x_max = np.pi/3.0
+> 
+>             cdf_1 = lambda x: CDF_from_evolution_importance2(amplitudes_sample,Coeffs_sum,samples,x) - (eta/4.0)
+>             cdf_2 = lambda x: CDF_from_evolution_importance2(amplitudes_sample,Coeffs_sum,samples,x) - (3*eta/4.0)
+>             negative_cdf_deriv = lambda x : -CDF_deriv_from_evolution_importance2(amplitudes_sample,Coeffs_sum,samples,x)
+> 
+>             #result = root_scalar(cdf,method='bisect',bracket=[x_min,x_max])
+>             result = find_all_roots(cdf_1, x_min, x_max) 
+>             if (len(result)<1):
+>                 x_min_opt = x_min # no root
+>             else:
+>                 x_min_opt = result[0]
+>             result = find_all_roots(cdf_2, x_min_opt, x_max) 
+>             if (len(result)<1):
+>                 x_max_opt = x_max # no root
+>             else:
+>                 x_max_opt = result[0]
+> 
+>             result = minimize_scalar(negative_cdf_deriv, bounds=(x_min_opt,x_max_opt), method='bounded')
+> 
+>             eigen_energy_estimate = result.x
+>         error = np.abs(eigen_energy_estimate/tau_scale-eigen_energies_exact[0][-1,0])
+> 
+>         error_avg += error
+>     error_avg /= n_iter
+>     if (core==0):
+>         print(n_sample,error_avg)
+>     error_for_n_samples[indx_n_sample] = error_avg
+>     indx_n_sample += 1
+> 
+> 
+> 
+> # %%
+> # save to file
+> if (core==0):
+>     with open('dE_vs_repetitions_with_exact','w') as file_:
+>         s = '# eps= '+str(delta/tau_scale)+', n_shot= '+str(n_shot)+', n_iter='+str(n_iter)
+>         s += '\n'
+>         file_.write(s)
+>         indx_n_sample = 0
+>         for n_sample in n_samples:
+>             s = '{:}'.format(n_sample)
+>             s += '  {:.16e}'.format(error_for_n_samples[indx_n_sample])
+>             print(s)
+>             s += '\n'
+>             file_.write(s)
+>             indx_n_sample += 1
+873d1021
+< #indx_n_sample = 0
+874a1023,1362
+> # prepare trotterization
+> del eigen_vectors_exact
+> gc.collect()
+> # exact eigenvalues for interaction parts
+> eigen_energies_coulomb  = []
+> H_subs_coulomb = []
+> for isec in range(nsec):
+>     eigen_energies_coulomb.append(np.zeros((dim_reduced),dtype=float))
+>     H_subs_coulomb.append([])
+> 
+> for isec in range(nsec):
+>     eigen_e               = np.zeros((dim_reduced),dtype=float)
+>     start_time = datetime.now()
+>     # project hamiltonian on to specified sector
+>     H_sparse = hamiltonian_coulomb.to_matrix(sparse=True)
+>     H_sparse.eliminate_zeros()
+>     jsec = isec
+>     row      = []
+>     col      = []
+>     data     = []
+>     for ii in range(dim_sub[isec]):
+>         i = indx_sub[isec][ii]
+>         for ind in range(H_sparse.indptr[i],H_sparse.indptr[i+1]):
+>             # j is always in indx_sub[isec], because the Hamiltonian does not mix it
+>             #print(i,j)
+>             j = H_sparse.indices[ind]
+>             jj = iindx_sub[jsec][j]
+>             row.append(jj)
+>             col.append(ii)
+>             #print(ii,jj)
+>             data.append(H_sparse.data[ind])
+>     H_sub = sparse.csc_matrix((data, (row, col)), shape=(dim_sub[jsec], dim_sub[isec]))
+> 
+>     H_sub_reduced = basis_transform@(H_sub.toarray())@basis_transform.conj().T
+> 
+>     H_subs_coulomb[isec].append(H_sub_reduced)
+> 
+>     eigen_e = H_sub_reduced.diagonal() # coulomb interaction matrix is diagonal in occupation number basis
+> 
+>     eigen_energies_coulomb[isec][:]   = eigen_e.real
+>     end_time = datetime.now()
+>     elapsed = end_time-start_time
+>     elapsed = elapsed.total_seconds()
+>     gc.collect()
+>     if (core==0):
+>         st = '# Coulomb, elapsed time = {elapsed} secs'.format(elapsed=elapsed)
+>         memory_usage(st)
+> 
+> 
+> # %%
+> # exact eigenvalues for kinetic parts
+> eigen_energies_kinetic   = []
+> eigen_vectors_kinetic = []
+> H_subs_kinetic = []
+> for isec in range(nsec):
+>     eigen_energies_kinetic.append(np.zeros((n_hamiltonians,dim_reduced),dtype=float))
+>     eigen_vectors_kinetic.append(np.zeros((n_hamiltonians,dim_reduced,dim_reduced),dtype=complex))
+>     H_subs_kinetic.append([])
+> 
+> for isec in range(nsec):
+>     eigen_e               = np.zeros((dim_reduced),dtype=float)
+>     eigen_v               = np.zeros((dim_reduced,dim_reduced),dtype=complex)
+>     for alpha in range(n_hamiltonians):
+>         start_time = datetime.now()
+>         # project hamiltonian on to specified sector
+>         H_sparse = hamiltonians_kinetic[alpha].to_matrix(sparse=True)
+>         H_sparse.eliminate_zeros()
+>         jsec = isec
+>         row      = []
+>         col      = []
+>         data     = []
+>         for ii in range(dim_sub[isec]):
+>             i = indx_sub[isec][ii]
+>             for ind in range(H_sparse.indptr[i],H_sparse.indptr[i+1]):
+>                 # j is always in indx_sub[isec], because the Hamiltonian does not mix it
+>                 #print(i,j)
+>                 j = H_sparse.indices[ind]
+>                 jj = iindx_sub[jsec][j]
+>                 row.append(jj)
+>                 col.append(ii)
+>                 #print(ii,jj)
+>                 data.append(H_sparse.data[ind])
+>         H_sub = sparse.csc_matrix((data, (row, col)), shape=(dim_sub[jsec], dim_sub[isec]))
+> 
+>         H_sub_reduced = basis_transform@(H_sub.toarray())@basis_transform.conj().T
+> 
+>         H_subs_kinetic[isec].append(H_sub_reduced)
+> 
+>         # diagonalize sectorized hamiltonian
+>         i_core = alpha%cores
+>         if (core==i_core):
+>             eigen_e, eigen_v = np.linalg.eigh(H_sub_reduced)
+>             eigen_energies_kinetic[isec][alpha,:]   = eigen_e
+>             eigen_vectors_kinetic[isec][alpha,:,:] = eigen_v
+>     del eigen_e, eigen_v
+>     gc.collect()
+> comm.Barrier()
+> bcast_start_time = datetime.now()
+> for isec in range(nsec):
+>     for alpha in range(n_hamiltonians):
+>         i_core = alpha%cores
+>         comm.Bcast([eigen_energies_kinetic[isec][alpha,:] ,MPI.DOUBLE],root=i_core)
+>         comm.Bcast([eigen_vectors_kinetic[isec][alpha,:,:],MPI.DOUBLE_COMPLEX],root=i_core)
+> end_time = datetime.now()
+> elapsed = end_time-start_time
+> elapsed = elapsed.total_seconds()
+> if (core==0):
+>     st = '# {percent}%, elapsed time = {elapsed} secs'.format(percent=(100),elapsed=elapsed)
+>     memory_usage(st)
+>     st = 'Bcast time = {elapsed} secs'.format(elapsed=(end_time-bcast_start_time).total_seconds())
+>     print(st)
+> 
+> 
+> def Apply_ExactEvolution_coulomb(isec, eps, time, v):
+>     vec = np.exp(-1j*time*(eigen_energies_coulomb[isec][:]-eps))
+>     w = vec * v
+>     return w
+> 
+> 
+> # %%
+> 
+> def Apply_ExactEvolution_kinetic(isec, alpha, eps, time, v):
+>     w = v.conj()@eigen_vectors_kinetic[isec][alpha,:,:]
+>     vec = np.exp(-1j*time*(eigen_energies_kinetic[isec][alpha,:]-eps))
+>     w = vec*w.conj()
+>     w = eigen_vectors_kinetic[isec][alpha,:,:]@w
+>     return w
+> 
+> 
+> def Apply_TrotterEvolution(isec, alpha, time, eps, n_trotter, indx, v):
+>     dt = time/n_trotter
+>     if (indx==0): 
+>         # first order trotter
+>         w = v
+>         for i_trotter in range(n_trotter):
+>             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+>             w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+>     elif (indx==1):
+>         w = v
+>         for i_trotter in range(n_trotter):
+>             w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+>             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+>     return w*np.exp(1j*eps*time)
+> 
+> def Apply_TrotterEvolution2(isec, alpha, time, eps, n_trotter, indx, v):
+>     dt = time/n_trotter
+>     vec = np.exp(-1j*dt*(eigen_energies_kinetic[isec][alpha,:]-eps))
+>     M = eigen_vectors_kinetic[isec][alpha,:,:]@np.diag(vec)@eigen_vectors_kinetic[isec][alpha,:,:].conj().T
+>     if (indx==0): 
+>         # first order trotter
+>         w = v
+>         for i_trotter in range(n_trotter):
+>             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+>             w = M@w
+>             #w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+>     elif (indx==1):
+>         w = v
+>         for i_trotter in range(n_trotter):
+>             w = M@w
+>             #w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+>             w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+>     return w*np.exp(1j*eps*time)
+> 
+> ## fix eps
+> d = 4001
+> delta = 4/d
+> eps = delta/tau_scale
+> n_sample = 2000 # after the convergence
+> max_n_trotter_list = [2, 4, 6, 8]
+> max_n_trotter_list+= [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+> max_n_trotter_list+= [200,300,400,500,600,700,800,900,1000]
+> max_n_trotter_list+= [2000,3000,4000,5000]
+> #max_n_trotter_list= np.arange(2000,5000,100)
+> error_for_trotter_list = np.zeros((len(max_n_trotter_list)),dtype=float)
+> max_n_trotter_run_list = np.zeros((len(max_n_trotter_list)),dtype=float)
+> n_shot = 2048
+> n_iter = 30
+> 
+> d = round(4/delta)
+> t_max = tau_scale*d
+> 
+> # compute step function expansion coeffs
+> C = F_fourier_coeffs(d,delta)
+> Coeffs = C[:d+1] # only positive coefficients are needed, because negative ones are just - of that, and 0th value is 0.5
+> 
+> # prepare importance sampling
+> Coeffs_sum = 0.0
+> for j in range(1,d+1):
+>     Coeffs_sum += np.abs(Coeffs[j])
+> #print(Coeffs_sum)
+> Coeffs_prob = np.abs(Coeffs)/Coeffs_sum
+> Coeffs_prob[0] = 0.0
+> ks = [j for j in range(d+1)]
+> if (core==0):
+>     for j in range(d+1):
+>         print(j, Coeffs_prob[j])
+> 
+> 
+> # without sampling error
+> indx_trotter = 0
+> for max_n_trotter in max_n_trotter_list:
+>     max_n_trotter_run = max_n_trotter
+>     # compute amplitudes first
+>     amplitudes = np.zeros((d+1),dtype=complex)
+>     n_trotters = np.zeros((d+1),dtype=int)
+>     # only odd parts contributes
+>     n_alive = 0
+>     k_alive = []
+>     for k in range(1,d+1):
+>         if (Coeffs_prob[k]<1e-10):
+>             continue
+>         k_alive.append(k)
+>         n_alive += 1
+>     #if (core==0):
+>     #    print(n_alive)
+>     for ii in range(core,n_alive,cores):
+>         k = k_alive[ii]
+>         isec = 0
+>         alpha = n_hamiltonians-1
+>         time = tau_scale * k
+>         n_trotter = max_n_trotter
+>         n_trotters[k] = n_trotter
+>         phi = copy.copy(phi_start)
+>         phi = Apply_TrotterEvolution(isec, alpha, time, 0.0, n_trotter, indx, phi)
+>         amplitudes[k] = phi_start.conj()@phi
+>     # collect and bcast
+>     for ii in range(n_alive):
+>         i_core = ii%cores
+>         k = k_alive[ii]
+>         amplitude = comm.bcast(amplitudes[k],root=i_core)
+>         amplitudes[k] = amplitude
+>         comm.Barrier()
+> 
+> 
+>     error_avg = 0.0
+>     max_evolution_time = 0.0
+>     # find ground state energy estimation through binary search
+> 
+>     # cost estimation
+>     #total_evolution_time = np.sum(samples) * tau_scale
+>     max_evolution_time = max(d * tau_scale,max_evolution_time)
+>     #print(max_evolution_time,t_max)
+> 
+>     # energy estimation
+>     if (sol_method==1):
+>         x_min = -np.pi/3.0
+>         x_max = np.pi/3.0
+> 
+>         cdf_1 = lambda x: CDF_from_evolution(amplitudes,Coeffs,x) - (eta/4.0)
+> 
+>         result = find_all_roots(cdf_1, x_min, x_max) 
+>         if (len(result)<1):
+>             x_min_opt = x_min # no root
+>         else:
+>             x_min_opt = result[0]
+> 
+>         eigen_energy_estimate = x_min_opt
+>     elif (sol_method==2):
+>         # search step and find maximum in the region
+>         x_min = -np.pi/3.0
+>         x_max = np.pi/3.0
+> 
+>         cdf_1 = lambda x: CDF_from_evolution(amplitudes,Coeffs,x) - (eta/4.0)
+>         cdf_2 = lambda x: CDF_from_evolution(amplitudes,Coeffs,x) - (3*eta/4.0)
+>         negative_cdf_deriv = lambda x : -CDF_deriv_from_evolution(amplitudes,Coeffs,x)
+> 
+>         #result = root_scalar(cdf,method='bisect',bracket=[x_min,x_max])
+>         result = find_all_roots(cdf_1, x_min, x_max) 
+>         if (len(result)<1):
+>             x_min_opt = x_min # no root
+>         else:
+>             x_min_opt = result[0]
+>         result = find_all_roots(cdf_2, x_min_opt, x_max) 
+>         if (len(result)<1):
+>             x_max_opt = x_max # no root
+>         else:
+>             x_max_opt = result[0]
+> 
+>         result = minimize_scalar(negative_cdf_deriv, bounds=(x_min_opt,x_max_opt), method='bounded')
+> 
+>         eigen_energy_estimate = result.x
+>     #count = 0
+>     #while width > delta:
+>     #    xs = np.linspace(-width/2.0,width/2.0,num=Nx) + eigen_energy_estimate
+>     #    #print(xs)
+>     #    cdf = CDF_from_evolution(amplitudes,Coeffs,xs)
+>     #    #print(cdf)
+>     #    indicator_list = cdf>=(eta/2.00)
+>     #    #print(indicator_list)
+>     #    ix = np.nonzero(indicator_list)[0][0]
+>     #    eigen_energy_estimate_old = copy.copy(eigen_energy_estimate)
+>     #    eigen_energy_estimate = xs[ix]
+>     #    width /= 2
+>     #    count += 1
+>     #    #print(width,count,eigen_energy_estimate/tau_scale-eigen_energies_exact[0][-1,0])
+> 
+>     #    #if (np.abs(eigen_energy_estimate-eigen_energy_estimate_old)<delta):
+>     #    #    break
+>     error = np.abs(eigen_energy_estimate/tau_scale-eigen_energies_exact[0][-1,0])
+>     error_avg = error
+>     if (core==0):
+>         print(max_n_trotter,max_n_trotter_run,error_avg)
+>     max_n_trotter_run_list[indx_trotter] = max_n_trotter_run
+>     error_for_trotter_list[indx_trotter] = error_avg
+>     indx_trotter +=1
+>     end_time = datetime.now()
+>     elapsed = end_time-start_time
+>     elapsed = elapsed.total_seconds()
+>     if (core==0):
+>         st = '# elapsed time = {elapsed} secs'.format(elapsed=elapsed)
+>         memory_usage(st)
+> 
+> 
+> 
+> # %%
+> # save to file
+> if (core==0):
+>     with open('dE_vs_n_trotter','w') as file_:
+>         s = '# eps= '+str(eps)+', n_shot= '+str(n_shot)+', n_iter='+str(n_iter)+', n_sample=' + str(n_sample)
+>         s += '\n'
+>         file_.write(s)
+>         indx_n_trotter = 0
+>         for max_n_trotter in max_n_trotter_list:
+>             s = '{:}'.format(max_n_trotter_run_list[indx_n_trotter])
+>             s += '  {:.16e}'.format(error_for_trotter_list[indx_n_trotter])
+>             print(s)
+>             s += '\n'
+>             file_.write(s)
+>             indx_n_trotter += 1
+> 
+> 
+> 
+> 
+> 
+> 
+> # %%
+> # parameters are from LinLin2022
+> # trotter version
+> # parallelized
+> #d = round(4/delta)
+888,889d1375
+< ##print(Coeffs_prob[1::2])
+< ##print(np.sum(Coeffs_prob))
+890a1377,1379
+> #if (core==0):
+> #    for j in range(d+1):
+> #        print(j, Coeffs_prob[j])
+892,919c1381
+< ## compute amplitudes first
+< #amplitudes = np.zeros((d+1),dtype=complex)
+< ## only odd parts contributes
+< #n_alive = 0
+< #k_alive = []
+< #for k in range(1,d+1):
+< #    if (Coeffs_prob[k]<1e-10):
+< #        continue
+< #    k_alive.append(k)
+< #    n_alive += 1
+< ##if (core==0):
+< ##    print(n_alive)
+< #for ii in range(core,n_alive,cores):
+< #    k = k_alive[ii]
+< #    isec = 0
+< #    alpha = n_hamiltonians-1
+< #    time = tau_scale * k
+< #    phi = copy.copy(phi_start)
+< #    phi = Apply_ExactEvolution(isec,alpha,0.0,time,phi)
+< #    amplitudes[k] = phi_start.conj()@phi
+< ## collect and bcast
+< #for ii in range(n_alive):
+< #    i_core = ii%cores
+< #    k = k_alive[ii]
+< #    amplitude = comm.bcast(amplitudes[k],root=i_core)
+< #    amplitudes[k] = amplitude
+< #    comm.Barrier()
+< #
+---
+> ## compute trotter amplitudes
+921d1382
+< #for n_sample in n_samples:
+922a1384,1419
+> #samples_list = []
+> #indx_trotter = 0
+> #for max_n_trotter in max_n_trotter_list:
+> #    start_time = datetime.now()
+> #    # compute amplitudes first
+> #    amplitudes = np.zeros((d+1),dtype=complex)
+> #    n_trotters = np.zeros((d+1),dtype=int)
+> #    # only odd parts contributes
+> #    n_alive = 0
+> #    k_alive = []
+> #    for k in range(1,d+1):
+> #        if (Coeffs_prob[k]<1e-10):
+> #            continue
+> #        k_alive.append(k)
+> #        n_alive += 1
+> #    for ii in range(core,n_alive,cores):
+> #        k = k_alive[ii]
+> #        isec = 0
+> #        alpha = n_hamiltonians-1
+> #        time = tau_scale * k
+> #        n_trotter = max_n_trotter
+> #        n_trotters[k] = n_trotter
+> #        indx = 1
+> #        phi = copy.copy(phi_start)
+> #        phi = Apply_TrotterEvolution(isec, alpha, time, 0.0, n_trotter, indx, phi)
+> #        amplitudes[k] = phi_start.conj()@phi
+> #    # collect and bcast
+> #    for ii in range(n_alive):
+> #        i_core = ii%cores
+> #        k = k_alive[ii]
+> #        n_trotter = comm.bcast(n_trotters[k],root=i_core)
+> #        n_trotters[k] = n_trotter
+> #        amplitude = comm.bcast(amplitudes[k],root=i_core)
+> #        amplitudes[k] = amplitude
+> #        comm.Barrier()
+> #        
+923a1421
+> #    max_n_trotter_run = 0
+931a1430
+> #            max_n_trotter_run = max(max_n_trotter_run,n_trotters[k])
+956a1456,1457
+> #        #print(max_evolution_time,t_max)
+> #
+994a1496
+> #
+995a1498
+> #        #print(i_iter,error)
+1000,1323d1502
+< #        print(n_sample,error_avg)
+< #    error_for_n_samples[indx_n_sample] = error_avg
+< #    indx_n_sample += 1
+< #
+< #
+< #
+< ## %%
+< ## save to file
+< #if (core==0):
+< #    with open('dE_vs_repetitions_with_exact','w') as file_:
+< #        s = '# eps= '+str(delta/tau_scale)+', n_shot= '+str(n_shot)+', n_iter='+str(n_iter)
+< #        s += '\n'
+< #        file_.write(s)
+< #        indx_n_sample = 0
+< #        for n_sample in n_samples:
+< #            s = '{:}'.format(n_sample)
+< #            s += '  {:.16e}'.format(error_for_n_samples[indx_n_sample])
+< #            print(s)
+< #            s += '\n'
+< #            file_.write(s)
+< #            indx_n_sample += 1
+< ##
+< ##
+< ## prepare trotterization
+< #del eigen_vectors_exact
+< #gc.collect()
+< ## exact eigenvalues for interaction parts
+< #eigen_energies_coulomb  = []
+< #H_subs_coulomb = []
+< #for isec in range(nsec):
+< #    eigen_energies_coulomb.append(np.zeros((dim_reduced),dtype=float))
+< #    H_subs_coulomb.append([])
+< #
+< #for isec in range(nsec):
+< #    eigen_e               = np.zeros((dim_reduced),dtype=float)
+< #    start_time = datetime.now()
+< #    # project hamiltonian on to specified sector
+< #    H_sparse = hamiltonian_coulomb.to_matrix(sparse=True)
+< #    H_sparse.eliminate_zeros()
+< #    jsec = isec
+< #    row      = []
+< #    col      = []
+< #    data     = []
+< #    for ii in range(dim_sub[isec]):
+< #        i = indx_sub[isec][ii]
+< #        for ind in range(H_sparse.indptr[i],H_sparse.indptr[i+1]):
+< #            # j is always in indx_sub[isec], because the Hamiltonian does not mix it
+< #            #print(i,j)
+< #            j = H_sparse.indices[ind]
+< #            jj = iindx_sub[jsec][j]
+< #            row.append(jj)
+< #            col.append(ii)
+< #            #print(ii,jj)
+< #            data.append(H_sparse.data[ind])
+< #    H_sub = sparse.csc_matrix((data, (row, col)), shape=(dim_sub[jsec], dim_sub[isec]))
+< #
+< #    H_sub_reduced = basis_transform@(H_sub.toarray())@basis_transform.conj().T
+< #
+< #    H_subs_coulomb[isec].append(H_sub_reduced)
+< #
+< #    eigen_e = H_sub_reduced.diagonal() # coulomb interaction matrix is diagonal in occupation number basis
+< #
+< #    eigen_energies_coulomb[isec][:]   = eigen_e.real
+< #    end_time = datetime.now()
+< #    elapsed = end_time-start_time
+< #    elapsed = elapsed.total_seconds()
+< #    gc.collect()
+< #    if (core==0):
+< #        st = '# Coulomb, elapsed time = {elapsed} secs'.format(elapsed=elapsed)
+< #        memory_usage(st)
+< #
+< #
+< ## %%
+< ## exact eigenvalues for kinetic parts
+< #eigen_energies_kinetic   = []
+< #eigen_vectors_kinetic = []
+< #H_subs_kinetic = []
+< #for isec in range(nsec):
+< #    eigen_energies_kinetic.append(np.zeros((n_hamiltonians,dim_reduced),dtype=float))
+< #    eigen_vectors_kinetic.append(np.zeros((n_hamiltonians,dim_reduced,dim_reduced),dtype=complex))
+< #    H_subs_kinetic.append([])
+< #
+< #for isec in range(nsec):
+< #    eigen_e               = np.zeros((dim_reduced),dtype=float)
+< #    eigen_v               = np.zeros((dim_reduced,dim_reduced),dtype=complex)
+< #    for alpha in range(n_hamiltonians):
+< #        start_time = datetime.now()
+< #        # project hamiltonian on to specified sector
+< #        H_sparse = hamiltonians_kinetic[alpha].to_matrix(sparse=True)
+< #        H_sparse.eliminate_zeros()
+< #        jsec = isec
+< #        row      = []
+< #        col      = []
+< #        data     = []
+< #        for ii in range(dim_sub[isec]):
+< #            i = indx_sub[isec][ii]
+< #            for ind in range(H_sparse.indptr[i],H_sparse.indptr[i+1]):
+< #                # j is always in indx_sub[isec], because the Hamiltonian does not mix it
+< #                #print(i,j)
+< #                j = H_sparse.indices[ind]
+< #                jj = iindx_sub[jsec][j]
+< #                row.append(jj)
+< #                col.append(ii)
+< #                #print(ii,jj)
+< #                data.append(H_sparse.data[ind])
+< #        H_sub = sparse.csc_matrix((data, (row, col)), shape=(dim_sub[jsec], dim_sub[isec]))
+< #
+< #        H_sub_reduced = basis_transform@(H_sub.toarray())@basis_transform.conj().T
+< #
+< #        H_subs_kinetic[isec].append(H_sub_reduced)
+< #
+< #        # diagonalize sectorized hamiltonian
+< #        i_core = alpha%cores
+< #        if (core==i_core):
+< #            eigen_e, eigen_v = np.linalg.eigh(H_sub_reduced)
+< #            eigen_energies_kinetic[isec][alpha,:]   = eigen_e
+< #            eigen_vectors_kinetic[isec][alpha,:,:] = eigen_v
+< #    del eigen_e, eigen_v
+< #    gc.collect()
+< #comm.Barrier()
+< #bcast_start_time = datetime.now()
+< #for isec in range(nsec):
+< #    for alpha in range(n_hamiltonians):
+< #        i_core = alpha%cores
+< #        comm.Bcast([eigen_energies_kinetic[isec][alpha,:] ,MPI.DOUBLE],root=i_core)
+< #        comm.Bcast([eigen_vectors_kinetic[isec][alpha,:,:],MPI.DOUBLE_COMPLEX],root=i_core)
+< #end_time = datetime.now()
+< #elapsed = end_time-start_time
+< #elapsed = elapsed.total_seconds()
+< #if (core==0):
+< #    st = '# {percent}%, elapsed time = {elapsed} secs'.format(percent=(100),elapsed=elapsed)
+< #    memory_usage(st)
+< #    st = 'Bcast time = {elapsed} secs'.format(elapsed=(end_time-bcast_start_time).total_seconds())
+< #    print(st)
+< #
+< #
+< #def Apply_ExactEvolution_coulomb(isec, eps, time, v):
+< #    vec = np.exp(-1j*time*(eigen_energies_coulomb[isec][:]-eps))
+< #    w = vec * v
+< #    return w
+< #
+< #
+< ## %%
+< #
+< #def Apply_ExactEvolution_kinetic(isec, alpha, eps, time, v):
+< #    w = v.conj()@eigen_vectors_kinetic[isec][alpha,:,:]
+< #    vec = np.exp(-1j*time*(eigen_energies_kinetic[isec][alpha,:]-eps))
+< #    w = vec*w.conj()
+< #    w = eigen_vectors_kinetic[isec][alpha,:,:]@w
+< #    return w
+< #
+< #
+< #def Apply_TrotterEvolution(isec, alpha, time, eps, n_trotter, indx, v):
+< #    dt = time/n_trotter
+< #    if (indx==0): 
+< #        # first order trotter
+< #        w = v
+< #        for i_trotter in range(n_trotter):
+< #            w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+< #            w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+< #    elif (indx==1):
+< #        w = v
+< #        for i_trotter in range(n_trotter):
+< #            w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+< #            w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+< #    return w*np.exp(1j*eps*time)
+< #
+< #def Apply_TrotterEvolution2(isec, alpha, time, eps, n_trotter, indx, v):
+< #    dt = time/n_trotter
+< #    vec = np.exp(-1j*dt*(eigen_energies_kinetic[isec][alpha,:]-eps))
+< #    M = eigen_vectors_kinetic[isec][alpha,:,:]@np.diag(vec)@eigen_vectors_kinetic[isec][alpha,:,:].conj().T
+< #    if (indx==0): 
+< #        # first order trotter
+< #        w = v
+< #        for i_trotter in range(n_trotter):
+< #            w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+< #            w = M@w
+< #            #w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+< #    elif (indx==1):
+< #        w = v
+< #        for i_trotter in range(n_trotter):
+< #            w = M@w
+< #            #w = Apply_ExactEvolution_kinetic (isec, alpha, 0.0, dt, w)
+< #            w = Apply_ExactEvolution_coulomb (isec, 0.0, dt, w)
+< #    return w*np.exp(1j*eps*time)
+< #
+< ### fix eps
+< #d = 4001
+< #delta = 4/d
+< #eps = delta/tau_scale
+< #n_sample = 2000 # after the convergence
+< #max_n_trotter_list = [2, 4, 6, 8]
+< #max_n_trotter_list+= [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+< #max_n_trotter_list+= [200,300,400,500,600,700,800,900,1000]
+< #max_n_trotter_list+= [2000,3000,4000,5000]
+< ##max_n_trotter_list= np.arange(2000,5000,100)
+< #error_for_trotter_list = np.zeros((len(max_n_trotter_list)),dtype=float)
+< #max_n_trotter_run_list = np.zeros((len(max_n_trotter_list)),dtype=float)
+< #n_shot = 2048
+< #n_iter = 30
+< #
+< #d = round(4/delta)
+< #t_max = tau_scale*d
+< #
+< ## compute step function expansion coeffs
+< #C = F_fourier_coeffs(d,delta)
+< #Coeffs = C[:d+1] # only positive coefficients are needed, because negative ones are just - of that, and 0th value is 0.5
+< #
+< ## prepare importance sampling
+< #Coeffs_sum = 0.0
+< #for j in range(1,d+1):
+< #    Coeffs_sum += np.abs(Coeffs[j])
+< ##print(Coeffs_sum)
+< #Coeffs_prob = np.abs(Coeffs)/Coeffs_sum
+< #Coeffs_prob[0] = 0.0
+< #ks = [j for j in range(d+1)]
+< #if (core==0):
+< #    for j in range(d+1):
+< #        print(j, Coeffs_prob[j])
+< #
+< #
+< ## without sampling error
+< #indx_trotter = 0
+< #for max_n_trotter in max_n_trotter_list:
+< #    max_n_trotter_run = max_n_trotter
+< #    # compute amplitudes first
+< #    amplitudes = np.zeros((d+1),dtype=complex)
+< #    n_trotters = np.zeros((d+1),dtype=int)
+< #    # only odd parts contributes
+< #    n_alive = 0
+< #    k_alive = []
+< #    for k in range(1,d+1):
+< #        if (Coeffs_prob[k]<1e-10):
+< #            continue
+< #        k_alive.append(k)
+< #        n_alive += 1
+< #    #if (core==0):
+< #    #    print(n_alive)
+< #    for ii in range(core,n_alive,cores):
+< #        k = k_alive[ii]
+< #        isec = 0
+< #        alpha = n_hamiltonians-1
+< #        time = tau_scale * k
+< #        n_trotter = max_n_trotter
+< #        n_trotters[k] = n_trotter
+< #        phi = copy.copy(phi_start)
+< #        phi = Apply_TrotterEvolution(isec, alpha, time, 0.0, n_trotter, indx, phi)
+< #        amplitudes[k] = phi_start.conj()@phi
+< #    # collect and bcast
+< #    for ii in range(n_alive):
+< #        i_core = ii%cores
+< #        k = k_alive[ii]
+< #        amplitude = comm.bcast(amplitudes[k],root=i_core)
+< #        amplitudes[k] = amplitude
+< #        comm.Barrier()
+< #
+< #
+< #    error_avg = 0.0
+< #    max_evolution_time = 0.0
+< #    # find ground state energy estimation through binary search
+< #
+< #    # cost estimation
+< #    #total_evolution_time = np.sum(samples) * tau_scale
+< #    max_evolution_time = max(d * tau_scale,max_evolution_time)
+< #    #print(max_evolution_time,t_max)
+< #
+< #    # energy estimation
+< #    if (sol_method==1):
+< #        x_min = -np.pi/3.0
+< #        x_max = np.pi/3.0
+< #
+< #        cdf_1 = lambda x: CDF_from_evolution(amplitudes,Coeffs,x) - (eta/4.0)
+< #
+< #        result = find_all_roots(cdf_1, x_min, x_max) 
+< #        if (len(result)<1):
+< #            x_min_opt = x_min # no root
+< #        else:
+< #            x_min_opt = result[0]
+< #
+< #        eigen_energy_estimate = x_min_opt
+< #    elif (sol_method==2):
+< #        # search step and find maximum in the region
+< #        x_min = -np.pi/3.0
+< #        x_max = np.pi/3.0
+< #
+< #        cdf_1 = lambda x: CDF_from_evolution(amplitudes,Coeffs,x) - (eta/4.0)
+< #        cdf_2 = lambda x: CDF_from_evolution(amplitudes,Coeffs,x) - (3*eta/4.0)
+< #        negative_cdf_deriv = lambda x : -CDF_deriv_from_evolution(amplitudes,Coeffs,x)
+< #
+< #        #result = root_scalar(cdf,method='bisect',bracket=[x_min,x_max])
+< #        result = find_all_roots(cdf_1, x_min, x_max) 
+< #        if (len(result)<1):
+< #            x_min_opt = x_min # no root
+< #        else:
+< #            x_min_opt = result[0]
+< #        result = find_all_roots(cdf_2, x_min_opt, x_max) 
+< #        if (len(result)<1):
+< #            x_max_opt = x_max # no root
+< #        else:
+< #            x_max_opt = result[0]
+< #
+< #        result = minimize_scalar(negative_cdf_deriv, bounds=(x_min_opt,x_max_opt), method='bounded')
+< #
+< #        eigen_energy_estimate = result.x
+< #    #count = 0
+< #    #while width > delta:
+< #    #    xs = np.linspace(-width/2.0,width/2.0,num=Nx) + eigen_energy_estimate
+< #    #    #print(xs)
+< #    #    cdf = CDF_from_evolution(amplitudes,Coeffs,xs)
+< #    #    #print(cdf)
+< #    #    indicator_list = cdf>=(eta/2.00)
+< #    #    #print(indicator_list)
+< #    #    ix = np.nonzero(indicator_list)[0][0]
+< #    #    eigen_energy_estimate_old = copy.copy(eigen_energy_estimate)
+< #    #    eigen_energy_estimate = xs[ix]
+< #    #    width /= 2
+< #    #    count += 1
+< #    #    #print(width,count,eigen_energy_estimate/tau_scale-eigen_energies_exact[0][-1,0])
+< #
+< #    #    #if (np.abs(eigen_energy_estimate-eigen_energy_estimate_old)<delta):
+< #    #    #    break
+< #    error = np.abs(eigen_energy_estimate/tau_scale-eigen_energies_exact[0][-1,0])
+< #    error_avg = error
+< #    if (core==0):
+1334,1337d1512
+< #
+< #
+< #
+< ## %%
+1352,1531c1527,1531
+< #
+< #
+< #
+< #
+< #
+< #
+< ## %%
+< ## parameters are from LinLin2022
+< ## trotter version
+< ## parallelized
+< ##d = round(4/delta)
+< ##t_max = tau_scale*d
+< ##
+< ### compute step function expansion coeffs
+< ##C = F_fourier_coeffs(d,delta)
+< ##Coeffs = C[:d+1] # only positive coefficients are needed, because negative ones are just - of that, and 0th value is 0.5
+< ##
+< ### prepare importance sampling
+< ##Coeffs_sum = 0.0
+< ##for j in range(1,d+1):
+< ##    Coeffs_sum += np.abs(Coeffs[j])
+< ###print(Coeffs_sum)
+< ##Coeffs_prob = np.abs(Coeffs)/Coeffs_sum
+< ##Coeffs_prob[0] = 0.0
+< ##ks = [j for j in range(d+1)]
+< ##if (core==0):
+< ##    for j in range(d+1):
+< ##        print(j, Coeffs_prob[j])
+< ##
+< ### compute trotter amplitudes
+< ##
+< ##
+< ##samples_list = []
+< ##indx_trotter = 0
+< ##for max_n_trotter in max_n_trotter_list:
+< ##    start_time = datetime.now()
+< ##    # compute amplitudes first
+< ##    amplitudes = np.zeros((d+1),dtype=complex)
+< ##    n_trotters = np.zeros((d+1),dtype=int)
+< ##    # only odd parts contributes
+< ##    n_alive = 0
+< ##    k_alive = []
+< ##    for k in range(1,d+1):
+< ##        if (Coeffs_prob[k]<1e-10):
+< ##            continue
+< ##        k_alive.append(k)
+< ##        n_alive += 1
+< ##    for ii in range(core,n_alive,cores):
+< ##        k = k_alive[ii]
+< ##        isec = 0
+< ##        alpha = n_hamiltonians-1
+< ##        time = tau_scale * k
+< ##        n_trotter = max_n_trotter
+< ##        n_trotters[k] = n_trotter
+< ##        indx = 1
+< ##        phi = copy.copy(phi_start)
+< ##        phi = Apply_TrotterEvolution(isec, alpha, time, 0.0, n_trotter, indx, phi)
+< ##        amplitudes[k] = phi_start.conj()@phi
+< ##    # collect and bcast
+< ##    for ii in range(n_alive):
+< ##        i_core = ii%cores
+< ##        k = k_alive[ii]
+< ##        n_trotter = comm.bcast(n_trotters[k],root=i_core)
+< ##        n_trotters[k] = n_trotter
+< ##        amplitude = comm.bcast(amplitudes[k],root=i_core)
+< ##        amplitudes[k] = amplitude
+< ##        comm.Barrier()
+< ##        
+< ##    error_avg = 0.0
+< ##    max_n_trotter_run = 0
+< ##    for i_iter in range(n_iter):
+< ##        # find ground state energy estimation through binary search
+< ##
+< ##        samples = np.random.choice(ks, size=n_sample, p=Coeffs_prob)
+< ##    
+< ##        amplitudes_sample = np.zeros((n_sample),dtype=complex)
+< ##        for i_sample in range(n_sample):
+< ##            k = samples[i_sample]
+< ##            max_n_trotter_run = max(max_n_trotter_run,n_trotters[k])
+< ##            # real part
+< ##            computed_value = amplitudes[k].real
+< ##
+< ##            # # shot errors
+< ##            p_up = (computed_value + 1.0)/2.0
+< ##            sample_shot = np.random.binomial(n_shot,p_up)
+< ##            shot_error = 2*(sample_shot/(n_shot) - p_up)
+< ##            computed_value += shot_error
+< ##
+< ##            amp_sample_real = computed_value
+< ##            
+< ##
+< ##            # imag part
+< ##            computed_value = amplitudes[k].imag
+< ##
+< ##            # # shot errors
+< ##            p_up = (computed_value + 1.0)/2.0
+< ##            sample_shot = np.random.binomial(n_shot,p_up)
+< ##            shot_error = 2*(sample_shot/(n_shot) - p_up)
+< ##            computed_value += shot_error
+< ##
+< ##            amp_sample_imag = computed_value
+< ##
+< ##            amplitudes_sample[i_sample] = amp_sample_real + 1j * amp_sample_imag
+< ##    
+< ##        #print(max_evolution_time,t_max)
+< ##
+< ##        # energy estimation
+< ##        if (sol_method==1):
+< ##            x_min = -np.pi/3.0
+< ##            x_max = np.pi/3.0
+< ##
+< ##            cdf_1 = lambda x: CDF_from_evolution_importance2(amplitudes_sample,Coeffs_sum,samples,x) - (eta/4.0)
+< ##
+< ##            result = find_all_roots(cdf_1, x_min, x_max) 
+< ##            if (len(result)<1):
+< ##                x_min_opt = x_min # no root
+< ##            else:
+< ##                x_min_opt = result[0]
+< ##
+< ##            eigen_energy_estimate = x_min_opt
+< ##        elif (sol_method==2):
+< ##            # search step and find maximum in the region
+< ##            x_min = -np.pi/3.0
+< ##            x_max = np.pi/3.0
+< ##
+< ##            cdf_1 = lambda x: CDF_from_evolution_importance2(amplitudes_sample,Coeffs_sum,samples,x) - (eta/4.0)
+< ##            cdf_2 = lambda x: CDF_from_evolution_importance2(amplitudes_sample,Coeffs_sum,samples,x) - (3*eta/4.0)
+< ##            negative_cdf_deriv = lambda x : -CDF_deriv_from_evolution_importance2(amplitudes_sample,Coeffs_sum,samples,x)
+< ##
+< ##            #result = root_scalar(cdf,method='bisect',bracket=[x_min,x_max])
+< ##            result = find_all_roots(cdf_1, x_min, x_max) 
+< ##            if (len(result)<1):
+< ##                x_min_opt = x_min # no root
+< ##            else:
+< ##                x_min_opt = result[0]
+< ##            result = find_all_roots(cdf_2, x_min_opt, x_max) 
+< ##            if (len(result)<1):
+< ##                x_max_opt = x_max # no root
+< ##            else:
+< ##                x_max_opt = result[0]
+< ##
+< ##            result = minimize_scalar(negative_cdf_deriv, bounds=(x_min_opt,x_max_opt), method='bounded')
+< ##
+< ##            eigen_energy_estimate = result.x
+< ##
+< ##        error = np.abs(eigen_energy_estimate/tau_scale-eigen_energies_exact[0][-1,0])
+< ##        #print(i_iter,error)
+< ##
+< ##        error_avg += error
+< ##    error_avg /= n_iter
+< ##    if (core==0):
+< ##        print(max_n_trotter,max_n_trotter_run,error_avg)
+< ##    max_n_trotter_run_list[indx_trotter] = max_n_trotter_run
+< ##    error_for_trotter_list[indx_trotter] = error_avg
+< ##    indx_trotter +=1
+< ##    end_time = datetime.now()
+< ##    elapsed = end_time-start_time
+< ##    elapsed = elapsed.total_seconds()
+< ##    if (core==0):
+< ##        st = '# elapsed time = {elapsed} secs'.format(elapsed=elapsed)
+< ##        memory_usage(st)
+< ### save to file
+< ##if (core==0):
+< ##    with open('dE_vs_n_trotter','w') as file_:
+< ##        s = '# eps= '+str(eps)+', n_shot= '+str(n_shot)+', n_iter='+str(n_iter)+', n_sample=' + str(n_sample)
+< ##        s += '\n'
+< ##        file_.write(s)
+< ##        indx_n_trotter = 0
+< ##        for max_n_trotter in max_n_trotter_list:
+< ##            s = '{:}'.format(max_n_trotter_run_list[indx_n_trotter])
+< ##            s += '  {:.16e}'.format(error_for_trotter_list[indx_n_trotter])
+< ##            print(s)
+< ##            s += '\n'
+< ##            file_.write(s)
+< ##            indx_n_trotter += 1
+< #
+< #
+< #
+< #
+< #
+---
+> 
+> 
+> 
+> 
+> 

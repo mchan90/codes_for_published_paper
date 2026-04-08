@@ -1,0 +1,423 @@
+40c40
+< n_x     = 8
+---
+> n_x     = 4
+168d167
+< n_eig = min(dim_sub[0],100)
+170,171c169,170
+<     eigen_energies_exact.append(np.zeros((n_hamiltonians,n_eig),dtype=float))
+<     eigen_vectors_exact.append(np.zeros((n_hamiltonians,dim_sub[isec],n_eig),dtype=complex))
+---
+>     eigen_energies_exact.append(np.zeros((n_hamiltonians,dim_sub[isec]),dtype=float))
+>     eigen_vectors_exact.append(np.zeros((n_hamiltonians,dim_sub[isec],dim_sub[isec]),dtype=complex))
+175,176c174,175
+<     eigen_e               = np.zeros((n_eig),dtype=float)
+<     eigen_v               = np.zeros((dim_sub[isec],n_eig),dtype=complex)
+---
+>     eigen_e               = np.zeros((dim_sub[isec]),dtype=float)
+>     eigen_v               = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+202,207c201,202
+<         if (dim_sub[isec]>n_eig):
+<             shift = 3.0
+<             H_shifted = H_sub- shift * sparse.eye(dim_sub[isec])
+<             eigen_e, eigen_v = sparse.linalg.eigsh(H_shifted,k=n_eig, which='SA')
+<             eigen_e = eigen_e + shift
+<         else:
+---
+>         i_core = alpha%cores
+>         if (core==i_core):
+209,213c204,208
+<         #print(alpha,eigen_e[0])
+<         #comm.Barrier()
+<         #bcast_start_time = datetime.now()
+<         #comm.Bcast([eigen_e,MPI.DOUBLE],root=i_core)
+<         #comm.Bcast([eigen_v,MPI.DOUBLE_COMPLEX],root=i_core)
+---
+>             #print(alpha,eigen_e[0])
+>         comm.Barrier()
+>         bcast_start_time = datetime.now()
+>         comm.Bcast([eigen_e,MPI.DOUBLE],root=i_core)
+>         comm.Bcast([eigen_v,MPI.DOUBLE_COMPLEX],root=i_core)
+222a218,219
+>             st = 'Bcast time = {elapsed} secs'.format(elapsed=(end_time-bcast_start_time).total_seconds())
+>             print(st)
+240,241c237,238
+<     vec = np.zeros(n_eig,dtype=complex)
+<     for k in range(n_eig):
+---
+>     vec = np.zeros((dim_sub[isec]),dtype=complex)
+>     for k in range(dim_sub[isec]):
+250,251c247,248
+<     vec = np.zeros(n_eig,dtype=complex)
+<     for k in range(n_eig):
+---
+>     vec = np.zeros((dim_sub[isec]),dtype=float)
+>     for k in range(dim_sub[isec]):
+421,422c418,419
+< populations = np.zeros(n_eig)
+< for k in range(n_eig):
+---
+> populations = np.zeros(dim_sub[isec])
+> for k in range(dim_sub[isec]):
+513,515c510
+< #time_max_list = [10.0 * j for j in range(1,300)]
+< time_max_list = [10, 100, 170, 190, 500, 1800, 3600, 7200, 14400]
+< #time_max_list = [26, 52, 104, 156, 280, 520, 1040, 2080, 4160, 8320]
+---
+> time_max_list = [26, 52, 104, 156, 280, 520, 1040, 2080, 4160, 8320]
+566,569c561,562
+< def ExactFilteredEvolution (isec, alpha, ks, Coeffs, eps, time):
+<     Vl = copy.deepcopy(eigen_vectors_exact[isec][alpha,:,:])
+<     evol = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+<     vec = np.zeros(n_eig,dtype=complex)
+---
+> def ExactFilter (isec, alpha, ks, Coeffs, eps):
+>     ef = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+571,584c564,574
+<         for k in range(n_eig):
+<             vec[k] += Coeffs[j] * np.exp(-1j*time*eigen_energies_exact[isec][alpha,k]-1j*ks[j]*tau_scale*(eigen_energies_exact[isec][alpha,k]-eps))
+<     exp_d = np.diag(vec)
+<     evol = Vl@exp_d@Vl.conj().T
+<     return evol
+< #def Apply_ExactFilter (isec, alpha, ks, Coeffs, eps, phi):
+< #    phi_ = phi
+< #    ef = ExactFilter(isec, alpha, ks, Coeffs, eps)
+< #    phi_ = ef@phi_
+< #    #w = np.zeros((dim_sub[isec]),dtype=complex)
+< #    #for j in range(2*d+1):
+< #    #    w += Coeffs[j] * Apply_ExactEvolution(isec,alpha,eps,ks[j]*tau_scale,phi)
+< #    return phi_
+< #
+---
+>         ef += Coeffs[j] * ExactEvolution(isec,alpha,eps,ks[j]*tau_scale)
+>     return ef
+> def Apply_ExactFilter (isec, alpha, ks, Coeffs, eps, phi):
+>     phi_ = phi
+>     ef = ExactFilter(isec, alpha, ks, Coeffs, eps)
+>     phi_ = ef@phi_
+>     #w = np.zeros((dim_sub[isec]),dtype=complex)
+>     #for j in range(2*d+1):
+>     #    w += Coeffs[j] * Apply_ExactEvolution(isec,alpha,eps,ks[j]*tau_scale,phi)
+>     return phi_
+> 
+589c579,580
+<     phi = ExactFilteredEvolution(isec, alpha, ks, Coeffs, eps, time)@phi
+---
+>     phi = Apply_ExactFilter(isec, alpha,ks, Coeffs, eps, phi)
+>     phi = Apply_ExactEvolution(isec,alpha,0.0,time,phi)
+597,602d587
+< # estimation of the upperbound
+< lambda_init = eigen_energies_exact[0][0,0]*tau_scale
+< 
+< # center of the eigenvalue filter
+< x_center = lambda_init + relative_gap/2.0
+< 
+604a590,595
+>     # estimation of the upperbound
+>     lambda_init = eigen_energies_exact[0][0,0]*tau_scale
+> 
+>     # center of the eigenvalue filter
+>     x_center = lambda_init + relative_gap/2.0
+>     #exact_filter = ExactFilter(0,n_hamiltonians-1,ks,Coeffs,x_center/tau_scale)
+803,916c794,905
+< # time_max = time_max_list[5]
+< # n_level = round(np.log2(time_max/n_time))
+< # #n_samples = [1, 5, 10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+< # n_samples = [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096]
+< # error_for_n_samples = np.zeros((len(n_samples)),dtype=float)
+< # n_shot = 2048
+< # n_iter = 10
+< # 
+< # 
+< # # %%
+< # # QCELS for small overlap
+< # # preprocess
+< # indx_n_sample = 0
+< # for n_sample in n_samples:
+< #     # estimation of the upperbound
+< #     lambda_init = eigen_energies_exact[0][0,0]*tau_scale
+< # 
+< # 
+< #     # center of the eigenvalue filter
+< #     x_center = lambda_init + relative_gap/2.0
+< # 
+< #     # compute time list first
+< # 
+< #     n_jobs = n_iter * (n_level+1) * n_time * n_sample
+< #     remainder            = n_jobs%cores
+< #     n_jobs_for_core = n_jobs//cores
+< #     if (core<remainder):
+< #         n_jobs_for_core += 1
+< # 
+< # 
+< #     amplitudes_sample_qcels = np.zeros((n_jobs_for_core),dtype=complex)
+< #     tau_scale_qcels         = np.zeros((n_level+1),dtype=float)
+< #     times_qcels             = np.zeros((n_level+1,n_time),dtype=float)
+< #     samples_qcels           = np.zeros((n_jobs_for_core),dtype=int)
+< #     for i_level in range(n_level+1):
+< #         tau_scale_qcels[i_level] = time_max/n_time/(2**(n_level-i_level))
+< #         times_qcels[i_level,:] = tau_scale_qcels[i_level] * np.arange(n_time)
+< #     samples_qcels = np.random.choice(indxs, size=n_jobs_for_core, p=Coeffs_prob)
+< # 
+< #     i_jobs = 0
+< #     i_jobs_core = 0
+< #     for i_iter in range(n_iter):
+< #         for i_level in range(n_level+1):
+< #             for i_time in range(n_time):
+< #                 for i_sample in range(n_sample):
+< #                     if (i_jobs%cores==core):
+< #                         time_ = times_qcels[i_level,i_time]+ ks[samples_qcels[i_jobs_core]]
+< #                         time_unscaled_filter = time_ * tau_scale
+< #                         amplitude = compute_amplitude(time_unscaled_filter)
+< #                         amplitudes_sample_qcels[i_jobs_core] = compute_amplitude_samples(amplitude, n_shot)
+< #                         i_jobs_core += 1
+< #                     i_jobs += 1
+< #     error = 0.0
+< #     i_jobs = 0
+< #     i_jobs_core = 0
+< #     for i_iter in range(n_iter):
+< #         for i_level in range(n_level+1):
+< #             filtered_amplitudes_sample = np.zeros((n_time),dtype=complex)
+< #             for i_time in range(n_time):
+< #                 # compute filtered CDF from amplitudes
+< #                 filtered = 0.0
+< #                 for i_sample in range(n_sample):
+< #                     if (i_jobs%cores==core):
+< #                         indx = samples_qcels[i_jobs_core]
+< #                         k = ks[indx]
+< #                         phase = x_center * k
+< #                         filtered += Coeffs_ratio[indx] * amplitudes_sample_qcels[i_jobs_core] * np.exp(1j*phase)
+< #                         i_jobs_core += 1
+< #                     i_jobs += 1
+< #                 filtered /= n_sample
+< #                 filtered_amplitudes_sample[i_time] += filtered
+< #                 #
+< #             comm.Allreduce(MPI.IN_PLACE, filtered_amplitudes_sample, op=MPI.SUM)
+< #             if (i_level==0):
+< #                 x0 = np.array((0.5,0.0,lambda_init))
+< #                 res = qcels_opt(times_qcels[i_level,:],filtered_amplitudes_sample,x0)
+< #             else:
+< #                 x0=np.array((ground_coefficient_QCELS,ground_coefficient_QCELS2,ground_energy_estimate_QCELS))
+< #                 bnds=((-np.inf,np.inf),(-np.inf,np.inf),(lambda_min,lambda_max)) 
+< #                 res = qcels_opt(times_qcels[i_level,:],filtered_amplitudes_sample, x0,bounds=bnds)
+< # 
+< #             #Update initial guess for next iteration
+< #             ground_coefficient_QCELS=res.x[0]
+< #             ground_coefficient_QCELS2=res.x[1]
+< #             ground_energy_estimate_QCELS=res.x[2]
+< #             #Update the estimation interval
+< #             lambda_min=ground_energy_estimate_QCELS-np.pi/(2*tau_scale_qcels[i_level])
+< #             lambda_max=ground_energy_estimate_QCELS+np.pi/(2*tau_scale_qcels[i_level])
+< #         # sum error
+< #         error += np.abs(ground_energy_estimate_QCELS-eigen_energies_exact[0][-1,0]*tau_scale)
+< #     error /= n_iter
+< #     error_for_n_samples[indx_n_sample] = error
+< #     if (core==0):
+< #         print(n_sample*(n_level+1)*(n_time), error/tau_scale)
+< #     indx_n_sample += 1
+< # 
+< # 
+< # 
+< # # %%
+< # if (core==0):
+< #     with open('dE_vs_repetitions_with_exact','w') as file_:
+< #         s = '# time_max = '+str(time_max)+', n_shot= '+str(n_shot)+', n_iter='+str(n_iter)
+< #         s += '\n'
+< #         file_.write(s)
+< #         indx_n_sample = 0
+< #         for n_sample in n_samples:
+< #             s = '{:}'.format(n_sample*(n_level+1)*(n_time))
+< #             s += '  {:.16e}'.format(error_for_n_samples[indx_n_sample]/tau_scale)
+< #             print(s)
+< #             s += '\n'
+< #             file_.write(s)
+< #             indx_n_sample += 1
+< # 
+< # comm.Barrier()
+---
+> time_max = time_max_list[5]
+> n_level = round(np.log2(time_max/n_time))
+> #n_samples = [1, 5, 10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+> n_samples = [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096]
+> error_for_n_samples = np.zeros((len(n_samples)),dtype=float)
+> n_shot = 2048
+> n_iter = 30
+> 
+> 
+> # %%
+> # QCELS for small overlap
+> # preprocess
+> indx_n_sample = 0
+> for n_sample in n_samples:
+>     # estimation of the upperbound
+>     lambda_init = eigen_energies_exact[0][0,0]*tau_scale
+> 
+> 
+>     # center of the eigenvalue filter
+>     x_center = lambda_init + relative_gap/2.0
+> 
+>     # compute time list first
+> 
+>     n_jobs = n_iter * (n_level+1) * n_time * n_sample
+>     remainder            = n_jobs%cores
+>     n_jobs_for_core = n_jobs//cores
+>     if (core<remainder):
+>         n_jobs_for_core += 1
+> 
+> 
+>     amplitudes_sample_qcels = np.zeros((n_jobs_for_core),dtype=complex)
+>     tau_scale_qcels         = np.zeros((n_level+1),dtype=float)
+>     times_qcels             = np.zeros((n_level+1,n_time),dtype=float)
+>     samples_qcels           = np.zeros((n_jobs_for_core),dtype=int)
+>     for i_level in range(n_level+1):
+>         tau_scale_qcels[i_level] = time_max/n_time/(2**(n_level-i_level))
+>         times_qcels[i_level,:] = tau_scale_qcels[i_level] * np.arange(n_time)
+>     samples_qcels = np.random.choice(indxs, size=n_jobs_for_core, p=Coeffs_prob)
+> 
+>     i_jobs = 0
+>     i_jobs_core = 0
+>     for i_iter in range(n_iter):
+>         for i_level in range(n_level+1):
+>             for i_time in range(n_time):
+>                 for i_sample in range(n_sample):
+>                     if (i_jobs%cores==core):
+>                         time_ = times_qcels[i_level,i_time]+ ks[samples_qcels[i_jobs_core]]
+>                         time_unscaled_filter = time_ * tau_scale
+>                         amplitude = compute_amplitude(time_unscaled_filter)
+>                         amplitudes_sample_qcels[i_jobs_core] = compute_amplitude_samples(amplitude, n_shot)
+>                         i_jobs_core += 1
+>                     i_jobs += 1
+>     error = 0.0
+>     i_jobs = 0
+>     i_jobs_core = 0
+>     for i_iter in range(n_iter):
+>         for i_level in range(n_level+1):
+>             filtered_amplitudes_sample = np.zeros((n_time),dtype=complex)
+>             for i_time in range(n_time):
+>                 # compute filtered CDF from amplitudes
+>                 filtered = 0.0
+>                 for i_sample in range(n_sample):
+>                     if (i_jobs%cores==core):
+>                         indx = samples_qcels[i_jobs_core]
+>                         k = ks[indx]
+>                         phase = x_center * k
+>                         filtered += Coeffs_ratio[indx] * amplitudes_sample_qcels[i_jobs_core] * np.exp(1j*phase)
+>                         i_jobs_core += 1
+>                     i_jobs += 1
+>                 filtered /= n_sample
+>                 filtered_amplitudes_sample[i_time] += filtered
+>                 #
+>             comm.Allreduce(MPI.IN_PLACE, filtered_amplitudes_sample, op=MPI.SUM)
+>             if (i_level==0):
+>                 x0 = np.array((0.5,0.0,lambda_init))
+>                 res = qcels_opt(times_qcels[i_level,:],filtered_amplitudes_sample,x0)
+>             else:
+>                 x0=np.array((ground_coefficient_QCELS,ground_coefficient_QCELS2,ground_energy_estimate_QCELS))
+>                 bnds=((-np.inf,np.inf),(-np.inf,np.inf),(lambda_min,lambda_max)) 
+>                 res = qcels_opt(times_qcels[i_level,:],filtered_amplitudes_sample, x0,bounds=bnds)
+> 
+>             #Update initial guess for next iteration
+>             ground_coefficient_QCELS=res.x[0]
+>             ground_coefficient_QCELS2=res.x[1]
+>             ground_energy_estimate_QCELS=res.x[2]
+>             #Update the estimation interval
+>             lambda_min=ground_energy_estimate_QCELS-np.pi/(2*tau_scale_qcels[i_level])
+>             lambda_max=ground_energy_estimate_QCELS+np.pi/(2*tau_scale_qcels[i_level])
+>         # sum error
+>         error += np.abs(ground_energy_estimate_QCELS-eigen_energies_exact[0][-1,0]*tau_scale)
+>     error /= n_iter
+>     error_for_n_samples[indx_n_sample] = error
+>     if (core==0):
+>         print(n_sample*(n_level+1)*(n_time), error/tau_scale)
+>     indx_n_sample += 1
+> 
+> 
+> 
+> # %%
+> if (core==0):
+>     with open('dE_vs_repetitions_with_exact','w') as file_:
+>         s = '# time_max = '+str(time_max)+', n_shot= '+str(n_shot)+', n_iter='+str(n_iter)
+>         s += '\n'
+>         file_.write(s)
+>         indx_n_sample = 0
+>         for n_sample in n_samples:
+>             s = '{:}'.format(n_sample*(n_level+1)*(n_time))
+>             s += '  {:.16e}'.format(error_for_n_samples[indx_n_sample]/tau_scale)
+>             print(s)
+>             s += '\n'
+>             file_.write(s)
+>             indx_n_sample += 1
+928,929c917,918
+<     eigen_energies_coulomb.append(np.zeros((n_eig),dtype=float))
+<     eigen_vectors_coulomb.append(np.zeros((dim_sub[isec],n_eig),dtype=complex))
+---
+>     eigen_energies_coulomb.append(np.zeros((dim_sub[isec]),dtype=float))
+>     eigen_vectors_coulomb.append(np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex))
+933,934c922,923
+<     eigen_e               = np.zeros((n_eig),dtype=float)
+<     eigen_v               = np.zeros((dim_sub[isec],n_eig),dtype=complex)
+---
+>     eigen_e               = np.zeros((dim_sub[isec]),dtype=float)
+>     eigen_v               = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+958,965c947
+<     # diagonalize sectorized hamiltonian
+<     if (dim_sub[isec]>n_eig):
+<         shift = 3.0
+<         H_shifted = H_sub- shift * sparse.eye(dim_sub[isec])
+<         eigen_e, eigen_v = sparse.linalg.eigsh(H_shifted,k=n_eig, which='SA')
+<         eigen_e = eigen_e + shift
+<     else:
+<         eigen_e, eigen_v = np.linalg.eigh(H_sub.toarray())
+---
+>     eigen_e, eigen_v = np.linalg.eigh(H_sub.toarray())
+983,984c965,966
+<     eigen_energies_kinetic.append(np.zeros((n_hamiltonians,n_eig),dtype=float))
+<     eigen_vectors_kinetic.append(np.zeros((n_hamiltonians,dim_sub[isec],n_eig),dtype=complex))
+---
+>     eigen_energies_kinetic.append(np.zeros((n_hamiltonians,dim_sub[isec]),dtype=float))
+>     eigen_vectors_kinetic.append(np.zeros((n_hamiltonians,dim_sub[isec],dim_sub[isec]),dtype=complex))
+988,989c970,971
+<     eigen_e               = np.zeros((n_eig),dtype=float)
+<     eigen_v               = np.zeros((dim_sub[isec],n_eig),dtype=complex)
+---
+>     eigen_e               = np.zeros((dim_sub[isec]),dtype=float)
+>     eigen_v               = np.zeros((dim_sub[isec],dim_sub[isec]),dtype=complex)
+1015,1020c997,998
+<         if (dim_sub[isec]>n_eig):
+<             shift = 3.0
+<             H_shifted = H_sub- shift * sparse.eye(dim_sub[isec])
+<             eigen_e, eigen_v = sparse.linalg.eigsh(H_shifted,k=n_eig, which='SA')
+<             eigen_e = eigen_e + shift
+<         else:
+---
+>         i_core = alpha%cores
+>         if (core==i_core):
+1021a1000,1004
+>             #print(alpha,eigen_e[0])
+>         comm.Barrier()
+>         bcast_start_time = datetime.now()
+>         comm.Bcast([eigen_e,MPI.DOUBLE],root=i_core)
+>         comm.Bcast([eigen_v,MPI.DOUBLE_COMPLEX],root=i_core)
+1030a1014,1015
+>             st = 'Bcast time = {elapsed} secs'.format(elapsed=(end_time-bcast_start_time).total_seconds())
+>             print(st)
+1036,1037c1021,1022
+<     vec = np.zeros(n_eig,dtype=complex)
+<     for k in range(n_eig):
+---
+>     vec = np.zeros((dim_sub[isec]),dtype=complex)
+>     for k in range(dim_sub[isec]):
+1047,1048c1032,1033
+<     vec = np.zeros(n_eig,dtype=complex)
+<     for k in range(n_eig):
+---
+>     vec = np.zeros((dim_sub[isec]),dtype=complex)
+>     for k in range(dim_sub[isec]):
+1093c1078
+< n_sample = 1024
+---
+> n_sample = 4096
+1101c1086
+< n_iter = 10
+---
+> n_iter = 30
