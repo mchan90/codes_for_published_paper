@@ -25,16 +25,16 @@ https://doi.org/10.1038/s41534-025-01002-3
 }
 ```
 
-### `CGS/` — Constant Geometric Speed schedule for adiabatic state preparation
+### `CGS/` — The Constant Geometric Speed Schedule for Adiabatic State Preparation
 
 Mancheon Han, Hyowon Park, and Sangkook Choi,  
-"Constant Geometric Speed schedule for adiabatic state preparation: Towards quadratic speedup without prior spectral knowledge,"  
+"The Constant Geometric Speed Schedule for Adiabatic State Preparation,"  
 *Phys. Rev. Research* (accepted, 2026).  
 https://doi.org/10.1103/ygs3-xgb1
 
 ```bibtex
 @article{han2026cgs,
-  title     = {Constant Geometric Speed schedule for adiabatic state preparation: Towards quadratic speedup without prior spectral knowledge},
+  title     = {The Constant Geometric Speed Schedule for Adiabatic State Preparation},
   author    = {Han, Mancheon and Park, Hyowon and Choi, Sangkook},
   journal   = {Physical Review Research},
   year      = {2026},
