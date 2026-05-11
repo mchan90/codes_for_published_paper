@@ -228,11 +228,11 @@ def global_optimize_mpi(f, f_deriv, x_min, x_max, omega_max, opt_flag):
     else:
         global_root, global_val = None, None
     
-    # 모든 프로세스에 결과를 브로드캐스트
+    # Broadcast the result to all processes
     global_root = comm.bcast(global_root, root=0)
     global_val  = comm.bcast(global_val,  root=0)
     
-    # 함수 반환
+    # Return value
     return global_root, global_val
 
 def isolate_interval(f, a, b, fa, h=1.0/1024, r=2, tol=5e-3):
@@ -325,7 +325,7 @@ def RootFinding (f, a, b, fa=None, fb=None, tol=5e-3, itermax=100):
 
 
         # 1) Inverse Quadratic Interpolation
-        # 세 점으로 보간: (x_i, f_i) for i=0,1,2
+        # Interpolate using three points: (x_i, f_i) for i=0,1,2
         x_i0, x_i1, x_i2 = xs
         f_i0, f_i1, f_i2 = fs
         denom0 = (f_i0 - f_i1) * (f_i0 - f_i2)
@@ -335,7 +335,7 @@ def RootFinding (f, a, b, fa=None, fb=None, tol=5e-3, itermax=100):
                 + (f_i0 * f_i2 / denom1) * x_i1 \
                 + (f_i0 * f_i1 / denom2) * x_i2
 
-        # 2) bracket 밖이면 IQI out-of-range → Secant → Bisection
+        # 2) If outside the bracket, fall back IQI -> Secant -> Bisection
         if x_iqi < x_min or x_iqi > x_max:
             # Secant method between the two points closest to zero: x_i0, x_i1
             x_sec = x_i1 - f_i1 * (x_i1 - x_i0) / (f_i1 - f_i0)
@@ -346,7 +346,7 @@ def RootFinding (f, a, b, fa=None, fb=None, tol=5e-3, itermax=100):
         else:
             x_new = x_iqi
 
-        # 함수 평가 및 수렴 확인
+        # Evaluate the function and check convergence
         f_new = f(x_new)
         if abs(f_new) < tol:
             return x_new
@@ -371,16 +371,16 @@ def RootFinding (f, a, b, fa=None, fb=None, tol=5e-3, itermax=100):
         print('Root-finding:', ind, x_new, f_new)
         print('boundary: ',x_min, x_max)
 
-        # 4) bracket 업데이트
+        # 4) Update the bracket
         if f_new * f_min < 0:
             x_max, f_max = x_new, f_new
         else:
             x_min, f_min = x_new, f_new
 
-        # 3) interpolation 후보 업데이트
+        # 3) Update the interpolation candidate
         xs.append(x_new)
         fs.append(f_new)
-        # 절댓값 기준 가장 작은 세 점 유지
+        # Keep the three points with the smallest absolute value
         pairs = sorted(zip(fs, xs), key=lambda p: abs(p[0]))[:3]
         fs, xs = map(list, zip(*pairs))
 
@@ -513,14 +513,14 @@ def adiabatic_evolve_krylov_with_zeno (t1, dt, phi, info_i, info_f, beta, gamma=
     h2e_diff = absorb_h1e(h1e_diff, g2e_diff, norb, nelec, 0.5)
     h2e_diff_ptr = h2e_diff.ctypes.data_as(ctypes.c_void_p)
     # 
-    # link index 한 번 계산
+    # Compute the link indices once
     link_a, link_b = _unpack(norb, nelec, None)
     na, nlinka = link_a.shape[:2]
     nb, nlinkb = link_b.shape[:2]
     li_ptr = link_a.ctypes.data_as(ctypes.c_void_p)
     lb_ptr = link_b.ctypes.data_as(ctypes.c_void_p)
 
-    # 버퍼 미리 할당
+    # Pre-allocate buffers
     ci_norb    = ctypes.c_int(norb)
     ci_na      = ctypes.c_int(na)
     ci_nb      = ctypes.c_int(nb)
@@ -531,11 +531,11 @@ def adiabatic_evolve_krylov_with_zeno (t1, dt, phi, info_i, info_f, beta, gamma=
 
     # 3) Pre-compute the out_buf pointer once
     out_buf = np.empty((na*nb), dtype=np.float64).view(FCIvector)
-    # 포인터도 미리 계산
+    # Pre-compute the pointers as well
     out_ptr = out_buf.ctypes.data_as(ctypes.c_void_p)
 
     def hop(vec, h2e_ptr, out_buf):
-        # C 함수 호출 (두 전자 contraction)
+        # Call the C routine (two-electron contraction)
         #start = time.perf_counter()
         libfci.FCIcontract_2e_spin1(
             h2e_ptr,
@@ -1074,7 +1074,7 @@ def compute_pj (alpha, hj, h1, ej, phi_asp):
 #    h2e_diff = absorb_h1e(h1e_diff, g2e_diff, norb, nelec, 0.5)
 #    h2e_diff_ptr = h2e_diff.ctypes.data_as(ctypes.c_void_p)
 #    # 
-#    # link index 한 번 계산
+#    # Compute the link indices once
 #    link_a, link_b = _unpack(norb, nelec, None)
 #    na, nlinka = link_a.shape[:2]
 #    nb, nlinkb = link_b.shape[:2]
@@ -1082,7 +1082,7 @@ def compute_pj (alpha, hj, h1, ej, phi_asp):
 #    lb_ptr = link_b.ctypes.data_as(ctypes.c_void_p)
 #
 #
-#    # 버퍼 미리 할당
+#    # Pre-allocate buffers
 #    ci_norb    = ctypes.c_int(norb)
 #    ci_na      = ctypes.c_int(na)
 #    ci_nb      = ctypes.c_int(nb)
@@ -1093,11 +1093,11 @@ def compute_pj (alpha, hj, h1, ej, phi_asp):
 #
 #    # 3) Pre-compute the out_buf pointer once
 #    out_buf = np.empty((na*nb), dtype=np.float64).view(FCIvector)
-#    # 포인터도 미리 계산
+#    # Pre-compute the pointers as well
 #    out_ptr = out_buf.ctypes.data_as(ctypes.c_void_p)
 #
 #    def hop(vec, h2e_ptr, out_buf):
-#        # C 함수 호출 (두 전자 contraction)
+#        # Call the C routine (two-electron contraction)
 #        #start = time.perf_counter()
 #        libfci.FCIcontract_2e_spin1(
 #            h2e_ptr,
@@ -1116,7 +1116,7 @@ def compute_pj (alpha, hj, h1, ej, phi_asp):
 #    tr1 = TraceCalculation(norb, nelec, 0, 1.0)
 #    print('Traces: ', tr0, tr1)
 #
-#    # 시간 루프 시작
+#    # Begin the time loop
 #    n_steps = round(t_f/dt) 
 #    t = 0.0
 #    overlap_val = None
@@ -1277,7 +1277,7 @@ def compute_pj (alpha, hj, h1, ej, phi_asp):
 #        #            print(ii, jj, phi.r[ii,jj])
 #        phi_krylov /= norm
 #
-#        # overlap 계산
+#        # Overlap calculation
 #
 #        overlap2 = np.abs(np.vdot(fcivec_krylov,phi_krylov))**2
 #
@@ -1295,7 +1295,7 @@ def compute_pj (alpha, hj, h1, ej, phi_asp):
 #def adiabatic_evolve(schedule, t_f, dt, phi, fcivec_exact, info_i, info_f):
 #
 #    norb, nelec = phi.norb, phi.nelec
-#    # link index 한 번 계산
+#    # Compute the link indices once
 #    link_a, link_b = _unpack(norb, nelec, None)
 #    na, nlinka = link_a.shape[:2]
 #    nb, nlinkb = link_b.shape[:2]
@@ -1303,7 +1303,7 @@ def compute_pj (alpha, hj, h1, ej, phi_asp):
 #    lb_ptr = link_b.ctypes.data_as(ctypes.c_void_p)
 #
 #
-#    # 버퍼 미리 할당
+#    # Pre-allocate buffers
 #    ci_norb    = ctypes.c_int(norb)
 #    ci_na      = ctypes.c_int(na)
 #    ci_nb      = ctypes.c_int(nb)
@@ -1314,11 +1314,11 @@ def compute_pj (alpha, hj, h1, ej, phi_asp):
 #
 #    # 3) Pre-compute the out_buf pointer once
 #    out_buf = np.empty((na*nb), dtype=np.float64).view(FCIvector)
-#    # 포인터도 미리 계산
+#    # Pre-compute the pointers as well
 #    out_ptr = out_buf.ctypes.data_as(ctypes.c_void_p)
 #
 #    def hop(vec, h2e_ptr, out_buf):
-#        # C 함수 호출 (두 전자 contraction)
+#        # Call the C routine (two-electron contraction)
 #        #start = time.perf_counter()
 #        libfci.FCIcontract_2e_spin1(
 #            h2e_ptr,
@@ -1337,7 +1337,7 @@ def compute_pj (alpha, hj, h1, ej, phi_asp):
 #    tr1 = TraceCalculation(norb, nelec, 0, 1.0)
 #    print('Traces: ', tr0, tr1)
 #
-#    # 시간 루프 시작
+#    # Begin the time loop
 #    n_steps = round(t_f/dt) 
 #    t = 0.0
 #    overlap_val = None
@@ -1413,7 +1413,7 @@ def compute_pj (alpha, hj, h1, ej, phi_asp):
 #
 #        
 #
-#        # overlap 계산
+#        # Overlap calculation
 #        overlap2 = compute_weight(phi, fcivec_exact)
 #
 #        print(t, schedule(t/t_f), overlap2)

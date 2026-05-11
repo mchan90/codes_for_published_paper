@@ -71,14 +71,14 @@ def compute_hamiltonian_diff(info_i, info_f):
     return ecore_diff, int1e_diff, int2e_diff
 
 def orthogonalize(b, phi):
-    # 1. 스칼라 곱 (Overlap) 계산: <phi|b>
-    # vdot은 입력이 다차원 배열이어도 1D로 펴서 계산해주므로 안전함
+    # 1. Inner product (overlap) <phi|b>
+    # vdot flattens multidimensional inputs to 1D internally, so this is safe
     ovlp = np.vdot(phi, b)
     
-    # 2. phi가 완벽히 규격화(norm=1) 되어있지 않을 수 있으니 norm 제곱으로 나눠줌
+    # 2. phi may not be perfectly normalized (norm=1), so divide by squared norm
     phi_norm_sq = np.vdot(phi, phi)
     
-    # 3. 평행 성분 제거 (Gram-Schmidt)
+    # 3. Remove the parallel component (Gram-Schmidt)
     b_perp = b - (ovlp / phi_norm_sq) * phi
     
     return b_perp
@@ -102,94 +102,94 @@ def get_weights (y, x):
 
 def distribute_new_points(weights, num_new_points):
     """
-    기존 점(1개)을 유지하면서, 총합(M + num_new)을 정확히 맞추는 할당 함수
+    Allocation function that keeps each existing point (1 slot) and matches the total (M + num_new) exactly.
     """
     M = len(weights)
     target_total = M + num_new_points
     
-    # 작업용 변수 복사
-    active_mask = np.ones(M, dtype=bool) # 아직 배분 중인 구간들
-    final_slots = np.zeros(M, dtype=float) # 최종 슬롯 개수 (실수)
+    # Working copies of the variables
+    active_mask = np.ones(M, dtype=bool) # Intervals still being allocated
+    final_slots = np.zeros(M, dtype=float) # Final slot counts (float)
     
-    # 0. Weight 안전장치
+    # 0. Weight safeguard
     safe_weights = np.maximum(weights, 1e-12)
     
     # --- [Iterative Locking Loop] ---
     while True:
-        # 1. 현재 살아남은 애들의 Weight 합
+        # 1. Sum of weights over the currently surviving intervals
         current_w_sum = np.sum(safe_weights[active_mask])
         
-        # 2. 살아남은 애들이 나눠가질 수 있는 남은 예산
-        # (총 목표) - (이미 확정된 1개짜리들의 합)
+        # 2. Remaining budget the surviving intervals can share
+        # (total target) - (sum of intervals already locked at 1)
         remaining_budget = target_total - np.sum(final_slots[~active_mask])
         
-        # 예외: 남은 예산이 없거나 음수면 중단 (보통 안 생김)
+        # Edge case: stop if the remaining budget is zero or negative (rare)
         if remaining_budget <= 0:
             break
             
-        # 3. 임시 할당량 계산 (Quota)
+        # 3. Tentative quota calculation
         if current_w_sum == 0:
-            # 남은 애들 Weight가 다 0이면 균등 배분
+            # Distribute equally if all remaining weights are zero
             n_active = np.sum(active_mask)
             quotas = np.ones(n_active) * (remaining_budget / n_active)
         else:
             quotas = (safe_weights[active_mask] / current_w_sum) * remaining_budget
             
-        # 4. [검사] 1.0 미만인 애들이 있는가?
-        # (부동소수점 오차 고려하여 1.0보다 살짝 작게 잡음)
+        # 4. [Check] Are there any intervals below 1.0?
+        # (slightly below 1.0 to absorb floating-point error)
         under_min_indices_local = np.where(quotas < 0.999999)[0]
         
         if len(under_min_indices_local) == 0:
-            # 모두가 1.0 이상이면 OK! 현재 계산된 Quota 저장하고 탈출
+            # All >= 1.0: store the current quota and exit
             final_slots[active_mask] = quotas
             break
         else:
-            # 5. [Lock] 1.0 미만인 애들을 찾아서 '1'로 확정짓고 배분에서 제외
-            # active_mask 상에서의 인덱스를 전체 인덱스로 변환해야 함
+            # 5. [Lock] Pin intervals below 1.0 to '1' and exclude them from the allocation
+            # Map active_mask indices back to the full index space
             full_indices = np.where(active_mask)[0]
             bad_indices = full_indices[under_min_indices_local]
             
-            final_slots[bad_indices] = 1.0      # 1개로 확정
-            active_mask[bad_indices] = False    # 목록에서 퇴출
+            final_slots[bad_indices] = 1.0      # Locked to 1
+            active_mask[bad_indices] = False    # Removed from the active set
             
-            # 루프 다시 돔 -> 줄어든 예산을 가지고 남은 애들이 다시 계산
-            # (부자들의 파이가 줄어들게 됨)
+            # Loop again: surviving intervals recompute with the reduced budget
+            # (the larger shares shrink as a result)
 
     # --- [Integer Rounding (Largest Remainder Method)] ---
-    # 이제 final_slots는 모두 >= 1.0 인 실수임. 합은 target_total과 같음.
-    # 정수로 변환하면서 오차(소수점)를 처리해야 함.
+    # All entries of final_slots are now >= 1.0 (float); their sum equals target_total.
+    # Convert to integers while handling the fractional-part residual.
     
     slots_int = np.floor(final_slots).astype(int)
     fractional_parts = final_slots - slots_int
     
-    # 현재 정수 합과 목표의 차이
+    # Difference between the current integer sum and the target
     diff = target_total - np.sum(slots_int)
     
-    # 소수점이 큰 순서대로 남은 갯수 배분
+    # Distribute the remainder in decreasing order of fractional part
     priority = np.argsort(fractional_parts)[::-1]
     for i in range(int(diff)):
         slots_int[priority[i]] += 1
-    # 최종적으로 '추가할 점의 개수'를 반환해야 하므로 1을 뺌
+    # Subtract 1 since we return the *number of points to add*
     return slots_int - 1
 
 def generate_new_points(x, counts):
     """
-    x: 현재 격자 점들 (길이 N)
-    counts: 각 구간(N-1개)에 추가할 점의 개수 리스트 (정수 배열)
-    return: 새로 추가된 점들의 1차원 배열 (x_new)
+    x: current grid points (length N)
+    counts: number of points to add per interval (N-1 ints)
+    return: 1D array of the newly inserted points (x_new)
     """
     new_points_list = []
     
-    # counts가 0보다 큰 구간만 순회
-    # (nonzero를 쓰면 루프 횟수를 줄여서 더 빠름)
+    # Iterate only over intervals with counts > 0
+    # (nonzero shortens the loop; faster)
     indices = np.nonzero(counts)[0]
     
     for i in indices:
         n = counts[i]
         start, end = x[i], x[i+1]
         
-        # linspace로 양 끝점 포함 n+2개를 만들고,
-        # 슬라이싱[1:-1]으로 내부 점 n개만 취함
+        # Build n+2 points including both endpoints via linspace,
+        # then slice [1:-1] to keep only the n interior points
         pts = np.linspace(start, end, n + 2)[1:-1]
         new_points_list.append(pts)
     
@@ -200,34 +200,34 @@ def generate_new_points(x, counts):
 
 def compute_monotonic_cumulative_integral(y, x):
     """
-    y >= 0 일 때, F(x)가 항상 증가하도록 보장하는 고정밀 적분
+    High-precision integration that keeps F(x) monotonically increasing whenever y >= 0
     """
-    # 1. Cubic Spline 생성
+    # 1. Build the cubic spline
     cs = CubicSpline(x, y)
     
-    # 2. 각 구간별 적분값 계산 (Delta F)
-    # antiderivative()를 쓰면 계수를 이용해 해석적으로 적분함
+    # 2. Per-interval integrated values (Delta F)
+    # antiderivative() integrates analytically using the spline coefficients
     # F(x_{i+1}) - F(x_i)
     
-    # 방법 A: 일일이 integrate 호출 (직관적)
+    # Method A: call integrate() for each interval (straightforward)
     delta_F = np.array([cs.integrate(x[i], x[i+1]) for i in range(len(x)-1)])
     
-    # 3. Monotonicity 강제 (Hybrid Strategy)
-    # Spline 적분값이 음수가 나오면(오버슈팅), 그 구간만 Trapezoid로 대체
+    # 3. Enforce monotonicity (hybrid strategy)
+    # If a spline-integrated value is negative (overshoot), replace that interval with the trapezoid value
     
-    # Trapezoid 계산 (해당 구간만)
+    # Trapezoid computation (per-interval)
     h = np.diff(x)
     trapz_areas = (y[:-1] + y[1:]) * h / 2
     
-    # Spline이 사고 친 곳(0보다 작거나, 혹은 너무 작은 값) 찾기
-    # 물리적으로 y>=0이면 적분은 무조건 >= 0이어야 함
+    # Identify intervals where the spline misbehaves (negative or too small)
+    # Physically, when y>=0 the integral must be >= 0
     bad_indices = np.where(delta_F < 0)[0]
     
     if len(bad_indices) > 0:
-        # 그 구간만 사다리꼴 넓이로 교체
+        # Replace only those intervals with the trapezoidal area
         delta_F[bad_indices] = trapz_areas[bad_indices]
         
-    # 4. 누적 합 계산
+    # 4. Cumulative sum
     F = np.concatenate(([0], np.cumsum(delta_F)))
     
     return F
@@ -351,7 +351,7 @@ for i_iter in range(n_iter):
         h2e_diff = absorb_h1e(h1e_diff, g2e_diff, norb, nelec, 0.5)
         h2e_diff_ptr = h2e_diff.ctypes.data_as(ctypes.c_void_p)
         # 
-        # link index 한 번 계산
+        # Compute the link indices once
         link_a, link_b = _unpack(norb, nelec, None)
         na, nlinka = link_a.shape[:2]
         nb, nlinkb = link_b.shape[:2]
@@ -359,7 +359,7 @@ for i_iter in range(n_iter):
         lb_ptr = link_b.ctypes.data_as(ctypes.c_void_p)
     
     
-        # 버퍼 미리 할당
+        # Pre-allocate buffers
         ci_norb    = ctypes.c_int(norb)
         ci_na      = ctypes.c_int(na)
         ci_nb      = ctypes.c_int(nb)
@@ -382,7 +382,7 @@ for i_iter in range(n_iter):
         h2e_ptr = h2e.ctypes.data_as(ctypes.c_void_p)
     
         def hop(vec, h2e_ptr, out_buf):
-            # C 함수 호출 (두 전자 contraction)
+            # Call the C routine (two-electron contraction)
             #start = time.perf_counter()
             libfci.FCIcontract_2e_spin1(
                 h2e_ptr,

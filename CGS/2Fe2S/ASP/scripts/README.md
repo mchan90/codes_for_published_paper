@@ -1,4 +1,4 @@
-# README for scripts us
+# README for scripts usage
 ## data_points
 file generated from figure 2 C of Lee2023. (found from matching initial overlaps, x-axis of the figure)
 ## for initialization

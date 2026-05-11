@@ -6,8 +6,8 @@ import math
 
 def next_power_of_10(t_f):
     if t_f <= 0:
-        return 1  # 정의에 따라 조정 가능
-    # 1) 로그를 이용
+        return 1  # adjustable depending on the definition
+    # 1) Use logs
     n = math.floor(math.log10(t_f)) + 1
     return 10**n
 

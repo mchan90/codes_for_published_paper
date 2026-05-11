@@ -1,4 +1,4 @@
-# README for scripts us
+# README for scripts usage
 ## for initialization
 ### script_run_dft.py
 dft run
@@ -20,7 +20,7 @@ to get fidelity vs asp time, must be conducted after on_the_fly
 asp simulation with ds/dt~\Delta^{p} schedule
 
 ## collection scripts
-### script_enery_collect.py
+### script_energy_collect.py
 collect DFT and FCI energies
 ### script_collect.py
 collect adiabatic evolution times

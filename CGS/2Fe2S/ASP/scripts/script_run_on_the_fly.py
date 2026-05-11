@@ -5,9 +5,9 @@ import subprocess
 import re
 
 number_pattern = re.compile(r"""
-    [+-]?                           # 선택적 부호
-    (?:\d+\.\d*|\.\d+|\d+)          # 소수 혹은 정수
-    (?:[eE][+-]?\d+)?               # 선택적 지수부
+    [+-]?                           # optional sign
+    (?:\d+\.\d*|\.\d+|\d+)          # decimal or integer
+    (?:[eE][+-]?\d+)?               # optional exponent
 """, re.VERBOSE)
 
 
@@ -54,7 +54,7 @@ for j in range(len(indx_list)):
 
     file_path = os.path.join(folder_sub, filename)
     
-    # 있으면 건너뛰기
+    # Skip if it already exists
     if os.path.isfile(file_path):
         print(f"'{file_path}' already exists.")
         continue

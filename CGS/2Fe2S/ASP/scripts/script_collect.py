@@ -5,9 +5,9 @@ import subprocess
 import re
 
 number_pattern = re.compile(r"""
-    [+-]?                           # 선택적 부호
-    (?:\d+\.\d*|\.\d+|\d+)          # 소수 혹은 정수
-    (?:[eE][+-]?\d+)?               # 선택적 지수부
+    [+-]?                           # optional sign
+    (?:\d+\.\d*|\.\d+|\d+)          # decimal or integer
+    (?:[eE][+-]?\d+)?               # optional exponent
 """, re.VERBOSE)
 
 

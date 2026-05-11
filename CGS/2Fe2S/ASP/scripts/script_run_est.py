@@ -26,7 +26,7 @@ for j in range(len(indx_list)):
 
     file_path = os.path.join(folder_sub, filename)
     
-    # 파일이 없으면 새로 만들고, 있으면 건너뛰기
+    # Create the file if missing, skip if it already exists
     if os.path.isfile(file_path):
         print(f"'{file_path}' already exists.")
         continue

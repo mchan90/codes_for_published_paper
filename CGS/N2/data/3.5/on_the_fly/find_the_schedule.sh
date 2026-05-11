@@ -4,12 +4,12 @@
 #
 #SBATCH --ntasks=1
 ##SBATCH --exclusive
-#SBATCH --cpus-per-task=8      # 여기서 원하는 스레드 수를 지정합니다.
+#SBATCH --cpus-per-task=8      # Set the desired number of threads here.
 #SBATCH --time=1000000:00
 #SBATCH --output=out
 #SBATCH --
 
-# SLURM이 자동으로 설정하는 SLURM_CPUS_PER_TASK 변수 사용
+# Use the SLURM_CPUS_PER_TASK variable set automatically by SLURM
 export MKL_NUM_THREADS=1
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 export MKL_DYNAMIC=FALSE

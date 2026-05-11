@@ -12,23 +12,23 @@ def bracket_from_grid_simple(x, f):
     """
     x: strictly increasing 1D array (len >= 3)
     f: same length
-    반환: (iL, iB, iR)  # 인덱스 삼중쌍, Brent용 브래킷
+    return: (iL, iB, iR)  # index triple, Brent-style bracket
     """
     x = np.asarray(x); f = np.asarray(f)
     n = len(x)
     assert n >= 3
 
-    # 1) 내부 로컬 최소 찾기: f[i-1] >= f[i] <= f[i+1]
-    #   (<= 를 쓰는 건 부동소수점 동률에 안전)
+    # 1) Find interior local minima: f[i-1] >= f[i] <= f[i+1]
+    #   (using <= is safe for floating-point ties)
     local_min_mask = (f[1:-1] <= f[:-2]) & (f[1:-1] <= f[2:])
     idxs = np.where(local_min_mask)[0] + 1
 
     if idxs.size > 0:
-        # 로컬 최소들 중 f가 가장 작은 중심을 선택
+        # Pick the local minimum with the smallest f value as the center
         i = idxs[np.argmin(f[idxs])]
         return (i-1, i, i+1)
 
-    # 2) 내부 로컬 최소가 없다면(단조/경계 최소)
+    # 2) No interior local minimum (monotonic / boundary-minimum case)
     j = int(np.argmin(f))
     if j == 0:
         return (0, 1, 2)
@@ -312,7 +312,7 @@ for iter_ in range(iter_max):
 
 
     if (DeltaS<eps_x or is_last):
-        j = int(np.argmin(gaps))  # 0=왼쪽, 1=가운데, 2=오른쪽 최소
+        j = int(np.argmin(gaps))  # 0=left, 1=middle, 2=right minimum
         print ('# gap minimum is found at ', ss[j])
         print ('# with the gap minimum value of ', gaps[j])
         print ('# and the estimated T_asp is ', T_asp_max)

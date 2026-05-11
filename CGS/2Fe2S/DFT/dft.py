@@ -2,8 +2,9 @@
 Generating FCIDUMP for the final Hamiltonian of ASP using pyscf.
 
 Original Author: Seunghoon Lee, Jan 17, 2022
-
-Modified by Mancheon Han, Apr 11, 2025
+(companion code to Lee et al., Nature Communications 14, 1952 (2023)).
+Modified by Mancheon Han, Apr 11, 2025, for the application of the
+constant geometric speed schedule to adiabatic state preparation.
 """
 
 ## check

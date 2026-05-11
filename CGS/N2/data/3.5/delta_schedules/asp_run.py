@@ -215,7 +215,7 @@ def adiabatic_evolve_krylov(taus, ss, t_f, dt, phi, fcivec_exact, info_i, info_f
     h2e_diff = absorb_h1e(h1e_diff, g2e_diff, norb, nelec, 0.5)
     h2e_diff_ptr = h2e_diff.ctypes.data_as(ctypes.c_void_p)
     # 
-    # link index 한 번 계산
+    # Compute the link indices once
     link_a, link_b = _unpack(norb, nelec, None)
     na, nlinka = link_a.shape[:2]
     nb, nlinkb = link_b.shape[:2]
@@ -223,7 +223,7 @@ def adiabatic_evolve_krylov(taus, ss, t_f, dt, phi, fcivec_exact, info_i, info_f
     lb_ptr = link_b.ctypes.data_as(ctypes.c_void_p)
 
 
-    # 버퍼 미리 할당
+    # Pre-allocate buffers
     ci_norb    = ctypes.c_int(norb)
     ci_na      = ctypes.c_int(na)
     ci_nb      = ctypes.c_int(nb)
@@ -234,11 +234,11 @@ def adiabatic_evolve_krylov(taus, ss, t_f, dt, phi, fcivec_exact, info_i, info_f
 
     # 3) Pre-compute the out_buf pointer once
     out_buf = np.empty((na*nb), dtype=np.float64).view(FCIvector)
-    # 포인터도 미리 계산
+    # Pre-compute the pointers as well
     out_ptr = out_buf.ctypes.data_as(ctypes.c_void_p)
 
     def hop(vec, h2e_ptr, out_buf):
-        # C 함수 호출 (두 전자 contraction)
+        # Call the C routine (two-electron contraction)
         #start = time.perf_counter()
         libfci.FCIcontract_2e_spin1(
             h2e_ptr,
@@ -252,7 +252,7 @@ def adiabatic_evolve_krylov(taus, ss, t_f, dt, phi, fcivec_exact, info_i, info_f
         #elapsed = time.perf_counter() - start
         #print('hop_:', elapsed)
 
-    # 시간 루프 시작
+    # Begin the time loop
     n_steps = max(round(t_f/dt),1)
     dt_step = t_f/n_steps
     t = 0.0
@@ -371,7 +371,7 @@ def adiabatic_evolve_krylov(taus, ss, t_f, dt, phi, fcivec_exact, info_i, info_f
 
         phi_krylov[:]/=norm
 
-        # overlap 계산
+        # Overlap calculation
 
         overlap2 = np.abs(np.vdot(fcivec_krylov,phi_krylov))**2
 
@@ -389,7 +389,7 @@ def adiabatic_evolve_krylov(taus, ss, t_f, dt, phi, fcivec_exact, info_i, info_f
 #def adiabatic_evolve(schedule, t_f, dt, phi, fcivec_exact, info_i, info_f):
 #
 #    norb, nelec = phi.norb, phi.nelec
-#    # link index 한 번 계산
+#    # Compute the link indices once
 #    link_a, link_b = _unpack(norb, nelec, None)
 #    na, nlinka = link_a.shape[:2]
 #    nb, nlinkb = link_b.shape[:2]
@@ -397,7 +397,7 @@ def adiabatic_evolve_krylov(taus, ss, t_f, dt, phi, fcivec_exact, info_i, info_f
 #    lb_ptr = link_b.ctypes.data_as(ctypes.c_void_p)
 #
 #
-#    # 버퍼 미리 할당
+#    # Pre-allocate buffers
 #    ci_norb    = ctypes.c_int(norb)
 #    ci_na      = ctypes.c_int(na)
 #    ci_nb      = ctypes.c_int(nb)
@@ -408,11 +408,11 @@ def adiabatic_evolve_krylov(taus, ss, t_f, dt, phi, fcivec_exact, info_i, info_f
 #
 #    # 3) Pre-compute the out_buf pointer once
 #    out_buf = np.empty((na*nb), dtype=np.float64).view(FCIvector)
-#    # 포인터도 미리 계산
+#    # Pre-compute the pointers as well
 #    out_ptr = out_buf.ctypes.data_as(ctypes.c_void_p)
 #
 #    def hop(vec, h2e_ptr, out_buf):
-#        # C 함수 호출 (두 전자 contraction)
+#        # Call the C routine (two-electron contraction)
 #        #start = time.perf_counter()
 #        libfci.FCIcontract_2e_spin1(
 #            h2e_ptr,
@@ -431,7 +431,7 @@ def adiabatic_evolve_krylov(taus, ss, t_f, dt, phi, fcivec_exact, info_i, info_f
 #    tr1 = TraceCalculation(norb, nelec, 0, 1.0)
 #    print('Traces: ', tr0, tr1)
 #
-#    # 시간 루프 시작
+#    # Begin the time loop
 #    n_steps = round(t_f/dt) 
 #    t = 0.0
 #    overlap_val = None
@@ -507,7 +507,7 @@ def adiabatic_evolve_krylov(taus, ss, t_f, dt, phi, fcivec_exact, info_i, info_f
 #
 #        
 #
-#        # overlap 계산
+#        # Overlap calculation
 #        overlap2 = compute_weight(phi, fcivec_exact)
 #
 #        print(t, schedule(t/t_f), overlap2)

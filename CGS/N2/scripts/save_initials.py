@@ -2,7 +2,10 @@
 Generating FCIDUMP for the initial mean-field Hamiltonian of ASP using pyscf.
 Numbering is based on the order of the MF states with the largest FCI amplitude.
 
-Author: Seunghoon Lee, Jan 17, 2022
+Original Author: Seunghoon Lee, Jan 17, 2022
+(companion code to Lee et al., Nature Communications 14, 1952 (2023)).
+Adapted by Mancheon Han (2025) for the application of the constant
+geometric speed schedule to adiabatic state preparation.
 """
 
 import numpy as np

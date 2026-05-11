@@ -209,7 +209,7 @@ def RootFinding (f, a, b, c, fa=None, fb=None, fc=None, tol=1e-3, itermax=100):
 
 
         # 1) Inverse Quadratic Interpolation
-        # 세 점으로 보간: (x_i, f_i) for i=0,1,2
+        # Interpolate using three points: (x_i, f_i) for i=0,1,2
         x_i0, x_i1, x_i2 = xs
         f_i0, f_i1, f_i2 = fs
         denom0 = (f_i0 - f_i1) * (f_i0 - f_i2)
@@ -219,7 +219,7 @@ def RootFinding (f, a, b, c, fa=None, fb=None, fc=None, tol=1e-3, itermax=100):
                 + (f_i0 * f_i2 / denom1) * x_i1 \
                 + (f_i0 * f_i1 / denom2) * x_i2
 
-        # 2) bracket 밖이면 IQI out-of-range → Secant → Bisection
+        # 2) If outside the bracket, fall back IQI -> Secant -> Bisection
         if x_iqi < x_min or x_iqi > x_max:
             # Secant method between the two points closest to zero: x_i0, x_i1
             x_sec = x_i1 - f_i1 * (x_i1 - x_i0) / (f_i1 - f_i0)
@@ -230,7 +230,7 @@ def RootFinding (f, a, b, c, fa=None, fb=None, fc=None, tol=1e-3, itermax=100):
         else:
             x_new = x_iqi
 
-        # 함수 평가 및 수렴 확인
+        # Evaluate the function and check convergence
         f_new = f(x_new)
         if abs(f_new) < tol:
             return x_new
@@ -255,21 +255,21 @@ def RootFinding (f, a, b, c, fa=None, fb=None, fc=None, tol=1e-3, itermax=100):
         print('Root-finding:', ind, x_new, f_new)
         print('boundary: ',x_min, x_max)
 
-        # 4) bracket 업데이트
+        # 4) Update the bracket
         if f_new * f_min < 0:
             x_max, f_max = x_new, f_new
         else:
             x_min, f_min = x_new, f_new
 
-        # 3) interpolation 후보 업데이트
+        # 3) Update the interpolation candidate
         xs.append(x_new)
         fs.append(f_new)
-        # 절댓값 기준 가장 작은 세 점 유지
+        # Keep the three points with the smallest absolute value
         pairs = sorted(zip(fs, xs), key=lambda p: abs(p[0]))[:3]
         fs, xs = map(list, zip(*pairs))
 
 
-    # 최대 반복 도달 시 중점 반환
+    # Return the midpoint when the iteration cap is reached
     return 0.5 * (x_min + x_max)
 
 
