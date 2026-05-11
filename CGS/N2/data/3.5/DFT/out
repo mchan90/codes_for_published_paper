@@ -1,0 +1,252 @@
+./'output' already exists.
+
+
+******** <class 'pyscf.x2c.sfx2c1e.sfX2C1eRKS'> ********
+method = sfX2C1eRKS
+initial guess = minao
+damping factor = 0
+level_shift factor = 0
+DIIS = <class 'pyscf.scf.diis.CDIIS'>
+diis_start_cycle = 1
+diis_space = 8
+diis_damp = 0
+SCF conv_tol = 0.0001
+SCF conv_tol_grad = None
+SCF max_cycles = 500
+direct_scf = True
+direct_scf_tol = 1e-13
+chkfile to save SCF result = ./output/hs_bp86.chk
+max_memory 4000 MB (current use 87 MB)
+XC library pyscf.dft.libxc version 7.0.0
+    S. Lehtola, C. Steigemann, M. J.T. Oliveira, and M. A.L. Marques.,  SoftwareX 7, 1–5 (2018)
+XC functionals = b88,p86
+    A. D. Becke.,  Phys. Rev. A 38, 3098 (1988)
+    J. P. Perdew.,  Phys. Rev. B 33, 8822 (1986)
+radial grids: 
+    Treutler-Ahlrichs [JCP 102, 346 (1995); DOI:10.1063/1.469408] (M4) radial grids
+    
+becke partition: Becke, JCP 88, 2547 (1988); DOI:10.1063/1.454033
+pruning grids: <function nwchem_prune at 0x15361067fba0>
+grids dens level: 3
+symmetrized grids: False
+atomic radii adjust function: <function treutler_atomic_radii_adjust at 0x15361067fb00>
+small_rho_cutoff = 1e-07
+
+
+******** <class 'pyscf.x2c.sfx2c1e.SpinFreeX2CHelper'> ********
+approx = 1e
+xuncontract = 1
+cond(S) = 1.6162185860566964
+Set gradient conv threshold to 0.01
+Initial guess from minao.
+atom N rad-grids = 75, ang-grids = [ 50  50  50  50  50  50  50  50  50  50  50  50  50  50  50  50  50  50
+  50  50  50  50  50  86  86  86  86  86  86  86  86  86  86 266 266 266
+ 266 266 266 266 302 302 302 302 302 302 302 302 302 302 302 302 302 302
+ 302 302 302 302 302 302 266 266 266 266 266 266 266 266 266 266 266 266
+ 266 266 266]
+tot_boxes 1215, boxes in each direction [ 7  7 13]
+Padding 4 grids
+tot grids = 27808
+Drop grids 3880
+prune_by_density_: 0 padding grids
+    CPU time for setting up grids      1.72 sec, wall time      0.12 sec
+nelec by numeric integration = 13.899422696210301
+    CPU time for vxc      2.89 sec, wall time      0.19 sec
+E1 = -161.54799010799798  Ecoul = 60.098157474928165  Exc = -13.452783519349168
+init E= -107.494135199539
+    CPU time for initialize scf      7.01 sec, wall time      0.48 sec
+
+WARN: HOMO -0.141549732634193 == LUMO -0.140736354701123
+
+  mo_energy =
+[-13.83801526 -13.83800084  -0.60506454  -0.60290283  -0.14537916
+  -0.14154973  -0.14154973  -0.14073635  -0.14073635  -0.13715541]
+nelec by numeric integration = 13.99998263966299
+    CPU time for vxc      1.36 sec, wall time      0.09 sec
+E1 = -162.1780841456008  Ecoul = 60.741063413679946  Exc = -13.516696154584546
+cycle= 1 E= -107.545235933625  delta_E= -0.0511  |g|= 0.000816  |ddm|= 2.43
+    CPU time for cycle= 1      1.64 sec, wall time      0.10 sec
+
+WARN: HOMO -0.101238480077494 == LUMO -0.100412064415807
+
+  mo_energy =
+[-13.78213195 -13.78211746  -0.56515452  -0.5629505   -0.10495598
+  -0.10123848  -0.10123848  -0.10041206  -0.10041206  -0.09654419]
+nelec by numeric integration = 13.999982630935012
+    CPU time for vxc      1.49 sec, wall time      0.09 sec
+E1 = -162.17766418397028  Ecoul = 60.74064015908252  Exc = -13.516693209444297
+cycle= 2 E= -107.545236281452  delta_E= -3.48e-07  |g|= 0.000423  |ddm|= 0.00259
+    CPU time for cycle= 2      1.93 sec, wall time      0.12 sec
+
+WARN: HOMO -0.101269249417188 == LUMO -0.100439902947719
+
+  mo_energy =
+[-13.78220907 -13.78210256  -0.56518714  -0.56297877  -0.10498542
+  -0.10126926  -0.10126925  -0.1004399   -0.1004399   -0.09657657]
+nelec by numeric integration = 13.999982635275426
+    CPU time for vxc      1.36 sec, wall time      0.09 sec
+E1 = -162.17787567174028  Ecoul = 60.757993735758404  Exc = -13.517992461543265
+Extra cycle  E= -107.529393444645  delta_E= 0.0158  |g|= 0.313  |ddm|= 0.166
+    CPU time for scf_cycle     12.28 sec, wall time      0.81 sec
+    CPU time for SCF     12.68 sec, wall time      0.89 sec
+converged SCF energy = -107.529393444645
+cond(S) = 1.6162185860566964
+cond(S) = 1.6162185860566964
+
+
+
+
+******** <class 'pyscf.soscf.newton_ah.SecondOrdersfX2C1eRKS'> ********
+method = SecondOrdersfX2C1eRKS
+initial guess = minao
+damping factor = 0
+level_shift factor = 0
+DIIS = <class 'pyscf.scf.diis.CDIIS'>
+diis_start_cycle = 1
+diis_space = 8
+diis_damp = 0
+SCF conv_tol = 1e-12
+SCF conv_tol_grad = None
+SCF max_cycles = 500
+direct_scf = True
+direct_scf_tol = 1e-13
+chkfile to save SCF result = ./output/hs_bp86.chk
+max_memory 4000 MB (current use 184 MB)
+XC library pyscf.dft.libxc version 7.0.0
+    S. Lehtola, C. Steigemann, M. J.T. Oliveira, and M. A.L. Marques.,  SoftwareX 7, 1–5 (2018)
+XC functionals = b88,p86
+    A. D. Becke.,  Phys. Rev. A 38, 3098 (1988)
+    J. P. Perdew.,  Phys. Rev. B 33, 8822 (1986)
+radial grids: 
+    Treutler-Ahlrichs [JCP 102, 346 (1995); DOI:10.1063/1.469408] (M4) radial grids
+    
+becke partition: Becke, JCP 88, 2547 (1988); DOI:10.1063/1.454033
+pruning grids: <function nwchem_prune at 0x15361067fba0>
+grids dens level: 3
+symmetrized grids: False
+atomic radii adjust function: <function treutler_atomic_radii_adjust at 0x15361067fb00>
+small_rho_cutoff = 1e-07
+
+
+******** <class 'pyscf.x2c.sfx2c1e.SpinFreeX2CHelper'> ********
+approx = 1e
+xuncontract = 1
+******** <class 'pyscf.x2c.sfx2c1e.sfX2C1eRKS'> Newton solver flags ********
+SCF tol = 1e-12
+conv_tol_grad = None
+max. SCF cycles = 500
+direct_scf = True
+direct_scf_tol = 1e-13
+chkfile to save SCF result = ./output/hs_bp86.chk
+max_cycle_inner = 12
+max_stepsize = 0.05
+ah_start_tol = 1e+09
+ah_level_shift = 0
+ah_conv_tol = 1e-12
+ah_lindep = 1e-14
+ah_start_cycle = 1
+ah_max_cycle = 40
+ah_grad_trust_region = 2.5
+kf_interval = 4
+kf_trust_region = 5
+canonicalization = True
+max_memory 4000 MB (current use 184 MB)
+Set conv_tol_grad to 1e-06
+nelec by numeric integration = 13.999982635275426
+    CPU time for vxc      1.62 sec, wall time      0.10 sec
+  HOMO = -0.189245098536213  LUMO = -0.0121835997717388
+  mo_energy =
+[-1.39225838e+01 -1.36416789e+01 -6.52636977e-01 -4.75364407e-01
+ -1.92120664e-01 -1.92115626e-01 -1.89245099e-01 -1.21835998e-02
+ -9.33237479e-03 -9.32675359e-03]
+E1 = -162.17787567174028  Ecoul = 60.757993735758404  Exc = -13.517992461543265
+Initial guess E= -107.529393444645  |g|= 0.312625
+    CPU time for initializing second order scf      6.41 sec, wall time      0.87 sec
+    |g|= 0.313 (keyframe)
+    imic 1(1)  |g|= 0.00561  |dxi|= 0.0503  max(|x|)= 0.0293  |dr|= 0.0503  eig= -0.0157  seig= 0.0977
+    imic 2(2)  |g|= 0.0219  |dxi|= 0.0239  max(|x|)= 0.019  |dr|= 0.0562  eig= -0.000116  seig= 7.05e-05
+    imic 3(3)  |g|= 0.00249  |dxi|= 0.0156  max(|x|)= 0.0123  |dr|= 0.0639  eig= -6.29e-05  seig= 5.47e-06
+nelec by numeric integration = 13.999982631732939
+    CPU time for vxc      3.03 sec, wall time      0.19 sec
+E1 = -162.17770468042846  Ecoul = 60.74070757224168  Exc = -13.51670916861752
+Adjust keyframe g_orb to |g|= 0.00361  |g-correction|=0.00264  E=-107.545225324 dE=-0.015832
+    imic 4(4)  |g|= 0.0008  |dxi|= 0.00963  max(|x|)= 0.00762  |dr|= 0.00963  eig= -1.21e-05  seig= 2.24e-06
+    imic 5(5)  |g|= 0.000405  |dxi|= 0.000758  max(|x|)= 0.000435  |dr|= 0.00962  eig= -7.38e-08  seig= 4.55e-07
+    imic 6(6)  |g|= 0.000255  |dxi|= 0.000666  max(|x|)= 0.000379  |dr|= 0.00962  eig= -4.77e-08  seig= 9.84e-08
+nelec by numeric integration = 13.999982634703548
+    CPU time for vxc      2.60 sec, wall time      0.16 sec
+E1 = -162.17784678472006  Ecoul = 60.74082423490983  Exc = -13.516694641927748
+Adjust keyframe g_orb to |g|= 0.000396  |g-correction|=0.000283  E=-107.545236239 dE=-1.0915e-05
+    imic 7(7)  |g|= 1.43e-05  |dxi|= 0.00111  max(|x|)= 0.000868  |dr|= 0.00111  eig= -1.77e-07  seig= 3.21e-09
+    imic 8(8)  |g|= 1.5e-05  |dxi|= 3.65e-06  max(|x|)= 2.58e-06  |dr|= 0.00111  eig= -1.53e-12  seig= 3.17e-09
+    imic 9(9)  |g|= 5.71e-07  |dxi|= 1.32e-06  max(|x|)= 7.05e-07  |dr|= 0.00111  eig= -8.43e-12  seig= 4.87e-13
+nelec by numeric integration = 13.999982633653742
+    CPU time for vxc      2.84 sec, wall time      0.18 sec
+E1 = -162.17779588208955  Ecoul = 60.74077263305619  Exc = -13.516694097688665
+Adjust keyframe g_orb to |g|= 4.23e-05  |g-correction|=4.22e-05  E=-107.545236394 dE=-1.5498e-07
+Out of trust region. Restore previouse step
+    tot inner=9  13 JK  |g|= 1.5e-05  |u-1|= 1.32e-06
+    CPU time for aug_hess in 9 inner iters     11.07 sec, wall time      0.70 sec
+Overlap to initial guess, SVD = [0.99914255 0.99913628]
+Overlap to last step, SVD = [0.99914255 0.99913628]
+nelec by numeric integration = 13.999982633651799
+    CPU time for vxc      1.66 sec, wall time      0.10 sec
+
+WARN: HOMO -0.101258729383642 == LUMO -0.100432057455905
+
+  mo_energy =
+[-13.78216042 -13.78213174  -0.56517658  -0.56297022  -0.10497614
+  -0.10125883  -0.10125873  -0.10043206  -0.10043196  -0.09656654]
+E1 = -162.1777958789078  Ecoul = 60.74077262641932  Exc = -13.5166940942197
+macro= 0  E= -107.545236393828  delta_E= -0.0158429  |g|= 0.000395729  4 KF 13 JK
+    CPU time for cycle= 1     13.28 sec, wall time      0.84 sec
+    |g|= 4.56e-05 (keyframe), |g-correction|= 4.22e-05
+    imic 1(1)  |g|= 4.22e-05  |dxi|= 1.76e-06  max(|x|)= 9.35e-07  |dr|= 1.76e-06  eig= -1.48e-11  seig= 1.75e-12
+    imic 2(2)  |g|= 3.42e-05  |dxi|= 7.58e-06  max(|x|)= 6.22e-06  |dr|= 7.78e-06  eig= -2.39e-10  seig= 1.75e-12
+    imic 3(3)  |g|= 3.02e-05  |dxi|= 8.36e-05  max(|x|)= 6.69e-05  |dr|= 8.66e-05  eig= -8.75e-10  seig= 1.75e-12
+    imic 4(4)  |g|= 2.34e-05  |dxi|= 9.27e-05  max(|x|)= 7.07e-05  |dr|= 0.000127  eig= -1.14e-09  seig= 1.75e-12
+    imic 5(5)  |g|= 1.23e-06  |dxi|= 1.81e-05  max(|x|)= 1.25e-05  |dr|= 0.000124  eig= -3.95e-10  seig= 1.75e-12
+nelec by numeric integration = 13.99998263380711
+    CPU time for vxc      2.57 sec, wall time      0.16 sec
+E1 = -162.17780325659467  Ecoul = 60.740780053617975  Exc = -13.516694146394979
+Adjust keyframe g_orb to |g|= 1.23e-06  |g-correction|=1.64e-09  E=-107.545236396 dE=-2.6635e-09
+    imic 6(6)  |g|= 1.04e-06  |dxi|= 3.58e-06  max(|x|)= 2.51e-06  |dr|= 3.58e-06  eig= -1.67e-12  seig= 1.69e-12
+    imic 7(7)  |g|= 1.02e-06  |dxi|= 5.38e-07  max(|x|)= 3.75e-07  |dr|= 3.61e-06  eig= -3.59e-14  seig= 1.64e-12
+    imic 8(8)  |g|= 2.6e-07  |dxi|= 2.37e-07  max(|x|)= 1.58e-07  |dr|= 3.6e-06  eig= -8.34e-14  seig= 9.22e-14
+    tot inner=8  10 JK  |g|= 2.6e-07  |u-1|= 3.6e-06
+    CPU time for aug_hess in 8 inner iters      6.94 sec, wall time      0.44 sec
+Overlap to initial guess, SVD = [0.99914327 0.99913963]
+Overlap to last step, SVD = []
+nelec by numeric integration = 13.99998263380619
+    CPU time for vxc      2.18 sec, wall time      0.14 sec
+
+WARN: HOMO -0.101258120473464 == LUMO -0.100431644653484
+
+  mo_energy =
+[-13.78215278 -13.78213829  -0.56517599  -0.56296974  -0.10497562
+  -0.10125812  -0.10125812  -0.10043164  -0.10043164  -0.09656597]
+E1 = -162.1778032111028  Ecoul = 60.74078000784637  Exc = -13.516694146117054
+macro= 1  E= -107.545236396493  delta_E= -2.6653e-09  |g|= 1.23306e-06  2 KF 10 JK
+    CPU time for cycle= 2      6.93 sec, wall time      0.44 sec
+    |g|= 2.6e-07 (keyframe), |g-correction|= 4.51e-11
+    imic 1(1)  |g|= 2.6e-07  |dxi|= 6.78e-12  max(|x|)= 4.54e-12  |dr|= 6.78e-12  eig= -6.85e-23  seig= 5.6e-14
+    tot inner=1  2 JK  |g|= 2.6e-07  |u-1|= 6.78e-12
+    CPU time for aug_hess in 1 inner iters      3.86 sec, wall time      0.24 sec
+Overlap to initial guess, SVD = [0.99914327 0.99913963]
+Overlap to last step, SVD = []
+nelec by numeric integration = 13.999982633806187
+    CPU time for vxc      1.91 sec, wall time      0.12 sec
+
+WARN: HOMO -0.101258120473598 == LUMO -0.100431644653619
+
+  mo_energy =
+[-13.78215278 -13.78213829  -0.56517599  -0.56296974  -0.10497562
+  -0.10125812  -0.10125812  -0.10043164  -0.10043164  -0.09656597]
+E1 = -162.1778032111009  Ecoul = 60.74078000784445  Exc = -13.516694146117041
+macro= 2  E= -107.545236396493  delta_E= 0  |g|= 2.59587e-07  1 KF 2 JK
+    CPU time for cycle= 3      3.85 sec, wall time      0.25 sec
+Canonicalize SCF orbitals
+macro X = 3  E=-107.545236396493  |g|= 2.59587e-07  total 8 KF 29 JK
+    CPU time for Second order SCF     30.65 sec, wall time      2.40 sec
+converged SCF energy = -107.545236396493
+done

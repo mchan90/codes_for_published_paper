@@ -1,0 +1,67 @@
+116,123c116
+< bond_length = 3.5
+< mol = gto.M(
+<     atom='N 0 0 0; N 0 0 {bond_length}'.format(bond_length=bond_length),  #
+<     basis='STO-3G',
+<     spin=0,
+<     charge=0,
+<     unit='A'
+< )
+---
+> mol = gto.Mole()
+124a118,146
+> mol.atom = '''
+>  Fe                 5.22000000    1.05000000   -7.95000000
+>  S                  3.86000000   -0.28000000   -9.06000000
+>  S                  5.00000000    0.95000000   -5.66000000
+>  S                  4.77000000    3.18000000   -8.74000000
+>  S                  7.23000000    0.28000000   -8.38000000
+>  Fe                 5.88000000   -1.05000000   -9.49000000
+>  S                  6.10000000   -0.95000000  -11.79000000
+>  S                  6.33000000   -3.18000000   -8.71000000
+>  C                  6.00000000    4.34000000   -8.17000000
+>  H                  6.46000000    4.81000000   -9.01000000
+>  H                  5.53000000    5.08000000   -7.55000000
+>  H                  6.74000000    3.82000000   -7.60000000
+>  C                  3.33000000    1.31000000   -5.18000000
+>  H                  2.71000000    0.46000000   -5.37000000
+>  H                  3.30000000    1.54000000   -4.13000000
+>  H                  2.97000000    2.15000000   -5.73000000
+>  C                  5.10000000   -4.34000000   -9.28000000
+>  H                  5.56000000   -5.05000000   -9.93000000
+>  H                  4.67000000   -4.84000000   -8.44000000
+>  H                  4.34000000   -3.81000000   -9.81000000
+>  C                  7.77000000   -1.31000000  -12.27000000
+>  H                  7.84000000   -1.35000000  -13.34000000
+>  H                  8.42000000   -0.54000000  -11.90000000
+>  H                  8.06000000   -2.25000000  -11.86000000
+> '''
+> mol.basis = 'tzp-dkh'
+> mol.charge = -2
+> mol.spin = 0
+128a151,152
+> material_home = '../../../../../'
+> indx_home = '../../'
+130,132c154
+< material_home = '../../'
+< 
+< ecore_i, h1e_i, g2e_i, norb, nelec, ms = loadERIs(material_home + '/FCIDUMP_0')
+---
+> ecore_i, h1e_i, g2e_i, norb, nelec, ms = loadERIs(indx_home + '/FCIDUMP_0')
+137,138c159,160
+< fcivec_00      = np.load(material_home + "/fcivec_0.npy")[0]
+< fcivec_exact_0 = np.load(material_home + "/fcivec_FULL.npy")[0] 
+---
+> fcivec_00      = np.load(indx_home + "/fcivec_0.npy")[0]
+> fcivec_exact_0 = np.load(material_home + "FCI/output/fcivec_FULL.npy")[0]  
+524c546,547
+< with open(material_home + '/on_the_fly/optimal_schedule','r') as file_:
+---
+> #with open(indx_home + '/qz/optimal_schedule','r') as file_:
+> with open(indx_home + '/on_the_fly/optimal_schedule','r') as file_:
+534,535c557,558
+< t_f_max = 836129.2253548327
+< dt = 0.5
+---
+> t_f_max = 2407415.790804167 * 5
+> dt = 1.0

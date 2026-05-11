@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+#SBATCH --job-name=3563_z
+#
+#SBATCH --ntasks=1
+##SBATCH --exclusive
+#SBATCH --mem-per-cpu=8G
+#SBATCH --cpus-per-task=1      # 여기서 원하는 스레드 수를 지정합니다.
+#SBATCH --time=30-00:00:00   
+#SBATCH --output=out
+
+# SLURM이 자동으로 설정하는 SLURM_CPUS_PER_TASK 변수 사용
+export MKL_NUM_THREADS=1
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
+export MKL_DYNAMIC=FALSE
+export KMP_AFFINITY=granularity=fine,compact
+
+
+source /home/mchan/venv_pyscf/bin/activate
+srun --mpi=pmi2 --cpu-bind=cores -o log_%t python3 -u zeno_run.py
+deactivate
+
